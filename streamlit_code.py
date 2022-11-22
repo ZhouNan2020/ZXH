@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+import copy as cp
 #%%
 from gsheetsdb import connect
 
@@ -16,8 +17,8 @@ client = gspread.authorize(credentials)
 
 sheet = client.open_by_key(
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").sheet1
+sheet.append_row("test1","king")
 
 sheet = pd.DataFrame(sheet.get_all_records())
 
 st.write(sheet)
-sheet.insert(0, 'ID', range(1, 1 + len(sheet)))
