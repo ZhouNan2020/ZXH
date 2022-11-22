@@ -17,7 +17,7 @@ test1="hg"
 test2="hut"
 sheet_url = st.secrets["public_gsheets_url"]
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
-run_query(f'INSERT INTO "{sheet_url}" (test1,test2) VALUES ("{test1}","{test2}")')
+
 
 # Print results.
 for row in rows:
