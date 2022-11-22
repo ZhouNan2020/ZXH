@@ -1,28 +1,21 @@
 import pandas as pd
 import streamlit as st
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 #%%
 from gsheetsdb import connect
 
 #%%
-# Create a connection object.
-conn = connect()
-#%%
-# Perform SQL query on the Google Sheet.
-# Uses st.cache to only rerun when the query changes or after 10 min.
+
+scopes = ["https://docs.google.com/spreadsheets/d/16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM/edit?usp=sharing"]
+
+credentials = ServiceAccountCredentials.from_json_keyfile_name(
+        "credentials.json", scopes)
+
+client = gspread.authorize(credentials)
+
+sheet = client.open_by_key(
+        "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").sheet1
 
 
-def run_query(query):
-    rows = conn.execute(query, headers=1)
-    rows = rows.fetchall()
-    return rows
-test1="hg"
-test2="hut"
-sheet_url = st.secrets["public_gsheets_url"]
-rows = run_query(f'SELECT * FROM "{sheet_url}"')
-
-
-rowb=pd.DataFrame(rows)
-st.write(rowb)
-# Print results.
-for row in rows:
-    st.write(f"{row.name} has a :{row.pet}:")
+st.write(sheet.get_all_records())
