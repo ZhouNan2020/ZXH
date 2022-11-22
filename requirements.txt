@@ -1,2 +1,2 @@
-streamlit==1.11.1
+streamlit==1.15.0
 gsheetsdb==0.1.13.1
