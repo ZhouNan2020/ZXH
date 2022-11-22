@@ -10,9 +10,6 @@ conn = connect()
 # Uses st.cache to only rerun when the query changes or after 10 min.
 
 
-query=(f'INSERT INTO rows (name,pet) '
-          f'VALUES ("test1","test2")')
-conn.execute(query, headers=1)
 def run_query(query):
     rows = conn.execute(query, headers=1)
     rows = rows.fetchall()
