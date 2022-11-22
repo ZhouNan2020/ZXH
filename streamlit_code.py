@@ -17,5 +17,6 @@ client = gspread.authorize(credentials)
 sheet = client.open_by_key(
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").sheet1
 
+sheet = pd.DataFrame(sheet.get_all_records())
 
-st.write(sheet.get_all_records())
+st.write(sheet)
