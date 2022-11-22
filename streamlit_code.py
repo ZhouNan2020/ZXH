@@ -8,7 +8,8 @@ conn = connect()
 #%%
 # Perform SQL query on the Google Sheet.
 # Uses st.cache to only rerun when the query changes or after 10 min.
-@st.cache(ttl=600)
+
+
 query=(f'INSERT INTO rows (name,pet) '
           f'VALUES ("test1","test2")')
 conn.execute(query, headers=1)
