@@ -7,7 +7,7 @@ from gsheetsdb import connect
 
 #%%
 
-scopes = ["https://docs.google.com/spreadsheets/d/16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM/edit?usp=sharing"]
+scopes = ["https://spreadsheets.google.com/feeds"]
 
 credentials = ServiceAccountCredentials.from_json_keyfile_name(
         "credentials.json", scopes)
