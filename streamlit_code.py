@@ -17,7 +17,7 @@ client = gspread.authorize(credentials)
 
 sheet = client.open_by_key(
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").sheet1
-sheet.append_row("test1","king")
+#sheet.append_row("test1","king")
 
 sheet = pd.DataFrame(sheet.get_all_records())
 
