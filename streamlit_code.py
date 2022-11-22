@@ -20,4 +20,4 @@ sheet = client.open_by_key(
 sheet = pd.DataFrame(sheet.get_all_records())
 
 st.write(sheet)
-sheet.insert(("ghh","king"),2)
+sheet.insert(0, 'ID', range(1, 1 + len(sheet)))
