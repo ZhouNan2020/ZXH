@@ -26,7 +26,8 @@ tab1, tab2, tab3 = st.tabs(["日常喂养记录", "特殊情况记录", "数据�
 
 with tab1:
         timeticks = time.time()
-        time=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        date=time.strftime("%Y-%m-%d", time.localtime())
+        time=time.strftime("%H:%M:%S", time.localtime())
         Breastfeeding = st.number_input('母乳亲喂（单位:分钟）')
         BreastMilkBottleFeeding = st.number_input('母乳瓶喂（单位:ml）')
         FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）')
@@ -45,7 +46,7 @@ with tab1:
         ChangeDiapers_value = 0
         if ChangeDiapers:
                 ChangeDiapers_value = 1
-        record = [timeticks,time, Breastfeeding, BreastMilkBottleFeeding, FormulaMilkPowder,Shit_value,Pee_value,ChangeDiapers_value]
+        record = [timeticks,date,time, Breastfeeding, BreastMilkBottleFeeding, FormulaMilkPowder,Shit_value,Pee_value,ChangeDiapers_value]
         if st.button('提交本次记录'):
                 sheet.append_row(record,1)
                 st.success('提交成功')
