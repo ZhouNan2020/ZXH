@@ -42,6 +42,8 @@ with tab1:
         record = [time, Breastfeeding, BreastMilkBottleFeeding, FormulaMilkPowder,Shit_value,Pee_value]
         if st.button('提交'):
                 sheet.append_row(record,1)
+                st.success('提交成功')
+
 
 
 # append_row这个是谷歌的方法，可以直接在sheet中添加一行数据
