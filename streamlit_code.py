@@ -51,12 +51,10 @@ with tab1:
                 st.success('提交成功')
 
 with tab3:
-        row = sheet.col_values(3)[1:]
+        BreastfeedingTime_all = sheet.col_values(3)[1:]
+        BreastfeedingTime_all = pd.DataFrame(BreastfeedingTime_all)
+        BreastfeedingTime_tail_7 = BreastfeedingTime_all.tail(3)
 
-        row = pd.DataFrame(row)
-        row_tail = row.tail(3)
-        st.write(row)
-        st.write(row_tail)
 
 
 
