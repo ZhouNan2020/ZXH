@@ -4,7 +4,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import copy as cp
 #%%
-from gsheetsdb import connect
+
 
 #%%
 # 这一段不要动，我特么目前还没有搞太明白谷歌的API怎么工作的
@@ -20,6 +20,12 @@ sheet = client.open_by_key(
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").sheet1
 #%%
 #下面的就可以动了
+
+tab1, tab2, tab3 = st.tabs(["日常喂养记录", "特殊情况记录", "数据分析"])
+
+with tab1:
+        st.checkbox(st.number_input('母乳亲喂（单位:ml）'))
+
 # append_row这个是谷歌的方法，可以直接在sheet中添加一行数据
 tes=("hjj","king")
 sheet.append_row(tes,1)
