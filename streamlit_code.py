@@ -63,6 +63,7 @@ class MeanAnalysis:
                     value_all = sheet.col_values(num)[1:]
                     value_all = pd.DataFrame(value_all)
                     value_all.columns = ['value_all']
+                    value_all = value_all.astype('float')
                     sheet_all = pd.concat([date, value_all], axis=1)
                     sheet_all.drop(index=0, axis=0, inplace=True)
                     sheet_nozero = sheet_all.drop(sheet_all[sheet_all['value_all'] == 0].index)
