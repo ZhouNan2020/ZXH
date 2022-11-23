@@ -28,16 +28,19 @@ client = gspread.authorize(credentials)
 global sheet1
 sheet1 = client.open_by_key(
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").sheet1
+sheet2 = client.open_by_key(
+        "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").sheet2
 
 #%%
 #下面的就可以动了
 
 tab1, tab2, tab3,tab4 = st.tabs(["日常喂养记录", "特殊情况记录", "数据分析","覃薇吸奶记录"])
+timeticks = time.time()
+date=time.strftime("%Y-%m-%d", time.localtime())
+time=time.strftime("%H:%M:%S", time.localtime())
 
 with tab1:
-        timeticks = time.time()
-        date=time.strftime("%Y-%m-%d", time.localtime())
-        time=time.strftime("%H:%M:%S", time.localtime())
+
         Breastfeeding = st.number_input('母乳亲喂（单位:分钟）')
         BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）')
         FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）')
@@ -103,7 +106,16 @@ with tab3:
 
 with tab4:
         st.subheader('覃薇吸奶记录')
-        timeticks = time.time()
+        col1, col2= st.columns(2)
+        with col1:
+                if st.button('记录一次吸奶'):
+                        sheet2.append_row([timeticks,date,time], 1)
+                        st.success('记录成功')
+        with col2:
+                milkdate = sheet2.col_values(2)[-1]
+                milktime = sheet2.col_values(3)[-1]
+                st.write('上次吸奶时间：',milkdate,milktime)
+
 
 
 
