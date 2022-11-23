@@ -151,7 +151,7 @@ with tab4:
                 st.write(suc_mean)
                 fig, ax = plt.subplots()
                 ax1 = ax.twinx()
-                ax.plot(day_count.index, day_count['count'], 'o-')
+                #ax.plot(day_count.index, day_count['count'], 'o-')
                 ax1.bar(suc_mean.index, suc_mean['suctionVolume'], alpha=0.5)
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
