@@ -93,7 +93,7 @@ with tab3:
         value_all = sheet.col_values(4)[1:]
         value_all = pd.DataFrame(value_all)
         value_all.columns = ['value_all']
-        value_all = (value_all.astype('float')).round(1)
+        value_all = value_all.astype('int')
 
         st.write(value_all)
         sheet_all = pd.concat([date, value_all], axis=1)
