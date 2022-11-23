@@ -132,6 +132,9 @@ def count_milk():
         suc_mean = suc_mean.astype('int')
         return suc_mean
 
+def plot_label(x_label,y_label):
+        x_label = []
+
 
 with tab4:
         st.subheader('覃薇吸奶记录')
@@ -149,8 +152,11 @@ with tab4:
                 st.write(suc_mean)
                 fig, ax = plt.subplots()
                 ax1 = ax.twinx()
-                ax.plot(suc_mean.index, suc_mean['count'], 'o-')
-                ax1.bar(suc_mean.index, suc_mean['suctionVolume'], alpha=0.5)
+                x=list(suc_mean.index)
+                y1=list(suc_mean['suctionVolume'])
+                y2=list(suc_mean['count'])
+                ax.plot(x, y2, 'o-')
+                ax1.bar(x, y1, alpha=0.5)
                 ax.set_ylabel('吸奶次数', fontsize=16, fontproperties=font)
                 ax1.set_ylabel('日均吸奶量', fontsize=16, fontproperties=font)
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
