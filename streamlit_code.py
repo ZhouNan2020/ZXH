@@ -104,18 +104,18 @@ with tab3:
                 ax.set_title(str(name1), fontsize=16, fontproperties=font)
                 st.pyplot(fig)
 
-class Qin:
-        def count_milk(self):
-                date = sheet1.col_values(2)[1:]
-                date = pd.DataFrame(date)
-                date.columns = ['date']
-                count = sheet2.col_values(4)[1:]
-                count = pd.DataFrame(count)
-                count.columns = ['count']
-                count = count.astype('int')
-                all_count = pd.concat([date, count], axis=1)
-                day_count = all_count.groupby('date').sum()
-                return day_count
+
+def count_milk():
+        date = sheet1.col_values(2)[1:]
+        date = pd.DataFrame(date)
+        date.columns = ['date']
+        count = sheet2.col_values(4)[1:]
+        count = pd.DataFrame(count)
+        count.columns = ['count']
+        count = count.astype('int')
+        all_count = pd.concat([date, count], axis=1)
+        day_count = all_count.groupby('date').sum()
+        return day_count
 
 
 with tab4:
@@ -129,7 +129,7 @@ with tab4:
                 milkdate = sheet2.col_values(2)[-1:]
                 milktime = sheet2.col_values(3)[-1:]
                 st.write('上次吸奶时间：',milkdate[0],milktime[0])
-                day_count = Qin.count_milk()
+                day_count = count_milk()
                 fig, ax = plt.subplots()
                 ax.plot(day_count.index, day_count['count'], 'o-')
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
