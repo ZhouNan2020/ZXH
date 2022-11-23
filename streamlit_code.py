@@ -36,12 +36,9 @@ sheet2 = client.open_by_key(
 #下面的就可以动了
 
 tab1, tab2, tab3,tab4 = st.tabs(["日常喂养记录", "特殊情况记录", "数据分析","覃薇吸奶记录"])
-timeticks = time.time()
-theTime = datetime.datetime.now()
-date_formula = '%Y-%m-%d'
-time_formula = '%H:%M:%S'
-date=datetime.datetime.now().strftime(date_formula)
-time=datetime.datetime.now().strftime(time_formula)
+
+
+
 
 with tab1:
 
@@ -63,8 +60,13 @@ with tab1:
         ChangeDiapers_value = 0
         if ChangeDiapers:
                 ChangeDiapers_value = 1
-        record = [timeticks,date,time, Breastfeeding, BreastBottleFeeding, FormulaMilkPowder,Shit_value,Pee_value,ChangeDiapers_value]
+
         if st.button('提交本次记录'):
+                timeticks1 = time.time()
+                date1 = time.strftime("%Y-%m-%d", time.localtime())
+                time1 = time.strftime("%H:%M:%S", time.localtime())
+                record = [timeticks1, date1, time1, Breastfeeding, BreastBottleFeeding, FormulaMilkPowder, Shit_value,
+                          Pee_value, ChangeDiapers_value]
                 sheet1.append_row(record, 1)
                 st.success('提交成功')
 
