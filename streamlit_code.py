@@ -5,13 +5,15 @@ from oauth2client.service_account import ServiceAccountCredentials
 import copy as cp
 import time
 import matplotlib.pyplot as plt
+from matplotlib import font_manager
 import matplotlib as mpl
 #%%
+font = font_manager.FontProperties(fname='simhei.ttf')
 parameters = {'xtick.labelsize': 16,
               'ytick.labelsize': 16,
-              'font.family':'SimHei',
               'axes.unicode_minus':False}
 plt.rcParams.update(parameters)
+plt.style.use('ggplot')
 
 #%%
 # 这一段不要动，我特么目前还没有搞太明白谷歌的API怎么工作的
@@ -91,9 +93,9 @@ with tab3:
         mean_breastfeeding=mean_breastfeeding.tail(7)
         fig, ax = plt.subplots()
         ax.plot(mean_breastfeeding.index, mean_breastfeeding[str(name)], 'o-')
-        ax.set_xlabel('日期', fontsize=16)
-        ax.set_ylabel('亲喂时长', fontsize=16)
-        ax.set_title(str(name), fontsize=16)
+        ax.set_xlabel('日期', fontsize=16, fontproperties=font)
+        ax.set_ylabel('亲喂时长', fontsize=16, fontproperties=font)
+        ax.set_title(str(name), fontsize=16, fontproperties=font)
         st.pyplot(fig)
 
         st.write('最近15天的数据日均母乳亲喂时间（单位：分钟）:', mean_breastfeeding.tail_15())
