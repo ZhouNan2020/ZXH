@@ -53,32 +53,21 @@ with tab1:
                 sheet.append_row(record,1)
                 st.success('提交成功')
 
-class MeanAnalysis:
-        def __init__(self, num):
-                date = sheet.col_values(2)
-                date = pd.DataFrame(date)
-                st.write(date)
-                value_all = sheet.col_values(num)
-                value_all = pd.DataFrame(value_all)
-                st.write(value_all)
-                sheet_all = pd.concat([date, value_all], axis=1)
-                #st.write(sheet_all)
-                mean_all = sheet_all.groupby('date').mean()
-                self.mean_all = mean_all[1:]
-        def tail_15(self):
-                mead_tail_15 = self.mean_all.tail(15)
-                return mead_tail_15
-        def tail_7(self):
-                mead_tail_7 = self.mean_all.tail(7)
-                return mead_tail_7
-        def tail_3(self):
-                mead_tail_3 = self.mean_all.tail(3)
-                return mead_tail_3
-        def tail_1(self):
-                mead_tail_1 = self.mean_all.tail(1)
-                return mead_tail_1
+
 
 with tab3:
+        date = sheet.col_values(2)
+        date = pd.DataFrame(date)
+        st.write(date)
+        value_all = sheet.col_values(num)
+        value_all = pd.DataFrame(value_all)
+        st.write(value_all)
+        sheet_all = pd.concat([date, value_all], axis=1)
+        # st.write(sheet_all)
+        # mean_all = sheet_all.groupby('date').mean()
+
+
+
         st.header('数据分析')
         mean_breastfeeding = MeanAnalysis(4)
         st.write('最近15天的数据日均母乳亲喂时间（单位：分钟）:',mean_breastfeeding.tail_15())
