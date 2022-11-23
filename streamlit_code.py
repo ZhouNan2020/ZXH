@@ -136,8 +136,8 @@ def count_milk():
 with tab4:
         st.subheader('覃薇吸奶记录')
         col1, col2= st.columns(2)
-        suctionVolume = st.number_input('吸出量（单位:ml）')
         with col1:
+                suctionVolume = st.number_input('吸出量（单位:ml）')
                 if st.button('记录一次吸奶'):
                         sheet2.append_row([timeticks,date,time,suctionVolume,1], 1)
                         st.success('记录成功')
