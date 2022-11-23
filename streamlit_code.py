@@ -115,10 +115,10 @@ def count_milk():
         date = sheet2.col_values(2)[1:]
         date = pd.DataFrame(date)
         date.columns = ['date']
-        time = sheet2.col_values(3)[1:]
-        time = pd.DataFrame(time)
-        time.columns = ['time']
-        time = time.astype('int')
+        time_milk = sheet2.col_values(3)[1:]
+        time_milk = pd.DataFrame(time_milk)
+        time_milk.columns = ['time']
+        time_milk = time_milk.astype('int')
         suctionVolume = sheet2.col_values(4)[1:]
         suctionVolume = pd.DataFrame(suctionVolume)
         suctionVolume.columns = ['suctionVolume']
@@ -127,7 +127,7 @@ def count_milk():
         count = pd.DataFrame(count)
         count.columns = ['count']
         count = count.astype('int')
-        suc_all = pd.concat([date, time, suctionVolume, count], axis=1)
+        suc_all = pd.concat([date, time_milk, suctionVolume, count], axis=1)
         suc_nozero = suc_all.drop(suc_all[suc_all['suctionVolume'] == 0].index)
         suc_mean = suc_nozero.groupby('date').mean()
         day_count = suc_nozero.groupby('date').sum()
