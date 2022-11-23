@@ -76,10 +76,11 @@ class MeanAnalysis:
 with tab3:
         st.header('数据分析')
         mean_breastfeeding = MeanAnalysis(sheet, 3)
-        st.write('最近15天的数据日均母乳亲喂时间（单位：分钟）:',MeanAnalysis(sheet, 4).tail_15())
-        st.write('最近7天的数据日均母乳亲喂时间（单位：分钟）:',MeanAnalysis(sheet, 4).tail_7())
-        st.write('最近3天的数据日均母乳亲喂时间（单位：分钟）:',MeanAnalysis(sheet, 4).tail_3())
-        st.write('最近1天的数据日均母乳亲喂时间（单位：分钟）:',MeanAnalysis(sheet, 4).tail_1())
+        st.write('最近15天的数据日均母乳亲喂时间（单位：分钟）:',mean_breastfeeding.tail_15())
+        st.write('最近7天的数据日均母乳亲喂时间（单位：分钟）:',mean_breastfeeding.tail_7())
+        st.write('最近3天的数据日均母乳亲喂时间（单位：分钟）:',mean_breastfeeding.tail_3())
+        st.write('最近1天的数据日均母乳亲喂时间（单位：分钟）:',mean_breastfeeding.tail_1())
+
 
 
 
