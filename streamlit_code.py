@@ -25,14 +25,14 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name(
 #这个json就是key，授权给谷歌的表格
 client = gspread.authorize(credentials)
 # 这一段就牛逼了，这一段那串乱码是目标谷歌sheet地址中间那一部分，用.来确定要访问的工作表
-global sheet
-sheet = client.open_by_key(
+global sheet1
+sheet1 = client.open_by_key(
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").sheet1
 
 #%%
 #下面的就可以动了
 
-tab1, tab2, tab3,tab4 = st.tabs(["日常喂养记录", "特殊情况记录", "数据分析","覃薇挤奶记录"])
+tab1, tab2, tab3,tab4 = st.tabs(["日常喂养记录", "特殊情况记录", "数据分析","覃薇吸奶记录"])
 
 with tab1:
         timeticks = time.time()
@@ -58,17 +58,17 @@ with tab1:
                 ChangeDiapers_value = 1
         record = [timeticks,date,time, Breastfeeding, BreastBottleFeeding, FormulaMilkPowder,Shit_value,Pee_value,ChangeDiapers_value]
         if st.button('提交本次记录'):
-                sheet.append_row(record,1)
+                sheet1.append_row(record, 1)
                 st.success('提交成功')
 
 
 
 class MeanAnalysis:
             def __init__(self, num,name):
-                    date = sheet.col_values(2)[1:]
+                    date = sheet1.col_values(2)[1:]
                     date = pd.DataFrame(date)
                     date.columns = ['date']
-                    value_all = sheet.col_values(num)[1:]
+                    value_all = sheet1.col_values(num)[1:]
                     value_all = pd.DataFrame(value_all)
                     value_all.columns = [str(name)]
                     value_all = value_all.astype('int')
@@ -87,21 +87,23 @@ class MeanAnalysis:
 
 
 with tab3:
-        st.header('数据分析')
+        st.subheader('数据分析')
         daynum = st.slider('想分析周栩珩最近多少天的状态？', 1, 15, 3)
         if st.button('开始分析'):
-                name = '近{}日每日平均母乳亲喂时间'.format(daynum)
-                mean_breastfeeding = MeanAnalysis(4,name)
+                name1 = '近{}日每日平均母乳亲喂时间'.format(daynum)
+                mean_breastfeeding = MeanAnalysis(4,name1)
                 mean_breastfeeding=mean_breastfeeding.tail(daynum)
                 fig, ax = plt.subplots()
-                ax.plot(mean_breastfeeding.index, mean_breastfeeding[str(name)], 'o-')
+                ax.plot(mean_breastfeeding.index, mean_breastfeeding[str(name1)], 'o-')
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
                 ax.set_ylabel('亲喂时长', fontsize=16, fontproperties=font)
-                ax.set_title(str(name), fontsize=16, fontproperties=font)
+                ax.set_title(str(name1), fontsize=16, fontproperties=font)
                 st.pyplot(fig)
 
-
+with tab4:
+        st.subheader('覃薇吸奶记录')
+        timeticks = time.time()
 
 
 
@@ -113,8 +115,8 @@ with tab3:
 
 # append_row这个是谷歌的方法，可以直接在sheet中添加一行数据
 #tes=("hjj","king")
-#sheet.append_row(tes,1)
+#sheet1.append_row(tes,1)
 
-#sheet = pd.DataFrame(sheet.get_all_records())
+#sheet1 = pd.DataFrame(sheet1.get_all_records())
 
-#st.write(sheet)
+#st.write(sheet1)
