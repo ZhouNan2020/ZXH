@@ -7,6 +7,7 @@ import time
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
 import matplotlib as mpl
+import datetime
 #%%
 font = font_manager.FontProperties(fname='simhei.ttf')
 parameters = {'xtick.labelsize': 16,
@@ -36,8 +37,8 @@ sheet2 = client.open_by_key(
 
 tab1, tab2, tab3,tab4 = st.tabs(["日常喂养记录", "特殊情况记录", "数据分析","覃薇吸奶记录"])
 timeticks = time.time()
-date=time.strftime("%Y-%m-%d", time.localtime())
-time=time.strftime("%H:%M:%S", time.localtime())
+date=time.strftime("%Y-%m-%d", datetime.datetime.now())
+time=time.strftime("%H:%M:%S", datetime.datetime.now())
 
 with tab1:
 
