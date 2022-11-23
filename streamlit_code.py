@@ -94,6 +94,7 @@ with tab3:
         fig, ax = plt.subplots()
         ax.plot(mean_breastfeeding.index, mean_breastfeeding[str(name)], 'o-')
         ax.set_xlabel('日期', fontsize=16, fontproperties=font)
+        plt.xticks(rotation=45)
         ax.set_ylabel('亲喂时长', fontsize=16, fontproperties=font)
         ax.set_title(str(name), fontsize=16, fontproperties=font)
         st.pyplot(fig)
