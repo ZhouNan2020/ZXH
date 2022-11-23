@@ -59,6 +59,7 @@ class MeanAnalysis:
                 st.write(date)
                 value_all = sheet.col_values(num)
                 sheet_all = pd.concat([pd.DataFrame(date), pd.DataFrame(value_all)], axis=1)
+                st.write(sheet_all)
                 mean_all = sheet_all.groupby('date').mean()
                 self.mean_all = mean_all[1:]
         def tail_15(self):
