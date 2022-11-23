@@ -1,4 +1,5 @@
 import pandas as pd
+import pytz
 import streamlit as st
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -130,8 +131,10 @@ with tab4:
         with col1:
                 if st.button('记录一次吸奶'):
                         timeticks2 = time.time()
-                        date2 = time.strftime("%Y-%m-%d", time.localtime(time.time()))
-                        time2 = time.strftime("%H:%M:%S", time.localtime(time.time()))
+                        date2 = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
+                        time2 = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
+                        #date2 = time.strftime("%Y-%m-%d", time.localtime(time.time()))
+                        #time2 = time.strftime("%H:%M:%S", time.localtime(time.time()))
                         sheet2.append_row([timeticks2,date2,time2,1], 1)
                         st.success('记录成功')
         with col2:
