@@ -50,7 +50,10 @@ with tab1:
                 sheet.append_row(record,1)
                 st.success('提交成功')
 
-#with tab3:
+with tab3:
+        row = sheet.row_values(1)
+        st.write(row)
+
 
 
 
