@@ -52,7 +52,10 @@ with tab1:
 
 with tab3:
         row = sheet.col_values(3)
+        row = pd.DataFrame(row)
+        row_tail = row.tail(3)
         st.write(row)
+        st.write(row_tail)
 
 
 
