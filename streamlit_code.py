@@ -129,6 +129,7 @@ def count_milk():
         suc_all = pd.concat([date, time_milk, suctionVolume, count], axis=1)
         suc_nozero = suc_all.drop(suc_all[suc_all['suctionVolume'] == 0].index)
         suc_mean = suc_nozero.groupby('date').mean()
+        suc_mean = suc_mean.astype('int')
         return suc_mean
 
 
@@ -150,10 +151,12 @@ with tab4:
                 ax1 = ax.twinx()
                 ax.plot(suc_mean.index, suc_mean['count'], 'o-')
                 ax1.bar(suc_mean.index, suc_mean['suctionVolume'], alpha=0.5)
-                ax.set_xlabel('日期', fontsize=16, fontproperties=font)
-                plt.xticks(rotation=45)
                 ax.set_ylabel('吸奶次数', fontsize=16, fontproperties=font)
                 ax1.set_ylabel('日均吸奶量', fontsize=16, fontproperties=font)
+                ax.set_xlabel('日期', fontsize=16, fontproperties=font)
+                plt.xticks(rotation=45)
+                for a, b in zip([suc_mean.index], [suc_mean['suctionVolume']]):
+                        plt.text(a + 0.1, b, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
 
 
