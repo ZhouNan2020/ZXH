@@ -65,7 +65,7 @@ class MeanAnalysis:
                     value_all.columns = ['value_all']
                     sheet_all = pd.concat([date, value_all], axis=1)
                     sheet_all.drop(index=0, axis=0, inplace=True)
-                    sheet_nozero = sheet_all[sheet_all['value_all'] != '0']
+                    sheet_nozero = sheet_all.drop(sheet_all[sheet_all['value_all'] == 0].index)
                     st.write(sheet_nozero)
                     mean_all = sheet_all.groupby('date').mean()
             def tail_15(self):
