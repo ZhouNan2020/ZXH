@@ -54,8 +54,9 @@ with tab1:
                 st.success('提交成功')
 
 class MeanAnalysis:
-        def __init__(self, sheet, num):
+        def __init__(self, num):
                 date = sheet.col_values(1)
+                st.write(date)
                 value_all = sheet.col_values(num)
                 sheet_all = pd.concat([pd.DataFrame(date), pd.DataFrame(value_all)], axis=1)
                 mean_all = sheet_all.groupby('date').mean()
@@ -75,7 +76,7 @@ class MeanAnalysis:
 
 with tab3:
         st.header('数据分析')
-        mean_breastfeeding = MeanAnalysis(sheet, 3)
+        mean_breastfeeding = MeanAnalysis(3)
         st.write('最近15天的数据日均母乳亲喂时间（单位：分钟）:',mean_breastfeeding.tail_15())
         st.write('最近7天的数据日均母乳亲喂时间（单位：分钟）:',mean_breastfeeding.tail_7())
         st.write('最近3天的数据日均母乳亲喂时间（单位：分钟）:',mean_breastfeeding.tail_3())
