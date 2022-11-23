@@ -114,7 +114,7 @@ with tab4:
         with col2:
                 milkdate = sheet2.col_values(2)[-1:]
                 milktime = sheet2.col_values(3)[-1:]
-                st.write('上次吸奶时间：',milkdate,milktime)
+                st.write('上次吸奶时间：',milkdate[0],milktime[0])
 
 
 
