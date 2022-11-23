@@ -50,7 +50,7 @@ with tab1:
                 sheet.append_row(record,1)
                 st.success('提交成功')
 
-with tab3:
+#with tab3:
 
 
 
@@ -59,6 +59,6 @@ with tab3:
 #tes=("hjj","king")
 #sheet.append_row(tes,1)
 
-sheet = pd.DataFrame(sheet.get_all_records())
+#sheet = pd.DataFrame(sheet.get_all_records())
 
 #st.write(sheet)
