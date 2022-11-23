@@ -31,13 +31,22 @@ with tab1:
         BreastMilkBottleFeeding = st.number_input('母乳瓶喂（单位:ml）')
         FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）')
         Shit = st.checkbox('大便')
-        Pee = st.checkbox('小便')
+        Shit_value = 0
+        if Shit:
+                Shit_value = 1
 
+        Pee = st.checkbox('小便')
+        Pee_value = 0
+        if Pee:
+                Pee_value = 1
+        record = [time, Breastfeeding, BreastMilkBottleFeeding, FormulaMilkPowder,Shit_value,Pee_value]
+        if st.button('提交'):
+                sheet.append_row(record,1)
 
 
 # append_row这个是谷歌的方法，可以直接在sheet中添加一行数据
-tes=("hjj","king")
-sheet.append_row(tes,1)
+#tes=("hjj","king")
+#sheet.append_row(tes,1)
 
 sheet = pd.DataFrame(sheet.get_all_records())
 
