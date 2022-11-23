@@ -69,29 +69,18 @@ class MeanAnalysis:
                     sheet_nozero = sheet_all.drop(sheet_all[sheet_all[str(name)] == 0].index)
                     mean_all = sheet_nozero.groupby('date').mean()
                     self.mean_all = mean_all
-            def tail_15(self):
-                    mean_tail_15 = self.mean_all.tail(15)
-                    mean_tail_15 = mean_tail_15.astype('int')
-                    return mean_tail_15
-            def tail_7(self):
-                    mean_tail_7 = self.mean_all.tail(7)
-                    mean_tail_7 = mean_tail_7.astype('int')
-                    return mean_tail_7
-            def tail_3(self):
-                    mean_tail_3 = self.mean_all.tail(3)
-                    mean_tail_3 = mean_tail_3.astype('int')
-                    return mean_tail_3
-            def tail_1(self):
-                    mean_tail_1 = self.mean_all.tail(1)
-                    mean_tail_1 = mean_tail_1.astype('int')
-                    return mean_tail_1
+            def tail(self,tail_num):
+                    mean_tail = self.mean_all.tail(tail_num)
+                    mean_tail = mean_tail.astype('int')
+                    return mean_tail
+
 
 
 
 
 with tab3:
         st.header('数据分析')
-        mean_breastfeeding = MeanAnalysis(4,'母乳亲喂')
+        mean_breastfeeding = MeanAnalysis(4,'{}日均母乳亲喂时间'.format(7))
         st.line_chart(mean_breastfeeding.tail_15())
         st.write('最近15天的数据日均母乳亲喂时间（单位：分钟）:', mean_breastfeeding.tail_15())
         st.write('最近7天的数据日均母乳亲喂时间（单位：分钟）:', mean_breastfeeding.tail_7())
