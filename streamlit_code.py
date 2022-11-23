@@ -56,17 +56,17 @@ with tab1:
 
 
 class MeanAnalysis:
-            def __init__(self, num):
+            def __init__(self, num,name):
                     date = sheet.col_values(2)[1:]
                     date = pd.DataFrame(date)
                     date.columns = ['date']
                     value_all = sheet.col_values(num)[1:]
                     value_all = pd.DataFrame(value_all)
-                    value_all.columns = ['value_all']
+                    value_all.columns = [str(name)]
                     value_all = value_all.astype('int')
                     sheet_all = pd.concat([date, value_all], axis=1)
                     sheet_all.drop(index=0, axis=0, inplace=True)
-                    sheet_nozero = sheet_all.drop(sheet_all[sheet_all['value_all'] == 0].index)
+                    sheet_nozero = sheet_all.drop(sheet_all[sheet_all[str(name)] == 0].index)
                     mean_all = sheet_nozero.groupby('date').mean()
                     self.mean_all = mean_all
             def tail_15(self):
@@ -91,7 +91,7 @@ class MeanAnalysis:
 
 with tab3:
         st.header('数据分析')
-        mean_breastfeeding = MeanAnalysis(4)
+        mean_breastfeeding = MeanAnalysis(4,'母乳亲喂')
         st.line_chart(mean_breastfeeding.tail_15())
         st.write('最近15天的数据日均母乳亲喂时间（单位：分钟）:', mean_breastfeeding.tail_15())
         st.write('最近7天的数据日均母乳亲喂时间（单位：分钟）:', mean_breastfeeding.tail_7())
