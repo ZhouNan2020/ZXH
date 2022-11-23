@@ -146,7 +146,9 @@ with tab4:
                 milktime = sheet2.col_values(3)[-1:]
                 st.write('上次吸奶时间：',milkdate[0],milktime[0])
                 day_count = count_milk()[0]
+                st.write(day_count)
                 suc_mean = count_milk()[1]
+                st.write(suc_mean)
                 fig, ax = plt.subplots()
                 ax1 = ax.twinx()
                 ax.plot(day_count.index, day_count['count'], 'o-')
