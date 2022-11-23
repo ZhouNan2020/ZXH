@@ -17,8 +17,10 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name(
 #这个json就是key，授权给谷歌的表格
 client = gspread.authorize(credentials)
 # 这一段就牛逼了，这一段那串乱码是目标谷歌sheet地址中间那一部分，用.来确定要访问的工作表
+global sheet
 sheet = client.open_by_key(
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").sheet1
+
 #%%
 #下面的就可以动了
 
@@ -29,7 +31,7 @@ with tab1:
         date=time.strftime("%Y-%m-%d", time.localtime())
         time=time.strftime("%H:%M:%S", time.localtime())
         Breastfeeding = st.number_input('母乳亲喂（单位:分钟）')
-        BreastMilkBottleFeeding = st.number_input('母乳瓶喂（单位:ml）')
+        BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）')
         FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）')
 
         Shit = st.checkbox('大便')
@@ -46,15 +48,38 @@ with tab1:
         ChangeDiapers_value = 0
         if ChangeDiapers:
                 ChangeDiapers_value = 1
-        record = [timeticks,date,time, Breastfeeding, BreastMilkBottleFeeding, FormulaMilkPowder,Shit_value,Pee_value,ChangeDiapers_value]
+        record = [timeticks,date,time, Breastfeeding, BreastBottleFeeding, FormulaMilkPowder,Shit_value,Pee_value,ChangeDiapers_value]
         if st.button('提交本次记录'):
                 sheet.append_row(record,1)
                 st.success('提交成功')
 
+class MeanAnalysis:
+        def __init__(self, sheet, num):
+                date = sheet.col_values(1)[1:]
+                value_all = sheet.col_values(num)[1:]
+                sheet_all = pd.concat([pd.DataFrame(date), pd.DataFrame(value_all)], axis=1)
+                mean_all = sheet_all.groupby('date').mean()
+                self.mean_all = mean_all
+        def tail_15(self):
+                mead_tail_15 = self.mean_all.tail(15)
+                return mead_tail_15
+        def tail_7(self):
+                mead_tail_7 = self.mean_all.tail(7)
+                return mead_tail_7
+        def tail_3(self):
+                mead_tail_3 = self.mean_all.tail(3)
+                return mead_tail_3
+        def tail_1(self):
+                mead_tail_1 = self.mean_all.tail(1)
+                return mead_tail_1
+
 with tab3:
-        BreastfeedingTime_all = sheet.col_values(3)[1:]
-        BreastfeedingTime_all = pd.DataFrame(BreastfeedingTime_all)
-        BreastfeedingTime_tail_7 = BreastfeedingTime_all.tail(3)
+        st.header('数据分析')
+        mean_breastfeeding = MeanAnalysis(sheet, 3)
+        st.write('最近15天的数据日均母乳亲喂时间（单位：分钟）:',MeanAnalysis(sheet, 4).tail_15())
+        st.write('最近7天的数据日均母乳亲喂时间（单位：分钟）:',MeanAnalysis(sheet, 4).tail_7())
+        st.write('最近3天的数据日均母乳亲喂时间（单位：分钟）:',MeanAnalysis(sheet, 4).tail_3())
+        st.write('最近1天的数据日均母乳亲喂时间（单位：分钟）:',MeanAnalysis(sheet, 4).tail_1())
 
 
 
