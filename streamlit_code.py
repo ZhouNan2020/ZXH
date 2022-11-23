@@ -32,7 +32,7 @@ sheet = client.open_by_key(
 #%%
 #下面的就可以动了
 
-tab1, tab2, tab3 = st.tabs(["日常喂养记录", "特殊情况记录", "数据分析"])
+tab1, tab2, tab3,tab4 = st.tabs(["日常喂养记录", "特殊情况记录", "数据分析","覃薇挤奶记录"])
 
 with tab1:
         timeticks = time.time()
@@ -88,21 +88,20 @@ class MeanAnalysis:
 
 with tab3:
         st.header('数据分析')
-        name = '近{}日每日平均母乳亲喂时间'.format(3)
-        mean_breastfeeding = MeanAnalysis(4,name)
-        mean_breastfeeding=mean_breastfeeding.tail(3)
-        fig, ax = plt.subplots()
-        ax.plot(mean_breastfeeding.index, mean_breastfeeding[str(name)], 'o-')
-        ax.set_xlabel('日期', fontsize=16, fontproperties=font)
-        plt.xticks(rotation=45)
-        ax.set_ylabel('亲喂时长', fontsize=16, fontproperties=font)
-        ax.set_title(str(name), fontsize=16, fontproperties=font)
-        st.pyplot(fig)
+        daynum = st.slider('想分析周栩珩最近多少天的状态？', 1, 15, 3)
+        if st.button('开始分析'):
+                name = '近{}日每日平均母乳亲喂时间'.format(daynum)
+                mean_breastfeeding = MeanAnalysis(4,name)
+                mean_breastfeeding=mean_breastfeeding.tail(daynum)
+                fig, ax = plt.subplots()
+                ax.plot(mean_breastfeeding.index, mean_breastfeeding[str(name)], 'o-')
+                ax.set_xlabel('日期', fontsize=16, fontproperties=font)
+                plt.xticks(rotation=45)
+                ax.set_ylabel('亲喂时长', fontsize=16, fontproperties=font)
+                ax.set_title(str(name), fontsize=16, fontproperties=font)
+                st.pyplot(fig)
 
-        st.write('最近15天的数据日均母乳亲喂时间（单位：分钟）:', mean_breastfeeding.tail_15())
-        st.write('最近7天的数据日均母乳亲喂时间（单位：分钟）:', mean_breastfeeding.tail_7())
-        st.write('最近3天的数据日均母乳亲喂时间（单位：分钟）:', mean_breastfeeding.tail_3())
-        st.write('最近1天的数据日均母乳亲喂时间（单位：分钟）:', mean_breastfeeding.tail_1())
+
 
 
 
