@@ -3,6 +3,7 @@ import streamlit as st
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import copy as cp
+import time
 #%%
 
 
@@ -24,7 +25,15 @@ sheet = client.open_by_key(
 tab1, tab2, tab3 = st.tabs(["日常喂养记录", "特殊情况记录", "数据分析"])
 
 with tab1:
-        st.checkbox(st.number_input('母乳亲喂（单位:ml）'))
+        timeticks = time.time()
+        time=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        Breastfeeding = st.number_input('母乳亲喂（单位:ml）')
+        BreastMilkBottleFeeding = st.number_input('母乳瓶喂（单位:ml）')
+        FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）')
+        Shit = st.checkbox('大便')
+        Pee = st.checkbox('小便')
+
+
 
 # append_row这个是谷歌的方法，可以直接在sheet中添加一行数据
 tes=("hjj","king")
