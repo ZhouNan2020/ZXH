@@ -104,7 +104,7 @@ with tab3:
                 ax.set_title(str(name1), fontsize=16, fontproperties=font)
                 st.pyplot(fig)
 
-class Qin
+class Qin:
         def count_milk(self):
                 date = sheet1.col_values(2)[1:]
                 date = pd.DataFrame(date)
