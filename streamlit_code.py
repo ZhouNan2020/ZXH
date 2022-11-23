@@ -112,8 +112,8 @@ with tab4:
                         sheet2.append_row([timeticks,date,time], 1)
                         st.success('记录成功')
         with col2:
-                milkdate = sheet2.col_values(2)[-1]
-                milktime = sheet2.col_values(3)[-1]
+                milkdate = sheet2.col_values(2)[-1:]
+                milktime = sheet2.col_values(3)[-1:]
                 st.write('上次吸奶时间：',milkdate,milktime)
 
 
