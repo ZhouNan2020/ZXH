@@ -27,7 +27,7 @@ tab1, tab2, tab3 = st.tabs(["日常喂养记录", "特殊情况记录", "数据�
 with tab1:
         timeticks = time.time()
         time=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        Breastfeeding = st.number_input('母乳亲喂（单位:ml）')
+        Breastfeeding = st.number_input('母乳亲喂（单位:分钟）')
         BreastMilkBottleFeeding = st.number_input('母乳瓶喂（单位:ml）')
         FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）')
 
@@ -52,7 +52,7 @@ with tab1:
 
 with tab3:
         row = sheet.col_values(3)[1:]
-        
+
         row = pd.DataFrame(row)
         row_tail = row.tail(3)
         st.write(row)
