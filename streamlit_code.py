@@ -45,10 +45,13 @@ with tab1:
         ChangeDiapers_value = 0
         if ChangeDiapers:
                 ChangeDiapers_value = 1
-        record = [time, Breastfeeding, BreastMilkBottleFeeding, FormulaMilkPowder,Shit_value,Pee_value,ChangeDiapers_value]
-        if st.button('提交'):
+        record = [timeticks,time, Breastfeeding, BreastMilkBottleFeeding, FormulaMilkPowder,Shit_value,Pee_value,ChangeDiapers_value]
+        if st.button('提交本次记录'):
                 sheet.append_row(record,1)
                 st.success('提交成功')
+
+with tab3:
+
 
 
 
