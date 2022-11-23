@@ -129,7 +129,10 @@ with tab4:
         col1, col2= st.columns(2)
         with col1:
                 if st.button('记录一次吸奶'):
-                        sheet2.append_row([timeticks,date,time,1], 1)
+                        timeticks2 = time.time()
+                        date2 = time.strftime("%Y-%m-%d", time.localtime())
+                        time2 = time.strftime("%H:%M:%S", time.localtime())
+                        sheet2.append_row([timeticks2,date2,time2,1], 1)
                         st.success('记录成功')
         with col2:
                 milkdate = sheet2.col_values(2)[-1:]
