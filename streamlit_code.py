@@ -56,14 +56,16 @@ with tab1:
 
 
 with tab3:
-        date = sheet.col_values(2)
+        date = sheet.col_values(2)[1:]
         date = pd.DataFrame(date)
+        date.columns = ['date']
         st.write(date)
-        value_all = sheet.col_values(4)
+        value_all = sheet.col_values(4)[1:]
         value_all = pd.DataFrame(value_all)
+        value_all.columns = ['value_all']
         st.write(value_all)
         sheet_all = pd.concat([date, value_all], axis=1)
-        #sheet_all.drop(index=0, axis=0, inplace=True)
+        sheet_all.drop(index=0, axis=0, inplace=True)
         st.write(sheet_all)
         # st.write(sheet_all)
         # mean_all = sheet_all.groupby('date').mean()
