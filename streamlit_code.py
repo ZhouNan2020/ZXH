@@ -59,7 +59,7 @@ with tab3:
         date = sheet.col_values(2)
         date = pd.DataFrame(date)
         st.write(date)
-        value_all = sheet.col_values(num)
+        value_all = sheet.col_values(4)
         value_all = pd.DataFrame(value_all)
         st.write(value_all)
         sheet_all = pd.concat([date, value_all], axis=1)
