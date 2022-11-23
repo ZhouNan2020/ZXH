@@ -55,11 +55,11 @@ with tab1:
 
 class MeanAnalysis:
         def __init__(self, sheet, num):
-                date = sheet.col_values(1)[1:]
-                value_all = sheet.col_values(num)[1:]
+                date = sheet.col_values(1)
+                value_all = sheet.col_values(num)
                 sheet_all = pd.concat([pd.DataFrame(date), pd.DataFrame(value_all)], axis=1)
                 mean_all = sheet_all.groupby('date').mean()
-                self.mean_all = mean_all
+                self.mean_all = mean_all[1:]
         def tail_15(self):
                 mead_tail_15 = self.mean_all.tail(15)
                 return mead_tail_15
