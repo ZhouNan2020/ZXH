@@ -128,8 +128,8 @@ def count_milk():
         count = count.astype('int')
         suc_all = pd.concat([date, time_milk, suctionVolume, count], axis=1)
         suc_nozero = suc_all.drop(suc_all[suc_all['suctionVolume'] == 0].index)
-        suc_mean = suc_nozero.groupby('date').mean()
-        day_count = suc_nozero.groupby('date').sum()
+        suc_mean = suc_nozero.groupby('date')['suctionVolume'].mean()
+        day_count = suc_nozero.groupby('date')['count'].sum()
         return day_count, suc_mean
 
 
