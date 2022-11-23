@@ -63,6 +63,8 @@ with tab3:
         value_all = pd.DataFrame(value_all)
         st.write(value_all)
         sheet_all = pd.concat([date, value_all], axis=1)
+        sheet_all.drop(index=0, axis=0, inplace=True)
+        st.write(sheet_all)
         # st.write(sheet_all)
         # mean_all = sheet_all.groupby('date').mean()
 
