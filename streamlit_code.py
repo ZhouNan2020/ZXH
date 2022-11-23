@@ -134,6 +134,12 @@ def count_milk():
 
 def plot_label(x_label,y_label):
         x_label = []
+        for x in x_label:
+                x_label.append(str(x))
+        y_label = []
+        for y in y_label:
+                y_label.append(str(y))
+        return x_label,y_label
 
 
 with tab4:
@@ -161,7 +167,9 @@ with tab4:
                 ax1.set_ylabel('日均吸奶量', fontsize=16, fontproperties=font)
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
-                for a, b in zip([suc_mean.index], [suc_mean['suctionVolume']]):
+                a=plot_label(x,y1)[0]
+                b=plot_label(x,y1)[1]
+                for a, b in zip(a, b):
                         plt.text(a + 0.1, b, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
 
