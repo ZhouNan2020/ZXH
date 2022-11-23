@@ -57,8 +57,10 @@ class MeanAnalysis:
         def __init__(self, num):
                 date = sheet.col_values(2)
                 date = pd.DataFrame(date)
+                st.write(date)
                 value_all = sheet.col_values(num)
                 value_all = pd.DataFrame(value_all)
+                st.write(value_all)
                 sheet_all = pd.concat([date, value_all], axis=1)
                 #st.write(sheet_all)
                 mean_all = sheet_all.groupby('date').mean()
