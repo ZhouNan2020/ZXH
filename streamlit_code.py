@@ -50,4 +50,4 @@ with tab1:
 
 sheet = pd.DataFrame(sheet.get_all_records())
 
-st.write(sheet)
+#st.write(sheet)
