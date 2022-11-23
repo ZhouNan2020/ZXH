@@ -112,37 +112,50 @@ with tab3:
 
 
 def count_milk():
-        date = sheet1.col_values(2)[1:]
+        date = sheet2.col_values(2)[1:]
         date = pd.DataFrame(date)
         date.columns = ['date']
-        count = sheet2.col_values(4)[1:]
+        time = sheet2.col_values(3)[1:]
+        time = pd.DataFrame(time)
+        time.columns = ['time']
+        time = time.astype('int')
+        suctionVolume = sheet2.col_values(4)[1:]
+        suctionVolume = pd.DataFrame(suctionVolume)
+        suctionVolume.columns = ['suctionVolume']
+        suctionVolume = suctionVolume.astype('int')
+        count = sheet2.col_values(5)[1:]
         count = pd.DataFrame(count)
         count.columns = ['count']
         count = count.astype('int')
-        all_count = pd.concat([date, count], axis=1)
-        day_count = all_count.groupby('date').sum()
-        return day_count
+        suc_all = pd.concat([date, time, suctionVolume, count], axis=1)
+        suc_nozero = suc_all.drop(suc_all[suc_all['suctionVolume'] == 0].index)
+        suc_mean = suc_nozero.groupby('date').mean()
+        day_count = suc_nozero.groupby('date').sum()
+        return day_count, suc_mean
 
 
 with tab4:
         st.subheader('覃薇吸奶记录')
         col1, col2= st.columns(2)
+        suctionVolume = st.number_input('吸出量（单位:ml）')
         with col1:
                 if st.button('记录一次吸奶'):
-                        #date2 = time.strftime("%Y-%m-%d", time.localtime(time.time()))
-                        #time2 = time.strftime("%H:%M:%S", time.localtime(time.time()))
-                        sheet2.append_row([timeticks,date,time,1], 1)
+                        sheet2.append_row([timeticks,date,time,suctionVolume,1], 1)
                         st.success('记录成功')
         with col2:
                 milkdate = sheet2.col_values(2)[-1:]
                 milktime = sheet2.col_values(3)[-1:]
                 st.write('上次吸奶时间：',milkdate[0],milktime[0])
-                day_count = count_milk()
+                day_count = count_milk()[0]
+                suc_mean = count_milk()[1]
                 fig, ax = plt.subplots()
+                ax1 = ax.twinx()
                 ax.plot(day_count.index, day_count['count'], 'o-')
+                ax1.bar(suc_mean.index, suc_mean['suctionVolume'], alpha=0.5)
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
                 ax.set_ylabel('吸奶次数', fontsize=16, fontproperties=font)
+                ax1.set_ylabel('日均吸奶量', fontsize=16, fontproperties=font)
                 st.pyplot(fig)
 
 
