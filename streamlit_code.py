@@ -80,7 +80,7 @@ class MeanAnalysis:
 
 with tab3:
         st.header('数据分析')
-        name = '{}日均母乳亲喂时间'.format(7)
+        name = '近{}日每日平均母乳亲喂时间'.format(7)
         mean_breastfeeding = MeanAnalysis(4,name)
         st.line_chart(mean_breastfeeding.tail(7))
         st.write('最近15天的数据日均母乳亲喂时间（单位：分钟）:', mean_breastfeeding.tail_15())
