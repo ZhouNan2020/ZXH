@@ -51,7 +51,7 @@ with tab1:
                 st.success('提交成功')
 
 with tab3:
-        row = sheet.row_values(1)
+        row = sheet.col_values(3)
         st.write(row)
 
 
