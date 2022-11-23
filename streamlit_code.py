@@ -129,9 +129,6 @@ with tab4:
         col1, col2= st.columns(2)
         with col1:
                 if st.button('记录一次吸奶'):
-                        timeticks = time.time()
-                        date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
-                        time = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
                         #date2 = time.strftime("%Y-%m-%d", time.localtime(time.time()))
                         #time2 = time.strftime("%H:%M:%S", time.localtime(time.time()))
                         sheet2.append_row([timeticks,date,time,1], 1)
