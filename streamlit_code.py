@@ -37,7 +37,9 @@ sheet2 = client.open_by_key(
 #下面的就可以动了
 
 tab1, tab2, tab3,tab4 = st.tabs(["日常喂养记录", "特殊情况记录", "数据分析","覃薇吸奶记录"])
-
+timeticks = time.time()
+date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
+time = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
 
 
 
@@ -63,10 +65,7 @@ with tab1:
                 ChangeDiapers_value = 1
 
         if st.button('提交本次记录'):
-                timeticks1 = time.time()
-                date1 = time.strftime("%Y-%m-%d", time.localtime())
-                time1 = time.strftime("%H:%M:%S", time.localtime())
-                record = [timeticks1, date1, time1, Breastfeeding, BreastBottleFeeding, FormulaMilkPowder, Shit_value,
+                record = [timeticks, date, time, Breastfeeding, BreastBottleFeeding, FormulaMilkPowder, Shit_value,
                           Pee_value, ChangeDiapers_value]
                 sheet1.append_row(record, 1)
                 st.success('提交成功')
@@ -130,12 +129,12 @@ with tab4:
         col1, col2= st.columns(2)
         with col1:
                 if st.button('记录一次吸奶'):
-                        timeticks2 = time.time()
-                        date2 = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
-                        time2 = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
+                        timeticks = time.time()
+                        date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
+                        time = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
                         #date2 = time.strftime("%Y-%m-%d", time.localtime(time.time()))
                         #time2 = time.strftime("%H:%M:%S", time.localtime(time.time()))
-                        sheet2.append_row([timeticks2,date2,time2,1], 1)
+                        sheet2.append_row([timeticks,date,time,1], 1)
                         st.success('记录成功')
         with col2:
                 milkdate = sheet2.col_values(2)[-1:]
