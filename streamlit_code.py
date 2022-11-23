@@ -118,7 +118,6 @@ def count_milk():
         time_milk = sheet2.col_values(3)[1:]
         time_milk = pd.DataFrame(time_milk)
         time_milk.columns = ['time']
-        time_milk = time_milk.astype('int')
         suctionVolume = sheet2.col_values(4)[1:]
         suctionVolume = pd.DataFrame(suctionVolume)
         suctionVolume.columns = ['suctionVolume']
