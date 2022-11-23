@@ -88,9 +88,9 @@ class MeanAnalysis:
 
 with tab3:
         st.header('数据分析')
-        name = '近{}日每日平均母乳亲喂时间'.format(7)
+        name = '近{}日每日平均母乳亲喂时间'.format(11)
         mean_breastfeeding = MeanAnalysis(4,name)
-        mean_breastfeeding=mean_breastfeeding.tail(7)
+        mean_breastfeeding=mean_breastfeeding.tail(11)
         fig, ax = plt.subplots()
         ax.plot(mean_breastfeeding.index, mean_breastfeeding[str(name)], 'o-')
         ax.set_xlabel('日期', fontsize=16, fontproperties=font)
