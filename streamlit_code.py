@@ -70,17 +70,21 @@ class MeanAnalysis:
                     mean_all = sheet_nozero.groupby('date').mean()
                     self.mean_all = mean_all
             def tail_15(self):
-                    mead_tail_15 = self.mean_all.tail(15)
-                    return mead_tail_15
+                    mean_tail_15 = self.mean_all.tail(15)
+                    mean_tail_15 = mean_tail_15.astype('int')
+                    return mean_tail_15
             def tail_7(self):
-                    mead_tail_7 = self.mean_all.tail(7)
-                    return mead_tail_7
+                    mean_tail_7 = self.mean_all.tail(7)
+                    mean_tail_7 = mean_tail_7.astype('int')
+                    return mean_tail_7
             def tail_3(self):
-                    mead_tail_3 = self.mean_all.tail(3)
-                    return mead_tail_3
+                    mean_tail_3 = self.mean_all.tail(3)
+                    mean_tail_3 = mean_tail_3.astype('int')
+                    return mean_tail_3
             def tail_1(self):
-                    mead_tail_1 = self.mean_all.tail(1)
-                    return mead_tail_1
+                    mean_tail_1 = self.mean_all.tail(1)
+                    mean_tail_1 = mean_tail_1.astype('int')
+                    return mean_tail_1
 
 
 
