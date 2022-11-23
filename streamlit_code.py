@@ -29,7 +29,7 @@ global sheet1
 sheet1 = client.open_by_key(
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").sheet1
 sheet2 = client.open_by_key(
-        "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").sheet2
+        "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('Sheet2')
 
 #%%
 #下面的就可以动了
