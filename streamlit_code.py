@@ -37,8 +37,11 @@ sheet2 = client.open_by_key(
 
 tab1, tab2, tab3,tab4 = st.tabs(["日常喂养记录", "特殊情况记录", "数据分析","覃薇吸奶记录"])
 timeticks = time.time()
-date=time.strftime("%Y-%m-%d", time.time())
-time=time.strftime("%H:%M:%S", time.time())
+theTime = datetime.datetime.now()
+date_formula = '%Y-%m-%d'
+time_formula = '%H:%M:%S'
+date=datetime.datetime.now().strftime(date_formula)
+time=datetime.datetime.now().strftime(time_formula)
 
 with tab1:
 
