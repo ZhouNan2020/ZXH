@@ -162,16 +162,16 @@ with tab4:
                 st.write(y1)
                 y2=list(suc_sum['count'])
                 y_major_locator = MultipleLocator(1)
-                ax.plot(x, y2, 'o-',label='日吸奶次数')
+                ax.plot(x, y2, 'o-',label='日吸奶次数',fontproperties=font)
                 ax.yaxis.set_major_locator(y_major_locator)
                 ax.set_ylabel('吸奶次数', fontsize=16, fontproperties=font)
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
-                ax1.bar(x, y1, alpha=0.5, label='日均吸奶量')
+                ax1.bar(x, y1, alpha=0.5, label='日均吸奶量',fontproperties=font)
                 ax1.set_ylabel('日均吸奶量', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
                 for a, c in zip(x, y1):
                         plt.text(a, c+0.5, c, ha='center', va='center', fontsize=14)
-                plt.legend(handles=[ax,ax1],labels=['日吸奶次数','日均吸奶量'],loc='upper left',fontsize=14,prop=font)
+                plt.legend(loc='upper left')
                 st.pyplot(fig)
 
 
