@@ -143,11 +143,8 @@ with tab3:
                 ana = Analysis()
                 name1 = '近{}日每日平均母乳亲喂时间'.format(daynum)
                 mean_breastfeeding=pd.DataFrame(ana.day_mean(daynum,'Breastfeeding'))
-                mean_bottle = pd.DataFrame(ana.day_mean(daynum, 'BreastBottleFeeding'))
                 fig, ax = plt.subplots()
                 ax.plot(mean_breastfeeding.index, mean_breastfeeding['Breastfeeding'], 'o-')
-                ax.plot(mean_bottle.index, mean_bottle['BreastBottleFeeding'], 'v-')
-                
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
                 ax.set_ylabel('日均亲喂时间', fontsize=16, fontproperties=font)
@@ -156,11 +153,14 @@ with tab3:
 
                 name2 = '近{}日每日平均母乳瓶喂量'.format(daynum)
                 mean_bottle=pd.DataFrame(ana.day_mean(daynum,'BreastBottleFeeding'))
+                mean_formulamilkpowder = pd.DataFrame(ana.day_mean(daynum, 'FormulaMilkPowder'))
                 fig, ax = plt.subplots()
                 ax.plot(mean_bottle.index, mean_bottle['BreastBottleFeeding'], 'o-')
+                ax.plot(mean_formulamilkpowder.index, mean_formulamilkpowder['FormulaMilkPowder'], 's-')
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
-                ax.set_ylabel('日均母乳瓶喂量', fontsize=16, fontproperties=font)
+                plt.legend(['母乳瓶喂', '配方奶粉'], loc='upper left')
+                ax.set_ylabel('喂养量', fontsize=16, fontproperties=font)
                 ax.set_title(str(name2), fontsize=16, fontproperties=font)
                 st.pyplot(fig)
 
