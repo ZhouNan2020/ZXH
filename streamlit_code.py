@@ -43,7 +43,36 @@ timeticks = time.time()
 date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
 time = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
 
+class today_count():
+    def __init__(self):
+            date = pd.DataFrame(sheet1.col_values(2)[1:])
+            date.columns = ['date']
+            shit = pd.DataFrame(sheet1.col_values(7)[1:])
+            shit.columns = ['shit']
+            shit = shit.astype('int')
+            ChangeDiapers = pd.DataFrame(sheet1.col_values(9)[1:])
+            ChangeDiapers.columns = ['ChangeDiapers']
+            ChangeDiapers = ChangeDiapers.astype('int')
+            Mamiai = pd.DataFrame(sheet1.col_values(10)[1:])
+            Mamiai.columns = ['Mamiai']
+            Mamiai = Mamiai.astype('int')
+            ADconsole = pd.DataFrame(sheet1.col_values(11)[1:])
+            ADconsole.columns = ['ADconsole']
+            ADconsole = ADconsole.astype('int')
+            all_count = pd.concat([date,shit,ChangeDiapers,Mamiai,ADconsole],axis=1)
+            all_sum = all_count.groupby('date').sum()
+            today = all_sum.iloc[-1:]
+            self.today = today
+    def shit(self):
+        return self.today['shit'].values[0]
+    def ChangeDiapers(self):
+        return self.today['ChangeDiapers'].values[0]
+    def Mamiai(self):
+        return self.today['Mamiai'].values[0]
+    def ADconsole(self):
+        return self.today['ADconsole'].values[0]
 
+today = today_count()
 
 with tab1:
 
@@ -55,22 +84,29 @@ with tab1:
         Shit_value = 0
         if Shit:
                 Shit_value = 1
-
         Pee = st.checkbox('小便')
         Pee_value = 0
         if Pee:
                 Pee_value = 1
-            
         ChangeDiapers = st.checkbox('换尿布')
         ChangeDiapers_value = 0
         if ChangeDiapers:
                 ChangeDiapers_value = 1
+        Mamiai = st.checkbox('妈咪爱')
+        Mamiai_value = 0
+        if Mamiai:
+                Mamiai_value = 1
+        ADconsole = st.checkbox('AD滴丸')
+        ADconsole_value = 0
+        if ADconsole:
+                ADconsole_value = 1
 
         if st.button('提交本次记录'):
                 record = [timeticks, date, time, Breastfeeding, BreastBottleFeeding, FormulaMilkPowder, Shit_value,
-                          Pee_value, ChangeDiapers_value]
+                          Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value]
                 sheet1.append_row(record, 1)
                 st.success('提交成功')
+        st.write('今日已拉粑粑{}次，已换尿布{}次，已服用妈咪爱{}次，已服用AD滴丸{}次'.format(today.shit(),today.ChangeDiapers(),today.Mamiai(),today.ADconsole()))
 
 
 
