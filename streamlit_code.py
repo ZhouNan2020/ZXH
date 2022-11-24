@@ -155,11 +155,13 @@ with tab4:
                 milktime = sheet2.col_values(3)[-1:]
                 st.write('上次吸奶时间：',milkdate[0],milktime[0])
                 suc_mean = count_milk()
-                st.write(suc_mean)
+
                 fig, ax = plt.subplots()
                 ax1 = ax.twinx()
                 x=list(suc_mean.index)
+                st.write(x)
                 y1=list(suc_mean['suctionVolume'])
+                st.write(y1)
                 y2=list(suc_mean['count'])
                 ax.plot(x, y2, 'o-')
                 ax1.bar(x, y1, alpha=0.5)
