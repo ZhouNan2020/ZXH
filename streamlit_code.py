@@ -172,7 +172,7 @@ with tab4:
                 for a, c in zip(x, y1):
                         plt.text(a, c+0.5, c, ha='center', va='center', fontsize=14)
                 ax.legend(['日吸奶次数'], loc='upper left', prop=font)
-                ax1.legend(['日均吸奶量'], loc='upper left', prop=font)
+                ax1.legend(['日均吸奶量'], loc='upper right', prop=font)
                 st.pyplot(fig)
 
 
