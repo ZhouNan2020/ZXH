@@ -61,6 +61,12 @@ class today_count():
         return self.today['Mamiai'].values[0]
     def ADconsole(self):
         return self.today['ADconsole'].values[0]
+    def Breastfeeding(self):
+        return self.today['Breastfeeding'].values[0]
+    def Bottle(self):
+        return self.today['BreastBottleFeeding'].values[0]
+    def FormulaMilkPowder(self):
+        return self.today['FormulaMilkPowder'].values[0]
 
 
 
@@ -97,28 +103,25 @@ with tab1:
                 sheet1.append_row(record, 1)
                 st.success('提交成功')
                 today = today_count()
+                st.write('今日喂养总量: ', today.Breastfeeding() + today.Bottle() + today.FormulaMilkPowder())
                 st.write('今日已拉粑粑{}次，已换尿布{}次，已服用妈咪爱{}次，已服用AD滴丸{}次'.format(today.shit(),today.ChangeDiapers(),today.Mamiai(),today.ADconsole()))
 
 
-@st.cache(ttl=600)
+@st.cache(ttl=300)
 class MeanAnalysis:
             def __init__(self, num,name):
-                    date = sheet1.col_values(2)[1:]
-                    date = pd.DataFrame(date)
-                    date.columns = ['date']
-                    value_all = sheet1.col_values(num)[1:]
-                    value_all = pd.DataFrame(value_all)
-                    value_all.columns = [str(name)]
-                    value_all = value_all.astype('int')
-                    sheet_all = pd.concat([date, value_all], axis=1)
-                    sheet_all.drop(index=0, axis=0, inplace=True)
-                    sheet_nozero = sheet_all.drop(sheet_all[sheet_all[str(name)] == 0].index)
-                    mean_all = sheet_nozero.groupby('date').mean()
-                    self.mean_all = mean_all
-            def tail(self,tail_num):
-                    mean_tail = self.mean_all.tail(tail_num)
+                    datafrmae = pd.DataFrame(sheet1.get_all_records())
+                    self.datafrmae = datafrmae
+                    self.num = num
+                    self.name = name
+            def day_mean(self,tail_num):
+                    data_nozero = self.datafrmae.drop(self.datafrmae[self.datafrmae[str(self.name)] == 0].index)
+                    mean_all = data_nozero.groupby('date').mean()
+                    mean_tail = mean_all.tail(tail_num)
                     mean_tail = mean_tail.astype('int')
                     return mean_tail
+
+
 
 
 
