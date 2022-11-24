@@ -61,6 +61,7 @@ class today_count():
             ADconsole = ADconsole.astype('int')
             all_count = pd.concat([date,shit,ChangeDiapers,Mamiai,ADconsole],axis=1)
             all_sum = all_count.groupby('date').sum()
+            st.write(all_sum)
             today = all_sum.iloc[-1:]
             self.today = today
     def shit(self):
@@ -72,7 +73,7 @@ class today_count():
     def ADconsole(self):
         return self.today['ADconsole'].values[0]
 
-today = today_count()
+
 
 with tab1:
 
@@ -100,7 +101,7 @@ with tab1:
         ADconsole_value = 0
         if ADconsole:
                 ADconsole_value = 1
-
+        today = today_count()
         if st.button('提交本次记录'):
                 record = [timeticks, date, time, Breastfeeding, BreastBottleFeeding, FormulaMilkPowder, Shit_value,
                           Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value]
