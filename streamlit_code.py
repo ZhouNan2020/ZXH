@@ -133,14 +133,14 @@ def count_milk():
         return suc_mean
 
 def plot_label(x_label,y_label):
-        x_label = []
+        x_label_str = []
         for x in x_label:
                 x = x.strftime('%Y-%m-%d')
-                x_label.append(x)
-        y_label = []
+                x_label_str.append(x)
+        y_label_str = []
         for y in y_label:
-                y_label.append(str(y))
-        return x_label,y_label
+                y_label_str.append(str(y))
+        return x_label_str,y_label_str
 
 
 with tab4:
