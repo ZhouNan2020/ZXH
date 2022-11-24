@@ -140,6 +140,7 @@ with tab3:
         if st.button('开始分析'):
                 name1 = '近{}日每日平均母乳亲喂时间'.format(daynum)
                 mean_breastfeeding=ana.day_mean(daynum,'Breastfeeding')
+                mean_breastfeeding=mean_breastfeeding['Breastfeeding']
                 mean_breastfeeding.columns = [name1]
                 fig, ax = plt.subplots()
                 ax.plot(mean_breastfeeding.index, mean_breastfeeding[str(name1)], 'o-')
