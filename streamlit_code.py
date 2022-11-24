@@ -22,18 +22,20 @@ plt.style.use('ggplot')
 #%%
 # 这一段不要动，我特么目前还没有搞太明白谷歌的API怎么工作的
 # 目前可以知道的是：scopes是范围，但是地址就是这个而不是sheet的链接
-scopes = ["https://spreadsheets.google.com/feeds"]
+@st.cache(ttl=600)
+def connect_to_google_sheet():
+        scopes = ["https://spreadsheets.google.com/feeds"]
 # 为特定的账户开设key，然后然后把账户给到谷歌sheet的访问权限中，通过key访问这个账户关联的sheet
-credentials = ServiceAccountCredentials.from_json_keyfile_name(
+        credentials = ServiceAccountCredentials.from_json_keyfile_name(
         "credentials.json", scopes)
 #这个json就是key，授权给谷歌的表格
-client = gspread.authorize(credentials)
+        client = gspread.authorize(credentials)
 # 这一段就牛逼了，这一段那串乱码是目标谷歌sheet地址中间那一部分，用.来确定要访问的工作表
-global sheet1
-sheet1 = client.open_by_key(
+        sheet_A = client.open_by_key(
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").sheet1
-sheet2 = client.open_by_key(
+        sheet_B = client.open_by_key(
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('工作表2')
+        return sheet_A, sheet_B
 
 #%%
 #下面的就可以动了
@@ -42,7 +44,8 @@ tab1, tab2, tab3,tab4 = st.tabs(["日常喂养记录", "特殊情况记录", "�
 timeticks = time.time()
 date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
 time = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
-
+global sheet1, sheet2
+sheet1, sheet2 = connect_to_google_sheet()
 @st.cache(ttl=600)
 class today_count():
     def __init__(self):
