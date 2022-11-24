@@ -18,7 +18,7 @@ parameters = {'xtick.labelsize': 16,
               'axes.unicode_minus':False}
 plt.rcParams.update(parameters)
 plt.style.use('ggplot')
-
+@st.cache(ttl=600)
 #%%
 # 这一段不要动，我特么目前还没有搞太明白谷歌的API怎么工作的
 # 目前可以知道的是：scopes是范围，但是地址就是这个而不是sheet的链接
