@@ -51,7 +51,7 @@ class today_count():
             today = all_sum.iloc[-1:]
             self.today = today
     def shit(self):
-        return self.today['shit'].values[0]
+        return self.today['Shit'].values[0]
     def ChangeDiapers(self):
         return self.today['ChangeDiapers'].values[0]
     def Mamiai(self):
