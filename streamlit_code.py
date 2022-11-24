@@ -111,18 +111,21 @@ with tab1:
 
 
 @st.cache(ttl=300)
-class MeanAnalysis:
-            def __init__(self, num,name):
+class Analysis:
+            def __init__(self):
                     datafrmae = pd.DataFrame(sheet1.get_all_records())
                     self.datafrmae = datafrmae
-                    self.num = num
-                    self.name = name
-            def day_mean(self,tail_num):
-                    data_nozero = self.datafrmae.drop(self.datafrmae[self.datafrmae[str(self.name)] == 0].index)
+            def day_mean(self,tail_num,name):
+                    data_nozero = self.datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index)
                     mean_all = data_nozero.groupby('date').mean()
                     mean_tail = mean_all.tail(tail_num)
                     mean_tail = mean_tail.astype('int')
                     return mean_tail
+            def day_sum(self,tail_num):
+                    sum_all = self.datafrmae.groupby('date').sum()
+                    sum_tail = sum_all.tail(tail_num)
+                    sum_tail = sum_tail.astype('int')
+                    return sum_tail
 
 
 
@@ -133,10 +136,11 @@ class MeanAnalysis:
 with tab3:
         st.subheader('数据分析')
         daynum = st.slider('想分析周栩珩最近多少天的状态？', 1, 15, 3)
+        ana = Analysis()
         if st.button('开始分析'):
                 name1 = '近{}日每日平均母乳亲喂时间'.format(daynum)
-                mean_breastfeeding = MeanAnalysis(4,name1)
-                mean_breastfeeding=mean_breastfeeding.tail(daynum)
+                mean_breastfeeding=ana.day_mean(daynum,'Breastfeeding')
+                mean_breastfeeding.columns = [name1]
                 fig, ax = plt.subplots()
                 ax.plot(mean_breastfeeding.index, mean_breastfeeding[str(name1)], 'o-')
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
@@ -144,6 +148,8 @@ with tab3:
                 ax.set_ylabel('亲喂时长', fontsize=16, fontproperties=font)
                 ax.set_title(str(name1), fontsize=16, fontproperties=font)
                 st.pyplot(fig)
+
+
 
 @st.cache(ttl=600)
 def count_milk():
