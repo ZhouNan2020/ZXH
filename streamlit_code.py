@@ -12,6 +12,7 @@ import matplotlib as mpl
 import datetime
 #%%
 font = font_manager.FontProperties(fname='simhei.ttf')
+plt.rcParams['font.family']=['SimHei']
 parameters = {'xtick.labelsize': 16,
               'ytick.labelsize': 16,
               'axes.unicode_minus':False}
@@ -171,7 +172,7 @@ with tab4:
                 plt.xticks(rotation=45)
                 for a, c in zip(x, y1):
                         plt.text(a, c+0.5, c, ha='center', va='center', fontsize=14)
-                plt.legend(loc='upper left',fontsize=14,fontproperties=font)
+                plt.legend(['日吸奶次数', '日均吸奶量'], loc='upper left', prop=font)
                 st.pyplot(fig)
 
 
