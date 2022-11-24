@@ -62,6 +62,7 @@ class today_count():
             all_count = pd.concat([date,shit,ChangeDiapers,Mamiai,ADconsole],axis=1)
             all_sum = all_count.groupby('date').sum()
             today = all_sum.iloc[-1:]
+            st.write(today)
             self.today = today
     def shit(self):
         return self.today['shit'].values[0]
