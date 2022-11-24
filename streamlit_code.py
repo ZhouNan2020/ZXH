@@ -60,9 +60,7 @@ class today_count():
             ADconsole.columns = ['ADconsole']
             ADconsole = ADconsole.astype('int')
             all_count = pd.concat([date,shit,ChangeDiapers,Mamiai,ADconsole],axis=1)
-            st.write(all_count)
             all_sum = all_count.groupby('date').sum()
-            st.write(all_sum)
             today = all_sum.iloc[-1:]
             self.today = today
     def shit(self):
