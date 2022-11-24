@@ -103,7 +103,10 @@ with tab1:
                 sheet1.append_row(record, 1)
                 st.success('提交成功')
                 today = today_count()
-                st.write('今日喂养总量: ', today.Breastfeeding() + today.Bottle() + today.FormulaMilkPowder())
+                st.write('今日喂养总量: ', today.Bottle() + today.FormulaMilkPowder())
+                st.write('母乳亲喂{}分钟 ', today.Breastfeeding())
+                st.write('母乳瓶喂{}毫升 ', today.Bottle())
+                st.write('配方奶粉{}毫升 ', today.FormulaMilkPowder())
                 st.write('今日已拉粑粑{}次，已换尿布{}次，已服用妈咪爱{}次，已服用AD滴丸{}次'.format(today.shit(),today.ChangeDiapers(),today.Mamiai(),today.ADconsole()))
 
 
