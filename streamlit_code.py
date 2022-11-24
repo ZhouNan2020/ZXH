@@ -110,7 +110,7 @@ with tab1:
                 st.write('今日已拉粑粑{}次，已换尿布{}次，已服用妈咪爱{}次，已服用AD滴丸{}次'.format(today.shit(),today.ChangeDiapers(),today.Mamiai(),today.ADconsole()))
 
 
-@st.cache(ttl=300)
+
 class Analysis:
             def __init__(self):
                     datafrmae = pd.DataFrame(sheet1.get_all_records())
@@ -138,8 +138,9 @@ class Analysis:
 with tab3:
         st.subheader('数据分析')
         daynum = st.slider('想分析周栩珩最近多少天的状态？', 1, 15, 3)
-        ana = Analysis()
+
         if st.button('开始分析'):
+                ana = Analysis()
                 name1 = '近{}日每日平均母乳亲喂时间'.format(daynum)
                 mean_breastfeeding=ana.day_mean(daynum,'Breastfeeding')
                 st.write(mean_breastfeeding)
