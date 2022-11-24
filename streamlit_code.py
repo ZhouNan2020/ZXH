@@ -117,6 +117,8 @@ class Analysis:
                     self.datafrmae = datafrmae
             def day_mean(self,tail_num,name):
                     data_nozero = self.datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index)
+                    data_nozero.set_index('date', inplace=True)
+                    data_nozero = data_nozero[str(name)]
                     mean_all = data_nozero.groupby('date').mean()
                     mean_tail = mean_all.tail(tail_num)
                     mean_tail = mean_tail.astype('int')
@@ -141,16 +143,16 @@ with tab3:
                 name1 = '近{}日每日平均母乳亲喂时间'.format(daynum)
                 mean_breastfeeding=ana.day_mean(daynum,'Breastfeeding')
                 st.write(mean_breastfeeding)
-                mean_breastfeeding=mean_breastfeeding['date','Breastfeeding']
-                mean_breastfeeding.columns = ['日期', '母乳亲喂时间']
-                mean_breastfeeding.set_index('日期', inplace=True)
-                fig, ax = plt.subplots()
-                ax.plot(mean_breastfeeding.index, mean_breastfeeding[name1], 'o-')
-                ax.set_xlabel('日期', fontsize=16, fontproperties=font)
-                plt.xticks(rotation=45)
-                ax.set_ylabel('亲喂时长', fontsize=16, fontproperties=font)
-                ax.set_title(str(name1), fontsize=16, fontproperties=font)
-                st.pyplot(fig)
+                #mean_breastfeeding=mean_breastfeeding['date','Breastfeeding']
+                #mean_breastfeeding.columns = ['日期', '母乳亲喂时间']
+                #mean_breastfeeding.set_index('日期', inplace=True)
+                #fig, ax = plt.subplots()
+                #ax.plot(mean_breastfeeding.index, mean_breastfeeding[name1], 'o-')
+                #ax.set_xlabel('日期', fontsize=16, fontproperties=font)
+                #plt.xticks(rotation=45)
+                #ax.set_ylabel('亲喂时长', fontsize=16, fontproperties=font)
+                #ax.set_title(str(name1), fontsize=16, fontproperties=font)
+                #st.pyplot(fig)
 
 
 
