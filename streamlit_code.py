@@ -153,14 +153,13 @@ with tab4:
                 milkdate = sheet2.col_values(2)[-1:]
                 milktime = sheet2.col_values(3)[-1:]
                 st.write('上次吸奶时间：',milkdate[0],milktime[0])
+                st.write('上次吸奶量：',suctionVolume,'ml')
                 suc_mean = count_milk()[0]
                 suc_sum = count_milk()[1]
                 fig, ax = plt.subplots()
                 ax1 = ax.twinx()
                 x=list(suc_mean.index)
-                st.write(x)
                 y1=list(suc_mean['suctionVolume'])
-                st.write(y1)
                 y2=list(suc_sum['count'])
                 y_major_locator = MultipleLocator(1)
                 ax.plot(x, y2, 'o-',label='日吸奶次数',color='red')
