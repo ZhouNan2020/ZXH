@@ -18,7 +18,7 @@ parameters = {'xtick.labelsize': 16,
               'axes.unicode_minus':False}
 plt.rcParams.update(parameters)
 plt.style.use('ggplot')
-@st.cache(ttl=600)
+
 #%%
 # 这一段不要动，我特么目前还没有搞太明白谷歌的API怎么工作的
 # 目前可以知道的是：scopes是范围，但是地址就是这个而不是sheet的链接
@@ -43,6 +43,7 @@ timeticks = time.time()
 date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
 time = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
 
+@st.cache(ttl=600)
 class today_count():
     def __init__(self):
             datafrmae = pd.DataFrame(sheet1.get_all_records())
@@ -96,7 +97,7 @@ with tab1:
                 st.write('今日已拉粑粑{}次，已换尿布{}次，已服用妈咪爱{}次，已服用AD滴丸{}次'.format(today.shit(),today.ChangeDiapers(),today.Mamiai(),today.ADconsole()))
 
 
-
+@st.cache(ttl=600)
 class MeanAnalysis:
             def __init__(self, num,name):
                     date = sheet1.col_values(2)[1:]
@@ -135,7 +136,7 @@ with tab3:
                 ax.set_title(str(name1), fontsize=16, fontproperties=font)
                 st.pyplot(fig)
 
-
+@st.cache(ttl=600)
 def count_milk():
         date = sheet2.col_values(2)[1:]
         date = pd.DataFrame(date)
