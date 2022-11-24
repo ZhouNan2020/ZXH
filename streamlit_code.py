@@ -131,8 +131,10 @@ def count_milk():
         suc_nozero = suc_all.drop(suc_all[suc_all['suctionVolume'] == 0].index)
         suc_mean = suc_nozero.groupby('date').mean()
         suc_mean = suc_mean.astype('int')
+        suc_mean = suc_mean.tail(7)
         suc_sum = suc_nozero.groupby('date').sum()
         suc_sum = suc_sum.astype('int')
+        suc_sum = suc_sum.tail(7)
         return suc_mean, suc_sum
 
 
@@ -167,11 +169,8 @@ with tab4:
                 ax1.bar(x, y1, alpha=0.5)
                 ax1.set_ylabel('日均吸奶量', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
-                for a, b in zip(x, y2):
-                        plt.text(a, b+0.5, b, ha='center', va='center', fontsize=14)
                 for a, c in zip(x, y1):
                         plt.text(a, c+0.5, c, ha='center', va='center', fontsize=14)
-
                 st.pyplot(fig)
 
 
