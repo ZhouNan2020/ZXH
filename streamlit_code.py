@@ -162,10 +162,11 @@ with tab4:
                 ax1.set_ylabel('日均吸奶量', fontsize=16, fontproperties=font)
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
-                for a, b in zip(x, y1):
-                        plt.text(a, b+0.5, b, ha='center', va='center', fontsize=14)
                 for a, b in zip(x, y2):
                         ax.text(a, b+0.5, b, ha='center', va='center', fontsize=14)
+                for a, b in zip(x, y1):
+                        plt.text(a, b+0.5, b, ha='center', va='center', fontsize=14)
+
                 st.pyplot(fig)
 
 
