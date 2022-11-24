@@ -172,7 +172,7 @@ with tab4:
                 a=plot_label(x,y1)[0]
                 b=plot_label(x,y1)[1]
                 for a, b in zip(x, y1):
-                        ax1.text(b + 0.1, a, b, ha='center', va='center', fontsize=14)
+                        ax1.text(a, b+0.1, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
 
 
