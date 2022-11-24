@@ -171,7 +171,7 @@ with tab4:
                 plt.xticks(rotation=45)
                 for a, c in zip(x, y1):
                         plt.text(a, c+0.5, c, ha='center', va='center', fontsize=14)
-                plt.legend(loc='upper left')
+                plt.legend(loc='upper left',fontsize=14,fontproperties=font)
                 st.pyplot(fig)
 
 
