@@ -130,7 +130,7 @@ def count_milk():
         suc_nozero = suc_all.drop(suc_all[suc_all['suctionVolume'] == 0].index)
         suc_mean = suc_nozero.groupby('date').mean()
         suc_mean = suc_mean.astype('int')
-        suc_sum = suc_nozero.groupby('count').sum()
+        suc_sum = suc_nozero.groupby('date').sum()
         suc_sum = suc_sum.astype('int')
         return suc_mean, suc_sum
 
