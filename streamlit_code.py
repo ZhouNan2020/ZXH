@@ -143,7 +143,7 @@ with tab3:
                 mean_breastfeeding=mean_breastfeeding['Breastfeeding']
                 mean_breastfeeding.columns = [name1]
                 fig, ax = plt.subplots()
-                ax.plot(mean_breastfeeding.index, mean_breastfeeding[str(name1)], 'o-')
+                ax.plot(mean_breastfeeding.index, mean_breastfeeding[name1], 'o-')
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
                 ax.set_ylabel('亲喂时长', fontsize=16, fontproperties=font)
