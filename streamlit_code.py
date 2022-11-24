@@ -130,7 +130,9 @@ def count_milk():
         suc_nozero = suc_all.drop(suc_all[suc_all['suctionVolume'] == 0].index)
         suc_mean = suc_nozero.groupby('date').mean()
         suc_mean = suc_mean.astype('int')
-        return suc_mean
+        suc_sum = suc_nozero.groupby('count').sum()
+        suc_sum = suc_sum.astype('int')
+        return suc_mean, suc_sum
 
 
 
@@ -147,15 +149,15 @@ with tab4:
                 milkdate = sheet2.col_values(2)[-1:]
                 milktime = sheet2.col_values(3)[-1:]
                 st.write('上次吸奶时间：',milkdate[0],milktime[0])
-                suc_mean = count_milk()
-
+                suc_mean = count_milk()[0]
+                suc_sum = count_milk()[1]
                 fig, ax = plt.subplots()
                 ax1 = ax.twinx()
                 x=list(suc_mean.index)
                 st.write(x)
                 y1=list(suc_mean['suctionVolume'])
                 st.write(y1)
-                y2=list(suc_mean['count'])
+                y2=list(suc_sum['count'])
                 ax.plot(x, y2, 'o-')
                 ax1.bar(x, y1, alpha=0.5)
                 ax.set_ylabel('吸奶次数', fontsize=16, fontproperties=font)
