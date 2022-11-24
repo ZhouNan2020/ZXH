@@ -42,7 +42,7 @@ tab1, tab2, tab3,tab4 = st.tabs(["日常喂养记录", "特殊情况记录", "�
 timeticks = time.time()
 date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
 time = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
-st.header("周栩珩")
+
 
 
 with tab1:
