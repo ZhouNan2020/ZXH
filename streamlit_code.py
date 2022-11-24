@@ -171,7 +171,7 @@ with tab4:
                 plt.xticks(rotation=45)
                 for a, c in zip(x, y1):
                         plt.text(a, c+0.5, c, ha='center', va='center', fontsize=14)
-                plt.legend(loc='upper left')
+                plt.legend(handles=[ax,ax1],labels=['日吸奶次数','日均吸奶量'],loc='upper left',fontsize=14,prop=font)
                 st.pyplot(fig)
 
 
