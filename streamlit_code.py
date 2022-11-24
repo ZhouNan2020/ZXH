@@ -164,8 +164,8 @@ with tab4:
                 plt.xticks(rotation=45)
                 for a, b in zip(x, y2):
                         ax.text(a, b+0.5, b, ha='center', va='center', fontsize=14)
-                for a, b in zip(x, y1):
-                        plt.text(a, b+0.5, b, ha='center', va='center', fontsize=14)
+                for a, c in zip(x, y1):
+                        plt.text(a, c+0.5, c, ha='center', va='center', fontsize=14)
 
                 st.pyplot(fig)
 
