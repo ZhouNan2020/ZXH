@@ -45,25 +45,26 @@ time = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:
 
 class today_count():
     def __init__(self):
-            date = pd.DataFrame(sheet1.col_values(2)[1:])
-            date.columns = ['date']
-            shit = pd.DataFrame(sheet1.col_values(7)[1:])
-            shit.columns = ['shit']
-            shit = shit.astype('int')
-            ChangeDiapers = pd.DataFrame(sheet1.col_values(9)[1:])
-            ChangeDiapers.columns = ['ChangeDiapers']
-            ChangeDiapers = ChangeDiapers.astype('int')
-            Mamiai = pd.DataFrame(sheet1.col_values(10)[1:])
-            Mamiai.columns = ['Mamiai']
-            Mamiai = Mamiai.astype('int')
-            ADconsole = pd.DataFrame(sheet1.col_values(11)[1:])
-            ADconsole.columns = ['ADconsole']
-            ADconsole = ADconsole.astype('int')
-            all_count = pd.concat([date,shit,ChangeDiapers,Mamiai,ADconsole],axis=1)
-            all_sum = all_count.groupby('date').sum()
-            today = all_sum.iloc[-1:]
-            st.write(today)
-            self.today = today
+            datafrmae = pd.DataFrame(sheet1.get_all_records())
+            st.write(datafrmae)
+            #date = pd.DataFrame(sheet1.col_values(2)[1:])
+            #date.columns = ['date']
+            #shit = pd.DataFrame(sheet1.col_values(7)[1:])
+            #shit.columns = ['shit']
+            #shit = shit.astype('int')
+            #ChangeDiapers = pd.DataFrame(sheet1.col_values(9)[1:])
+            #ChangeDiapers.columns = ['ChangeDiapers']
+            #ChangeDiapers = ChangeDiapers.astype('int')
+            #Mamiai = pd.DataFrame(sheet1.col_values(10)[1:])
+            #Mamiai.columns = ['Mamiai']
+            #Mamiai = Mamiai.astype('int')
+            #ADconsole = pd.DataFrame(sheet1.col_values(11)[1:])
+            #ADconsole.columns = ['ADconsole']
+            #ADconsole = ADconsole.astype('int')
+            #all_count = pd.concat([date,shit,ChangeDiapers,Mamiai,ADconsole],axis=1)
+            #all_sum = all_count.groupby('date').sum()
+            #today = all_sum.iloc[-1:]
+            #self.today = today
     def shit(self):
         return self.today['shit'].values[0]
     def ChangeDiapers(self):
