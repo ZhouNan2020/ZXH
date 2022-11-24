@@ -143,8 +143,11 @@ with tab3:
                 ana = Analysis()
                 name1 = '近{}日每日平均母乳亲喂时间'.format(daynum)
                 mean_breastfeeding=pd.DataFrame(ana.day_mean(daynum,'Breastfeeding'))
+                mean_bottle = pd.DataFrame(ana.day_mean(daynum, 'BreastBottleFeeding'))
                 fig, ax = plt.subplots()
                 ax.plot(mean_breastfeeding.index, mean_breastfeeding['Breastfeeding'], 'o-')
+                ax.plot(mean_bottle.index, mean_bottle['BreastBottleFeeding'], 'v-')
+                
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
                 ax.set_ylabel('日均亲喂时间', fontsize=16, fontproperties=font)
