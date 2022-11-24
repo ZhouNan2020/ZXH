@@ -151,7 +151,7 @@ with tab3:
                 ax.set_title(str(name1), fontsize=16, fontproperties=font)
                 st.pyplot(fig)
 
-                name2 = '近{}日每日平均母乳瓶喂量'.format(daynum)
+                name2 = '近{}日每日平均喂养量'.format(daynum)
                 mean_bottle=pd.DataFrame(ana.day_mean(daynum,'BreastBottleFeeding'))
                 mean_formulamilkpowder = pd.DataFrame(ana.day_mean(daynum, 'FormulaMilkPowder'))
                 fig, ax = plt.subplots()
@@ -159,7 +159,7 @@ with tab3:
                 ax.plot(mean_formulamilkpowder.index, mean_formulamilkpowder['FormulaMilkPowder'], 's-')
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
-                plt.legend(['母乳瓶喂', '配方奶粉'], loc='upper left')
+                plt.legend(['母乳瓶喂', '配方奶粉'], loc='upper left', prop=font)
                 ax.set_ylabel('喂养量', fontsize=16, fontproperties=font)
                 ax.set_title(str(name2), fontsize=16, fontproperties=font)
                 st.pyplot(fig)
