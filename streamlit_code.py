@@ -140,6 +140,7 @@ with tab3:
         if st.button('开始分析'):
                 name1 = '近{}日每日平均母乳亲喂时间'.format(daynum)
                 mean_breastfeeding=ana.day_mean(daynum,'Breastfeeding')
+                st.write(mean_breastfeeding)
                 mean_breastfeeding=mean_breastfeeding['date','Breastfeeding']
                 mean_breastfeeding.columns = ['日期', '母乳亲喂时间']
                 mean_breastfeeding.set_index('日期', inplace=True)
