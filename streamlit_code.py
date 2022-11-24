@@ -143,7 +143,7 @@ with tab3:
                 ana = Analysis()
                 name1 = '近{}日每日平均母乳亲喂时间'.format(daynum)
                 mean_breastfeeding=ana.day_mean(daynum,'Breastfeeding')
-                st.write(mean_breastfeeding)
+                st.write(mean_breastfeeding.columns)
                 fig, ax = plt.subplots()
                 ax.plot(mean_breastfeeding.index, mean_breastfeeding['Breastfeeding'], 'o-')
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
