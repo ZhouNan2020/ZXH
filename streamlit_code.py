@@ -46,7 +46,7 @@ date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-
 time = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
 global sheet1, sheet2
 sheet1, sheet2 = connect_to_google_sheet()
-@st.cache(ttl=600)
+#@st.cache(ttl=600)
 class today_count():
     def __init__(self):
             datafrmae = pd.DataFrame(sheet1.get_all_records())
@@ -90,12 +90,13 @@ with tab1:
         ADconsole_value = 0
         if ADconsole:
                 ADconsole_value = 1
-        today = today_count()
+
         if st.button('提交本次记录'):
                 record = [timeticks, date, time, Breastfeeding, BreastBottleFeeding, FormulaMilkPowder, Shit_value,
                           Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value]
                 sheet1.append_row(record, 1)
                 st.success('提交成功')
+                today = today_count()
                 st.write('今日已拉粑粑{}次，已换尿布{}次，已服用妈咪爱{}次，已服用AD滴丸{}次'.format(today.shit(),today.ChangeDiapers(),today.Mamiai(),today.ADconsole()))
 
 
