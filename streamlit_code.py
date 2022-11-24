@@ -47,7 +47,6 @@ time = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:
 class today_count():
     def __init__(self):
             datafrmae = pd.DataFrame(sheet1.get_all_records())
-            st.write(datafrmae.columns)
             all_sum = datafrmae.groupby('date').sum()
             today = all_sum.iloc[-1:]
             self.today = today
