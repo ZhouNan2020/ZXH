@@ -2,6 +2,7 @@ import pandas as pd
 import pytz
 import streamlit as st
 import gspread
+from matplotlib.ticker import MultipleLocator
 from oauth2client.service_account import ServiceAccountCredentials
 import copy as cp
 import time
@@ -160,7 +161,9 @@ with tab4:
                 y2=list(suc_sum['count'])
                 ax.plot(x, y2, 'o-')
                 ax1.bar(x, y1, alpha=0.5)
+                y_major_locator = MultipleLocator(1)
                 ax.set_ylabel('吸奶次数', fontsize=16, fontproperties=font)
+                ax.yaxis.set_major_locator(y_major_locator)
                 ax1.set_ylabel('日均吸奶量', fontsize=16, fontproperties=font)
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
