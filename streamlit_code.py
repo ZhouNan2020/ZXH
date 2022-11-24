@@ -22,7 +22,7 @@ plt.style.use('ggplot')
 #%%
 # 这一段不要动，我特么目前还没有搞太明白谷歌的API怎么工作的
 # 目前可以知道的是：scopes是范围，但是地址就是这个而不是sheet的链接
-@st.cache(ttl=600)
+#@st.cache(ttl=600)
 def connect_to_google_sheet():
         scopes = ["https://spreadsheets.google.com/feeds"]
 # 为特定的账户开设key，然后然后把账户给到谷歌sheet的访问权限中，通过key访问这个账户关联的sheet
