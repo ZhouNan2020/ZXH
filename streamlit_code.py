@@ -93,7 +93,7 @@ with tab1:
                           Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value]
                 sheet1.append_row(record, 1)
                 st.success('提交成功')
-        st.write('今日已拉粑粑{}次，已换尿布{}次，已服用妈咪爱{}次，已服用AD滴丸{}次'.format(today.shit(),today.ChangeDiapers(),today.Mamiai(),today.ADconsole()))
+                st.write('今日已拉粑粑{}次，已换尿布{}次，已服用妈咪爱{}次，已服用AD滴丸{}次'.format(today.shit(),today.ChangeDiapers(),today.Mamiai(),today.ADconsole()))
 
 
 
