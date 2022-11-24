@@ -135,8 +135,7 @@ def count_milk():
 def plot_label(x_label,y_label):
         x_label_str = []
         for x in x_label:
-                x = x.strftime('%Y-%m-%d')
-                x_label_str.append(x)
+                x_label_str.append(str(x))
         y_label_str = []
         for y in y_label:
                 y_label_str.append(str(y))
