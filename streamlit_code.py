@@ -164,20 +164,11 @@ with tab3:
                 ax.set_title(str(name2), fontsize=16, fontproperties=font)
                 st.pyplot(fig)
 
-                name3 = '近{}日每日平均配方奶粉量'.format(daynum)
-                mean_formulamilkpowder=pd.DataFrame(ana.day_mean(daynum,'FormulaMilkPowder'))
-                fig, ax = plt.subplots()
-                ax.plot(mean_formulamilkpowder.index, mean_formulamilkpowder['FormulaMilkPowder'], 'o-')
-                ax.set_xlabel('日期', fontsize=16, fontproperties=font)
-                plt.xticks(rotation=45)
-                ax.set_ylabel('日均配方奶粉量', fontsize=16, fontproperties=font)
-                ax.set_title(str(name3), fontsize=16, fontproperties=font)
-                st.pyplot(fig)
-
-
 
 @st.cache(ttl=600)
 def count_milk():
+        data_frame = pd.DataFrame(sheet2.get_all_records())
+        
         date = sheet2.col_values(2)[1:]
         date = pd.DataFrame(date)
         date.columns = ['date']
