@@ -149,7 +149,7 @@ with tab3:
                 ax.set_ylabel('日均亲喂时间', fontsize=16, fontproperties=font)
                 ax.set_title(str(name1), fontsize=16, fontproperties=font)
                 for a, b in zip(list(mean_breastfeeding.index), list(mean_breastfeeding['Breastfeeding'])):
-                        plt.text(a, b+1, b, ha='center', va='center', fontsize=14)
+                        plt.text(a, b+1.5, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
 
                 name2 = '近{}日每日平均喂养量'.format(daynum)
@@ -164,9 +164,9 @@ with tab3:
                 ax.set_ylabel('喂养量', fontsize=16, fontproperties=font)
                 ax.set_title(str(name2), fontsize=16, fontproperties=font)
                 for a, b in zip(list(mean_bottle.index), list(mean_bottle['BreastBottleFeeding'])):
-                        plt.text(a, b + 1, b, ha='center', va='center', fontsize=14)
+                        plt.text(a, b + 1.5, b, ha='center', va='center', fontsize=14)
                 for a, b in zip(list(mean_formulamilkpowder.index), list(mean_formulamilkpowder['FormulaMilkPowder'])):
-                        plt.text(a, b + 1, b, ha='center', va='center', fontsize=14)
+                        plt.text(a, b + 1.5, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
 
 
