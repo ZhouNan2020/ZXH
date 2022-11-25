@@ -51,9 +51,11 @@ class today_count():
     def __init__(self):
             #这两行基本是所由的类都要用
             datafrmae = pd.DataFrame(sheet1.get_all_records())
-            datafrmae = datafrmae.astype({'Breastfeeding': 'int', 'BreastBottleFeeding': 'int','FormulaMilkPowder':'int',
-                                          'Shit': 'int', 'ChangeDiapers': 'int', 'Mamiai': 'int', 'ADconsole': 'int'})
-            all_sum = datafrmae.groupby('date').sum()
+            date_time = datafrmae['Date', 'Time']
+            value_frame = datafrmae.drop(['Date', 'Time'], axis=1)
+            value_frame = value_frame.astype('int')
+            all_data = pd.concat([date_time, value_frame], axis=1)
+            all_sum = all_data.groupby('date').sum()
             today = all_sum.iloc[-1:]
             self.today = today
     def shit(self):
