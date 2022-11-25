@@ -221,7 +221,7 @@ with tab4:
                 st.write(dailymilk)
                 fig, ax = plt.subplots()
                 ax1 = ax.twinx()
-                ax.plot(dailytimes.index, dailytimes['count'], 'o-')
+                #ax.plot(dailytimes.index, dailytimes['count'], 'o-')
                 ax1.bar(dailymilk.index, dailymilk['Quantity'], width=0.5, alpha=0.5)
                 ax.set_ylabel('日吸奶次数', fontsize=16, fontproperties=font)
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
