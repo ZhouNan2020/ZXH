@@ -49,7 +49,10 @@ sheet1, sheet2 = connect_to_google_sheet()
 #@st.cache(ttl=600)
 class today_count():
     def __init__(self):
+            #这两行基本是所由的类都要用
             datafrmae = pd.DataFrame(sheet1.get_all_records())
+            datafrmae = datafrmae.astype({'Breastfeeding': 'int', 'BreastBottleFeeding': 'int','FormulaMilkPowder':'int',
+                                          'Shit': 'int', 'ChangeDiapers': 'int', 'Mamiai': 'int', 'ADconsole': 'int'})
             all_sum = datafrmae.groupby('date').sum()
             today = all_sum.iloc[-1:]
             self.today = today
