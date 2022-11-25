@@ -171,69 +171,78 @@ with tab3:
 
 
 @st.cache(ttl=600)
-def count_milk():
-        data_frame = pd.DataFrame(sheet2.get_all_records())
 
-        date = sheet2.col_values(2)[1:]
-        date = pd.DataFrame(date)
-        date.columns = ['date']
-        time_milk = sheet2.col_values(3)[1:]
-        time_milk = pd.DataFrame(time_milk)
-        time_milk.columns = ['time']
-        suctionVolume = sheet2.col_values(4)[1:]
-        suctionVolume = pd.DataFrame(suctionVolume)
-        suctionVolume.columns = ['suctionVolume']
-        suctionVolume = suctionVolume.astype('int')
-        count = sheet2.col_values(5)[1:]
-        count = pd.DataFrame(count)
-        count.columns = ['count']
-        count = count.astype('int')
-        suc_all = pd.concat([date, time_milk, suctionVolume, count], axis=1)
-        suc_nozero = suc_all.drop(suc_all[suc_all['suctionVolume'] == 0].index)
-        suc_mean = suc_nozero.groupby('date').mean()
-        suc_mean = suc_mean.astype('int')
-        suc_mean = suc_mean.tail(7)
-        suc_sum = suc_nozero.groupby('date').sum()
-        suc_sum = suc_sum.astype('int')
-        suc_sum = suc_sum.tail(7)
-        return suc_mean, suc_sum
-
-
+class suctionOfMilk:
+        def __init__(self):
+                self.datafrmae = pd.DataFrame(sheet2.get_all_records())
+        def lastSuckingTime(self):
+                data = self.datafrmae
+                data = data['time']
+                data = data.tail(1)
+                return data
+        def lastMilkIntake(self):
+                data = self.datafrmae
+                data = data['milkIntake']
+                data = data.tail(1)
+                return data
+        def dailyMilkIntake(self):
+                data = self.datafrmae
+                data = data.set_index('date')
+                data = data['count']
+                data = data.groupby('date').sum()
+                data = data.tail(1)
+                return data
+        def dailyMilkMl(self):
+                data = self.datafrmae
+                data = data.set_index('date')
+                data = data['Quantity']
+                data = data.groupby('date').mean()
+                data = data.tail(1)
+                return data
 
 
 with tab4:
         st.subheader('覃薇吸奶记录')
         col1, col2= st.columns([1,2])
+        suc = suctionOfMilk()
+        st.write('最近一次吸奶时间：', suc.lastSuckingTime())
+        st.write('最近一次吸奶量：', suc.lastMilkIntake())
         with col1:
                 suctionVolume = st.number_input('吸出量（单位:ml）')
-                if st.button('记录一次吸奶'):
+                if st.button('记录本次吸奶'):
                         sheet2.append_row([timeticks,date,time,suctionVolume,1], 1)
                         st.success('记录成功')
         with col2:
-                milkdate = sheet2.col_values(2)[-1:]
-                milktime = sheet2.col_values(3)[-1:]
-                st.write('上次吸奶时间：',milkdate[0],milktime[0])
-                st.write('上次吸奶量：',suctionVolume,'ml')
-                suc_mean = count_milk()[0]
-                suc_sum = count_milk()[1]
+                dailytimes = suc.dailyMilkIntake()
+                dailymilk = suc.dailyMilkMl()
                 fig, ax = plt.subplots()
                 ax1 = ax.twinx()
-                x=list(suc_mean.index)
-                y1=list(suc_mean['suctionVolume'])
-                y2=list(suc_sum['count'])
-                y_major_locator = MultipleLocator(1)
-                ax.plot(x, y2, 'o-',label='日吸奶次数',color='red')
-                ax.yaxis.set_major_locator(y_major_locator)
+                ax.plot(dailytimes.index, dailytimes['count'], 'o-')
+                ax1.bar(dailymilk.index, dailymilk['Quantity'], width=0.5, alpha=0.5)
                 ax.set_ylabel('日吸奶次数', fontsize=16, fontproperties=font)
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
-                ax1.bar(x, y1, alpha=0.5, label='日均吸奶量',color='blue')
                 ax1.set_ylabel('日均吸奶量', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
-                for a, c in zip(x, y1):
-                        plt.text(a, c+0.5, c, ha='center', va='center', fontsize=14)
+                for a, c in zip(list(dailytimes.index), list(dailytimes['count'])):
+                        plt.text(a, c + 2, c, ha='center', va='center', fontsize=14)
                 ax.legend(['日吸奶次数'], loc='upper left', prop=font)
                 ax1.legend(['日均吸奶量'], loc='upper right', prop=font)
                 st.pyplot(fig)
+
+
+
+
+
+
+
+
+
+
+
+
+              
+
+
 
 
 
