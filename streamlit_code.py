@@ -190,16 +190,14 @@ class suctionOfMilk:
                 data = data.set_index('date')
                 data = data['count']
                 data = data.groupby('date').sum()
-                data = data.tail(7)
-                st.write(data)
+                data = pd.DataFrame(data.tail(7))
                 return data
         def dailyMilkMl(self):
                 data = self.datafrmae
                 data = data.set_index('date')
                 data = data['Quantity']
                 data = data.groupby('date').mean()
-                data = data.tail(7)
-                st.write(data)
+                data = pd.DataFrame(data.tail(7))
                 return data
 
 
@@ -216,12 +214,10 @@ with tab4:
                         st.success('记录成功')
         with col2:
                 dailytimes = suc.dailyMilkIntake()
-                st.write(dailytimes)
                 dailymilk = suc.dailyMilkMl()
-                st.write(dailymilk)
                 fig, ax = plt.subplots()
                 ax1 = ax.twinx()
-                #ax.plot(dailytimes.index, dailytimes['count'], 'o-')
+                ax.plot(dailytimes.index, dailytimes['count'], 'o-')
                 ax1.bar(dailymilk.index, dailymilk['Quantity'], width=0.5, alpha=0.5)
                 ax.set_ylabel('日吸奶次数', fontsize=16, fontproperties=font)
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
