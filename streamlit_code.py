@@ -191,7 +191,7 @@ class suctionOfMilk:
                 data = data['count']
                 data = data.groupby('date').sum()
                 data = data.tail(7)
-                data = data.astype('int')
+                st.write(data)
                 return data
         def dailyMilkMl(self):
                 data = self.datafrmae
@@ -199,7 +199,7 @@ class suctionOfMilk:
                 data = data['Quantity']
                 data = data.groupby('date').mean()
                 data = data.tail(7)
-                data = data.astype('int')
+                st.write(data)
                 return data
 
 
