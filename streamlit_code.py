@@ -49,7 +49,6 @@ sheet1, sheet2 = connect_to_google_sheet()
 #@st.cache(ttl=600)
 class today_count():
     def __init__(self):
-            #这两行基本是所由的类都要用
             datafrmae = pd.DataFrame(sheet1.get_all_records())
             all_sum = datafrmae.groupby('date').sum()
             today = all_sum.iloc[-1:]
@@ -72,7 +71,7 @@ class today_count():
 
 
 with tab1:
-        Breastfeeding = st.number_input('母乳亲喂（单位:分钟）')
+        Breastfeeding = st.number_input('母乳亲喂（单位:分钟）',value=None,step=1)
         BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）')
         FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）')
 
@@ -103,7 +102,7 @@ with tab1:
                 sheet1.append_row(record, 1)
                 st.success('提交成功')
                 today = today_count()
-                st.write('今日喂养总量: ', today.Bottle() + today.FormulaMilkPowder())
+                st.write('今日喂养总量: ',today.Bottle() + today.FormulaMilkPowder())
                 st.write('母乳亲喂{}分钟 '.format(today.Breastfeeding()))
                 st.write('母乳瓶喂{}毫升 '.format(today.Bottle()))
                 st.write('配方奶粉{}毫升 '.format(today.FormulaMilkPowder()))
