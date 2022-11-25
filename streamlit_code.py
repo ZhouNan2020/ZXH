@@ -72,11 +72,11 @@ class today_count():
 
 
 with tab1:
-        Breastfeeding = st.text_input('母乳亲喂（单位:分钟）', value='')
+        Breastfeeding = st.text_input('母乳亲喂（单位:分钟）',type='number')
         Breastfeeding = int(float(Breastfeeding))
-        BreastBottleFeeding = st.text_input('母乳瓶喂（单位:ml）', value='')
+        BreastBottleFeeding = st.text_input('母乳瓶喂（单位:ml）',type='number')
         BreastBottleFeeding = int(float(BreastBottleFeeding))
-        FormulaMilkPowder = st.text_input('配方奶粉（单位:ml）', value='')
+        FormulaMilkPowder = st.text_input('配方奶粉（单位:ml）',type='number')
         FormulaMilkPowder = int(float(FormulaMilkPowder))
 
         Shit = st.checkbox('大便')
