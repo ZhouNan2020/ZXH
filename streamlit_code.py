@@ -51,6 +51,7 @@ class today_count():
     def __init__(self):
             #这两行基本是所由的类都要用
             datafrmae = pd.DataFrame(sheet1.get_all_records())
+            st.write(datafrmae.columns)
             date_time = datafrmae['date', 'time']
             value_frame = datafrmae.drop(['date', 'time'], axis=1)
             value_frame = value_frame.astype('int')
