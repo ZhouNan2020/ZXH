@@ -51,12 +51,7 @@ class today_count():
     def __init__(self):
             #这两行基本是所由的类都要用
             datafrmae = pd.DataFrame(sheet1.get_all_records())
-            st.write(datafrmae.columns)
-            date_time = datafrmae['date', 'time']
-            value_frame = datafrmae.drop(['date', 'time'], axis=1)
-            value_frame = value_frame.astype('int')
-            all_data = pd.concat([date_time, value_frame], axis=1)
-            all_sum = all_data.groupby('date').sum()
+            all_sum = datafrmae.groupby('date').sum()
             today = all_sum.iloc[-1:]
             self.today = today
     def shit(self):
@@ -78,8 +73,11 @@ class today_count():
 
 with tab1:
         Breastfeeding = st.text_input('母乳亲喂（单位:分钟）', value='')
+        Breastfeeding = int(Breastfeeding)
         BreastBottleFeeding = st.text_input('母乳瓶喂（单位:ml）', value='')
+        BreastBottleFeeding = int(BreastBottleFeeding)
         FormulaMilkPowder = st.text_input('配方奶粉（单位:ml）', value='')
+        FormulaMilkPowder = int(FormulaMilkPowder)
 
         Shit = st.checkbox('大便')
         Shit_value = 0
@@ -108,7 +106,7 @@ with tab1:
                 sheet1.append_row(record, 1)
                 st.success('提交成功')
                 today = today_count()
-                st.write('今日喂养总量: ', int(today.Bottle()) + int(today.FormulaMilkPowder()))
+                st.write('今日喂养总量: ', today.Bottle() + today.FormulaMilkPowder())
                 st.write('母乳亲喂{}分钟 '.format(today.Breastfeeding()))
                 st.write('母乳瓶喂{}毫升 '.format(today.Bottle()))
                 st.write('配方奶粉{}毫升 '.format(today.FormulaMilkPowder()))
