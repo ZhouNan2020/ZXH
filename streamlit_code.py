@@ -180,9 +180,9 @@ class suctionOfMilk:
                 data = data['time']
                 data = data.tail(1)
                 return data
-        def lastMilkIntake(self):
+        def lastMilkML(self):
                 data = self.datafrmae
-                data = data['milkIntake']
+                data = data['Quantity']
                 data = data.tail(1)
                 return data
         def dailyMilkIntake(self):
@@ -206,7 +206,7 @@ with tab4:
         col1, col2= st.columns([1,2])
         suc = suctionOfMilk()
         st.write('最近一次吸奶时间：', suc.lastSuckingTime())
-        st.write('最近一次吸奶量：', suc.lastMilkIntake())
+        st.write('最近一次吸奶量：', suc.lastMilkML())
         with col1:
                 suctionVolume = st.number_input('吸出量（单位:ml）')
                 if st.button('记录本次吸奶'):
@@ -240,7 +240,7 @@ with tab4:
 
 
 
-              
+
 
 
 
