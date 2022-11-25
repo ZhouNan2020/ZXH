@@ -190,14 +190,14 @@ class suctionOfMilk:
                 data = data.set_index('date')
                 data = data['count']
                 data = data.groupby('date').sum()
-                data = pd.DataFrame(data.tail(7))
+                data = data.tail(7)
                 return data
         def dailyMilkMl(self):
                 data = self.datafrmae
                 data = data.set_index('date')
                 data = data['Quantity']
                 data = data.groupby('date').mean()
-                data = pd.DataFrame(data.tail(7))
+                data = data.tail(7)
                 return data
 
 
@@ -223,7 +223,7 @@ with tab4:
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
                 ax1.set_ylabel('日均吸奶量', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
-                for a, c in zip(list(dailytimes.index), list(dailytimes['count'])):
+                for a, c in zip(list(dailymilk.index), list(dailymilk['Quantity'])):
                         plt.text(a, c + 2, c, ha='center', va='center', fontsize=14)
                 ax.legend(['日吸奶次数'], loc='upper left', prop=font)
                 ax1.legend(['日均吸奶量'], loc='upper right', prop=font)
