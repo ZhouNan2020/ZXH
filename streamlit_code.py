@@ -178,26 +178,26 @@ class suctionOfMilk:
         def lastSuckingTime(self):
                 data = self.datafrmae
                 data = data['time']
-                data = data.tail(1)
+                data = data.tail(1).values[0]
                 return data
         def lastMilkML(self):
                 data = self.datafrmae
                 data = data['Quantity']
-                data = data.tail(1)
+                data = data.tail(1).values[0]
                 return data
         def dailyMilkIntake(self):
                 data = self.datafrmae
                 data = data.set_index('date')
                 data = data['count']
                 data = data.groupby('date').sum()
-                data = data.tail(1)
+                data = data.tail(1).values[0]
                 return data
         def dailyMilkMl(self):
                 data = self.datafrmae
                 data = data.set_index('date')
                 data = data['Quantity']
                 data = data.groupby('date').mean()
-                data = data.tail(1)
+                data = data.tail(1).values[0]
                 return data
 
 
