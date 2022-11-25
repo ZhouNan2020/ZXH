@@ -190,14 +190,12 @@ class suctionOfMilk:
                 data = data.set_index('date')
                 data = data['count']
                 data = data.groupby('date').sum()
-                data = data.tail(1)
                 return data
         def dailyMilkMl(self):
                 data = self.datafrmae
                 data = data.set_index('date')
                 data = data['Quantity']
                 data = data.groupby('date').mean()
-                data = data.tail(1)
                 return data
 
 
