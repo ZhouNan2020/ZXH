@@ -212,7 +212,9 @@ with tab4:
                         st.success('记录成功')
         with col2:
                 dailytimes = suc.dailyMilkIntake()
+                st.write(dailytimes)
                 dailymilk = suc.dailyMilkMl()
+                st.write(dailymilk)
                 fig, ax = plt.subplots()
                 ax1 = ax.twinx()
                 ax.plot(dailytimes.index, dailytimes['count'], 'o-')
