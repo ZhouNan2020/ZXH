@@ -128,6 +128,12 @@ class Analysis:
                     sum_tail = sum_all.tail(tail_num)
                     sum_tail = sum_tail.astype('int')
                     return sum_tail
+            def ticks(self,tail_num,name):
+                    datafrmae = self.datafrmae
+                    dataframe = datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index)
+                    st.write(dataframe)
+
+
 
 
 
@@ -182,6 +188,8 @@ with tab3:
                         plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
 
+
+                ana.ticks(daynum,'Shit')
 
 @st.cache(ttl=600)
 class suctionOfMilk:
