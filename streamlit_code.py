@@ -130,8 +130,8 @@ class Analysis:
                     return sum_tail
             def shit_ticks(self,tail_num,name):
                     datafrmae = self.datafrmae
-                    dataframe = datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index)
-                    dataframe = dataframe['ticks','Shit']
+                    dataframe = pd.DataFrame(datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index))
+                    dataframe = dataframe['ticks']
                     st.write(dataframe)
 
 
