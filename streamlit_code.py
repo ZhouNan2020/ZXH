@@ -132,7 +132,7 @@ class Analysis:
                     datafrmae = self.datafrmae
                     dataframe = pd.DataFrame(datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index))
                     dataframe.set_index('date', inplace=True)
-                    dataframe = dataframe['ticks']
+                    dataframe = pd.DataFrame(dataframe['ticks'])
                     dataframe.diff(axis=0, periods=1)
                     st.write(dataframe)
 
