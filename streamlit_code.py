@@ -116,13 +116,12 @@ class Analysis:
                     self.datafrmae = datafrmae
             def day_mean(self,tail_num,name):
                     data_nozero = self.datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index)
-                    mean_all = data_nozero.groupby('date').mean()
                     data_nozero.set_index('date', inplace=True)
                     data_nozero = data_nozero[str(name)]
-                    st.write(data_nozero)
-
+                    mean_all = data_nozero.groupby('date').mean()
                     mean_tail = mean_all.tail(tail_num)
                     mean_tail = mean_tail.astype('int')
+                    st.write(mean_tail)
                     return mean_tail
             def day_sum(self,tail_num,name):
                     sum_all = self.datafrmae.groupby('date').sum()
