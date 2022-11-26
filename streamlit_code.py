@@ -131,6 +131,7 @@ class Analysis:
             def shit_ticks(self,tail_num,name):
                     datafrmae = self.datafrmae
                     dataframe = pd.DataFrame(datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index))
+                    dataframe = pd.DataFrame(dataframe['date', 'time'])
                     st.write('1:',dataframe)
                     #dataframe.set_index('date', inplace=True)
                     dataframe = pd.DataFrame(dataframe['ticks'])
