@@ -122,8 +122,9 @@ class Analysis:
                     mean_tail = mean_all.tail(tail_num)
                     mean_tail = mean_tail.astype('int')
                     return mean_tail
-            def day_sum(self,tail_num):
+            def day_sum(self,tail_num,name):
                     sum_all = self.datafrmae.groupby('date').sum()
+                    sum_all = sum_all[str(name)]
                     sum_tail = sum_all.tail(tail_num)
                     sum_tail = sum_tail.astype('int')
                     return sum_tail
@@ -169,9 +170,20 @@ with tab3:
                         plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
 
+                name3 = '近{}日每日拉粑粑次数'.format(daynum)
+                shit_sum = pd.DataFrame(ana.day_sum(daynum,'shit'))
+                fig, ax = plt.subplots()
+                ax.plot(shit_sum.index,shit_sum['shit'],'o-')
+                ax.set_xlabel('日期', fontsize=16, fontproperties=font)
+                plt.xticks(rotation=45)
+                ax.set_ylabel('拉粑粑次数', fontsize=16, fontproperties=font)
+                ax.set_title(str(name3), fontsize=16, fontproperties=font)
+                for a, b in zip(list(shit_sum.index),list(shit_sum['shit']):
+                        plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
+                st.pyplot(fig)
+
 
 @st.cache(ttl=600)
-
 class suctionOfMilk:
         def __init__(self):
                 self.datafrmae = pd.DataFrame(sheet2.get_all_records())
