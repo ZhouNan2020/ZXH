@@ -121,7 +121,6 @@ class Analysis:
                     mean_all = data_nozero.groupby('date').mean()
                     mean_tail = mean_all.tail(tail_num)
                     mean_tail = mean_tail.astype('int')
-                    st.write(mean_tail)
                     return mean_tail
             def day_sum(self,tail_num,name):
                     sum_all = self.datafrmae.groupby('date').sum()
