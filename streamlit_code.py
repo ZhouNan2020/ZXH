@@ -128,12 +128,6 @@ class Analysis:
                     sum_tail = sum_tail.astype('int')
                     return sum_tail
 
-
-
-
-
-
-
 with tab3:
         st.subheader('数据分析')
         daynum = st.slider('想分析周栩珩最近多少天的状态？', 1, 15, 3)
