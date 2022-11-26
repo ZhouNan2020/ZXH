@@ -135,6 +135,8 @@ class Analysis:
                     dataframe.set_index('date', inplace=True)
                     dataframe = dataframe.diff(axis=0, periods=1)
                     dataframe = dataframe.iloc[1:]
+                    dataframe = dataframe.astype('int')
+                    dataframe = dataframe/60
                     st.write('1:', dataframe)
 
 
