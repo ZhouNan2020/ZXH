@@ -131,6 +131,7 @@ class Analysis:
             def ticks(self,tail_num,name):
                     datafrmae = self.datafrmae
                     dataframe = datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index)
+                    dataframe = dataframe['ticks',str(name)]
                     st.write(dataframe)
 
 
