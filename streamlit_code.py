@@ -133,21 +133,12 @@ class Analysis:
                     dataframe = pd.DataFrame(datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index))
                     dataframe = pd.concat([dataframe['date'], dataframe['ticks']], axis=1)
                     dataframe.set_index('date', inplace=True)
+                    dataframe = dataframe.tail(tail_num)
                     dataframe = dataframe.diff(axis=0, periods=1)
                     dataframe = dataframe.iloc[1:]
                     dataframe = dataframe.astype('int')
                     dataframe = dataframe/60
-                    st.write('1:', dataframe)
-
-
-
-
-
-
-
-
-
-
+                    return dataframe
 
 with tab3:
         st.subheader('数据分析')
@@ -196,8 +187,18 @@ with tab3:
                         plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
 
+                name4 = '近{}日每日平时拉屎间隔时间'.format(daynum)
+                shit_day = pd.DataFrame(ana.shit_ticks(daynum,'Shit'))
+                fig, ax = plt.subplots()
+                ax.plot(shit_day.index, shit_sum['Shit'], 'o-')
+                ax.set_xlabel('日期', fontsize=16, fontproperties=font)
+                plt.xticks(rotation=45)
+                ax.set_ylabel('平时拉屎间隔时间', fontsize=16, fontproperties=font)
+                ax.set_title(str(name4), fontsize=16, fontproperties=font)
+                for a, b in zip(list(shit_day.index),list(shit_day['Shit'])):
+                        plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
+                st.pyplot(fig)
 
-                ana.shit_ticks(daynum,'Shit')
 
 @st.cache(ttl=600)
 class suctionOfMilk:
