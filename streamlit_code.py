@@ -178,7 +178,7 @@ with tab3:
                 plt.xticks(rotation=45)
                 ax.set_ylabel('拉粑粑次数', fontsize=16, fontproperties=font)
                 ax.set_title(str(name3), fontsize=16, fontproperties=font)
-                for a, b in zip(list(shit_sum.index),list(shit_sum['shit']):
+                for a, b in zip(list(shit_sum.index),list(shit_sum['shit'])):
                         plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
 
