@@ -117,9 +117,10 @@ class Analysis:
             def day_mean(self,tail_num,name):
                     data_nozero = self.datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index)
                     mean_all = data_nozero.groupby('date').mean()
+                    data_nozero.set_index('date', inplace=True)
                     data_nozero = data_nozero[str(name)]
                     st.write(data_nozero)
-                    data_nozero.set_index('date', inplace=True)
+
                     mean_tail = mean_all.tail(tail_num)
                     mean_tail = mean_tail.astype('int')
                     return mean_tail
