@@ -196,7 +196,7 @@ with tab3:
                 plt.xticks(rotation=45)
                 ax.set_ylabel('平时拉屎间隔时间', fontsize=16, fontproperties=font)
                 ax.set_title(str(name4), fontsize=16, fontproperties=font)
-                for a, b in zip(list(shit_day.index),list(shit_day['Shit'])):
+                for a, b in zip(list(shit_day.index),list(shit_day['ticks'])):
                         plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
 
