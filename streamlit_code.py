@@ -134,6 +134,8 @@ class Analysis:
                     dataframe.set_index('date', inplace=True)
                     dataframe = pd.DataFrame(dataframe['ticks'])
                     dataframe = dataframe.diff(axis=0, periods=1)
+                    dataframe = dataframe.drop(dataframe.index[0])
+                    #dataframe = dataframe.groupby('date').mean()
                     st.write(dataframe)
 
 
