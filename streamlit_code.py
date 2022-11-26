@@ -132,6 +132,7 @@ class Analysis:
                     datafrmae = self.datafrmae
                     dataframe = pd.DataFrame(datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index))
                     dataframe = pd.concat([dataframe['date'], dataframe['time']], axis=1)
+                    dataframe.set_index('date', inplace=True)
                     st.write('1:',dataframe)
                     #dataframe.set_index('date', inplace=True)
                     dataframe = pd.DataFrame(dataframe['ticks'])
