@@ -190,7 +190,7 @@ with tab3:
                 name4 = '近{}日每日平时拉屎间隔时间'.format(daynum)
                 shit_day = pd.DataFrame(ana.shit_ticks(daynum,'Shit'))
                 fig, ax = plt.subplots()
-                ax.plot(shit_day.index, shit_sum['Shit'], 'o-')
+                ax.plot(shit_day.index, shit_day['Shit'], 'o-')
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
                 ax.set_ylabel('平时拉屎间隔时间', fontsize=16, fontproperties=font)
