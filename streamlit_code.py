@@ -171,14 +171,14 @@ with tab3:
                 st.pyplot(fig)
 
                 name3 = '近{}日每日拉粑粑次数'.format(daynum)
-                shit_sum = pd.DataFrame(ana.day_sum(daynum,'shit'))
+                shit_sum = pd.DataFrame(ana.day_sum(daynum,'Shit'))
                 fig, ax = plt.subplots()
-                ax.plot(shit_sum.index,shit_sum['shit'],'o-')
+                ax.plot(shit_sum.index,shit_sum['Shit'],'o-')
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
                 ax.set_ylabel('拉粑粑次数', fontsize=16, fontproperties=font)
                 ax.set_title(str(name3), fontsize=16, fontproperties=font)
-                for a, b in zip(list(shit_sum.index),list(shit_sum['shit'])):
+                for a, b in zip(list(shit_sum.index),list(shit_sum['Shit'])):
                         plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
 
