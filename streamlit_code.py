@@ -134,7 +134,7 @@ class Analysis:
                     dataframe = pd.concat([dataframe['date'], dataframe['ticks']], axis=1)
                     dataframe.set_index('date', inplace=True)
                     st.write(dataframe)
-                    dataframe = dataframe['ticks'].diff(axis=0, periods=1)
+                    dataframe = dataframe.diff(axis=0, periods=1)
                     #st.write('1:', dataframe)
                     #dataframe.set_index('date', inplace=True)
 
