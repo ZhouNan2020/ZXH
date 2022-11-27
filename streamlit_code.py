@@ -65,7 +65,6 @@ class he_we:
             y2 = dataframe['weight']
             return x, y1, y2
 
-
 with st.sidebar:
         st.header('身高体重记录')
         height_weight = he_we()
@@ -100,18 +99,6 @@ with st.sidebar:
         if st.button('提交', key='submit_2'):
                 sheet3.append_row([date, height, weight])
                 st.success('提交成功')
-
-
-
-
-
-
-
-
-
-
-
-
 
 #@st.cache(ttl=600)
 class today_count():
@@ -222,10 +209,11 @@ class temper_metric:
                 self.datafrmae = datafrmae
         def temper(self):
                 datafrmae = pd.DataFrame(self.datafrmae)
-
                 datafrmae = datafrmae.set_index('date')
+                st.write(datafrmae)
                 datafrmae = datafrmae['temper']
                 datafrmae = datafrmae.astype('float')
+                
                 current = datafrmae.values[-1]
                 last = datafrmae.values[-2]
                 delta = current-last
@@ -235,16 +223,18 @@ class temper_metric:
 with tab2:
         st.header('该版面会依据当前需要记录的特殊情况调整')
         st.subheader('目前仅开放记录体温和大便颜色')
-        st.write('1.体温')
+        st.subheader('1.体温')
         temper=st.number_input('本次体温',step=0.1,min_value=35.0,max_value=42.0)
         if st.button('提交本次体温记录',key='temper'):
                 sheet4.append_row([timeticks,date,time,temper],1)
         temp = temper_metric()
         delta = temp.temper()
         st.metric(label="目前体温", value=temper, delta=delta,delta_color="inverse")
+        st.write('本日体温曲线')
 
 
-        st.write('2.大便颜色')
+
+        st.subheader('2.大便颜色')
 
 with tab3:
         st.subheader('数据分析')
