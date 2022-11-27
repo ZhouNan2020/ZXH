@@ -233,9 +233,9 @@ with tab2:
         temp_plot = pd.DataFrame(temp.temper()[1])
         fig, ax = plt.subplots()
         ax.plot(temp_plot.index, temp_plot['temper'])
-        ax.set_xlabel('时间')
-        ax.set_ylabel('体温')
-        ax.set_title('本日体温曲线')
+        ax.set_xlabel('时间',fontproperties=font)
+        ax.set_ylabel('体温',fontproperties=font)
+        ax.set_title('本日体温曲线',fontproperties=font)
         st.pyplot(fig)
 
 
