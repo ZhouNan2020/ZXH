@@ -23,7 +23,7 @@ plt.style.use('ggplot')
 #%%
 # 这一段不要动，我特么目前还没有搞太明白谷歌的API怎么工作的
 # 目前可以知道的是：scopes是范围，但是地址就是这个而不是sheet的链接
-#@st.cache(ttl=600)
+@st.cache(ttl=300)
 def connect_to_google_sheet():
         scopes = ["https://spreadsheets.google.com/feeds"]
 # 为特定的账户开设key，然后然后把账户给到谷歌sheet的访问权限中，通过key访问这个账户关联的sheet
@@ -38,7 +38,9 @@ def connect_to_google_sheet():
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('工作表2')
         sheet_C = client.open_by_key(
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('工作表3')
-        return sheet_A, sheet_B, sheet_C
+        sheet_D = client.open_by_key(
+        "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('特殊记录')
+        return sheet_A, sheet_B, sheet_C, sheet_D
 
 #%%
 #下面的就可以动了
@@ -46,8 +48,8 @@ tab1, tab2, tab3,tab4 = st.tabs(["日常喂养记录", "特殊情况记录", "�
 timeticks = time.time()
 date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
 time = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
-global sheet1, sheet2
-sheet1, sheet2, sheet3 = connect_to_google_sheet()
+global sheet1, sheet2, sheet3, sheet4
+sheet1, sheet2, sheet3, sheet4 = connect_to_google_sheet()
 
 
 st.cache(ttl=300)
@@ -206,7 +208,39 @@ class Analysis:
                     datafrmae = self.datafrmae
                     dataframe = pd.DataFrame(datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index))
 
+class temper_metric:
+        def __init__(self):
+                datafrmae = pd.DataFrame(sheet4.get_all_records())
+                self.datafrmae = datafrmae
+        def temper(self):
+                datafrmae = self.datafrmae
+                datafrmae.set_index('date', inplace=True)
+                datafrmae = datafrmae['temper']
+                datafrmae = datafrmae.astype('float')
+                current = datafrmae.iloc[-1]
+                last = datafrmae.iloc[-2]
+                delta = current-last
+                return delta
 
+
+with tab2:
+        st.header('该版面会依据当前需要记录的特殊情况调整')
+        st.subheader('目前仅开放记录体温和大便颜色')
+        st.write('1.体温')
+        temper=st.number_input('本次体温',value=0.0,step=0.1,min_value=35.0,max_value=42.0)
+        if st.button('提交本次体温记录',key='temper'):
+                sheet4.append_row([timeticks,date,time,temper],1)
+        temp = temper_metric
+        delta = temp.temper()
+        temp_color='off'
+        if delta>0:
+                temp_color = "normal"
+        else:
+                temp_color = 'inverse'
+        st.metric(label="目前体温", value=temper, delta=delta,delta_color=temp_color)
+
+
+        st.write('2.大便颜色')
 
 with tab3:
         st.subheader('数据分析')
