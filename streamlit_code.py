@@ -181,7 +181,9 @@ class Analysis:
                     dataframe.set_index('date', inplace=True)
                     dataframe = dataframe.tail(tail_num)
                     dataframe = dataframe.diff(axis=0, periods=1)
+                    st.write(dataframe)
                     dataframe = dataframe.iloc[1:]
+                    st.write(dataframe)
                     dataframe = dataframe.astype('int')
                     dataframe = dataframe/60
                     return dataframe
