@@ -86,9 +86,9 @@ with st.sidebar:
                 ax2.tick_params(axis='y', labelcolor='blue')
                 ax2.legend(loc='upper right', prop=font)
                 for a, b in zip(list(x), list(y1)):
-                        plt.text(a, b + 1, b, ha='center', va='bottom', fontsize=10)
+                        ax1.text(a, b + 1, b, ha='center', va='bottom', fontsize=10)
                 for a, c in zip(list(x), list(y2)):
-                        plt.text(a, c + 1, c, ha='center', va='bottom', fontsize=10)
+                        ax2.text(a, c + 1, c, ha='center', va='bottom', fontsize=10)
                 st.pyplot(fig)
 
 
