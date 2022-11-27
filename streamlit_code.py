@@ -62,8 +62,8 @@ class he_we:
 
 
 with st.sidebar:
-        height = st.number_input('身高', value=0.0, step=0.1)
-        weight= st.number_input('体重', value=0.0, step=0.1)
+        height = st.number_input('身高(cm)', value=0.0, step=0.1)
+        weight= st.number_input('体重(kg)', value=0.0, step=0.1)
         if st.button('提交', key='submit_2'):
                 sheet3.append_row([date, height, weight])
                 st.success('提交成功')
