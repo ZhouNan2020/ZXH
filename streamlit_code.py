@@ -59,13 +59,8 @@ class he_we:
             dataframe = pd.DataFrame(self.dataframe)
             dataframe = dataframe.set_index('date')
             x = dataframe.index
-            plt.xticks(rotation=45)
             y1 = dataframe['height']
             y2 = dataframe['weight']
-            for a,b in zip(list(x),list(y1)):
-                plt.text(a,b+1,b,ha='center',va='bottom',fontsize=10)
-            for a,b in zip(list(x),list(y2)):
-                plt.text(a,b+1,b,ha='center',va='bottom',fontsize=10)
             return x, y1, y2
 
 
@@ -81,6 +76,7 @@ with st.sidebar:
                 fig, ax1 = plt.subplots()
                 ax1.plot(x, y1, color='red', label='身高')
                 ax1.set_xlabel('日期', fontproperties=font)
+                plt.xticks(rotation=45)
                 ax1.set_ylabel('身高', fontproperties=font)
                 ax1.tick_params(axis='y', labelcolor='red')
                 ax1.legend(loc='upper left', prop=font)
@@ -89,6 +85,10 @@ with st.sidebar:
                 ax2.set_ylabel('体重', fontproperties=font)
                 ax2.tick_params(axis='y', labelcolor='blue')
                 ax2.legend(loc='upper right', prop=font)
+                for a, b in zip(list(x), list(y1)):
+                        plt.text(a, b + 1, b, ha='center', va='bottom', fontsize=10)
+                for a, b in zip(list(x), list(y2)):
+                        plt.text(a, b + 1, b, ha='center', va='bottom', fontsize=10)
                 st.pyplot(fig)
 
 
