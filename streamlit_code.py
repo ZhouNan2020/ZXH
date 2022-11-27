@@ -11,6 +11,7 @@ from matplotlib import font_manager
 import matplotlib as mpl
 import datetime
 #%%
+st.title('周栩珩成长日记')
 font = font_manager.FontProperties(fname='simhei.ttf')
 plt.rcParams['font.family']=['SimHei']
 parameters = {'xtick.labelsize': 16,
@@ -48,7 +49,7 @@ time = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:
 global sheet1, sheet2
 sheet1, sheet2, sheet3 = connect_to_google_sheet()
 
-st.title('周栩珩成长日记')
+
 
 class he_we:
     def __init__(self):
