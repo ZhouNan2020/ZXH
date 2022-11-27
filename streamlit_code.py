@@ -175,11 +175,10 @@ class Analysis:
                     data_nozero = self.datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index)
                     data_nozero.set_index('date', inplace=True)
                     data_nozero = data_nozero[str(name)]
+                    median = data_nozero.median()
+                    max = data_nozero.max()
+                    min = data_nozero.min()
                     mean_all = data_nozero.groupby('date').mean()
-                    median = mean_all.median()
-                    max = mean_all.max()
-                    min = mean_all.min()
-                    st.write('最近{}天{}的平均值为{}，中位数为{}，最大值为{}，最小值为{}'.format(tail_num,name,mean_all.tail(tail_num).mean(),median,max,min))
                     mean_tail = mean_all.tail(tail_num)
                     mean_tail = mean_tail.astype('int')
                     return mean_tail,median,max,min
@@ -213,7 +212,7 @@ with tab3:
         if st.button('开始分析'):
                 ana = Analysis()
                 name1 = '近{}日每日平均母乳亲喂时间'.format(daynum)
-                mean_breastfeeding=pd.DataFrame(ana.day_mean(daynum,'Breastfeeding'))
+                mean_breastfeeding=pd.DataFrame(ana.day_mean(daynum,'Breastfeeding')[0])
                 fig, ax = plt.subplots()
                 ax.plot(mean_breastfeeding.index, mean_breastfeeding['Breastfeeding'], 'o-')
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
@@ -223,6 +222,10 @@ with tab3:
                 for a, b in zip(list(mean_breastfeeding.index), list(mean_breastfeeding['Breastfeeding'])):
                         plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
+                median = ana.day_mean(daynum,'Breastfeeding')[1]
+                max = ana.day_mean(daynum,'Breastfeeding')[2]
+                min = ana.day_mean(daynum,'Breastfeeding')[3]
+                st.write('近{}日母乳亲喂时间中位数为{}分钟，最大值为{}分钟，最小值为{}分钟'.format(daynum,median,max,min))
 
                 name2 = '近{}日每日平均喂养量'.format(daynum)
                 mean_bottle=pd.DataFrame(ana.day_mean(daynum,'BreastBottleFeeding')[0])
