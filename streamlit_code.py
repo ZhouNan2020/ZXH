@@ -87,8 +87,16 @@ with st.sidebar:
         for a, c in zip(list(x), list(y2)):
                 ax2.text(a, c + 1, c, ha='center', va='bottom', fontsize=10)
         st.pyplot(fig)
-        height = st.number_input('身高(cm)', value=0.0, step=0.1)
-        weight= st.number_input('体重(kg)', value=0.0, step=0.1)
+        height_value = st.number_input('身高(cm)', value=0.0, step=0.1)
+        weight_value= st.number_input('体重(kg)', value=0.0, step=0.1)
+        if height_value ==0.0:
+                height=y1[-1]
+        else:
+                height = height_value
+        if weight_value ==0.0:
+                weight=y2[-1]
+        else:
+                weight = weight_value
         if st.button('提交', key='submit_2'):
                 sheet3.append_row([date, height, weight])
                 st.success('提交成功')
