@@ -226,8 +226,8 @@ class temper_metric:
                 datafrmae = datafrmae.set_index('date')
                 datafrmae = datafrmae['temper']
                 datafrmae = datafrmae.astype('float')
-                current = datafrmae.iloc[-2:-1].values[0]
-                last = datafrmae.iloc[-3:-2].values[0]
+                current = datafrmae.values[-1]
+                last = datafrmae.values[-2]
                 delta = current-last
                 return delta
 
