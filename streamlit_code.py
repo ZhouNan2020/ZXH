@@ -63,9 +63,9 @@ class he_we:
             y1 = dataframe['height']
             y2 = dataframe['weight']
             for a,b in zip(list(x),list(y1)):
-                plt.text(a,b,b,ha='center',va='bottom',fontsize=10)
+                plt.text(a,b+1,b,ha='center',va='bottom',fontsize=10)
             for a,b in zip(list(x),list(y2)):
-                plt.text(a,b,b,ha='center',va='bottom',fontsize=10)
+                plt.text(a,b+1,b,ha='center',va='bottom',fontsize=10)
             return x, y1, y2
 
 
