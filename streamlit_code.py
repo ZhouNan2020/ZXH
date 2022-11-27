@@ -227,7 +227,7 @@ with tab2:
         st.header('该版面会依据当前需要记录的特殊情况调整')
         st.subheader('目前仅开放记录体温和大便颜色')
         st.write('1.体温')
-        temper=st.number_input('本次体温',value=0.0,step=0.1,min_value=35.0,max_value=42.0)
+        temper=st.number_input('本次体温',step=0.1,min_value=35.0,max_value=42.0)
         if st.button('提交本次体温记录',key='temper'):
                 sheet4.append_row([timeticks,date,time,temper],1)
         temp = temper_metric
