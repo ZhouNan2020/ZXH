@@ -237,13 +237,13 @@ with tab3:
                         plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
 
-                name4 = '近{}日每日平时拉屎间隔时间'.format(daynum)
+                name4 = '近{}日每日平均拉屎间隔时间'.format(daynum)
                 shit_day = pd.DataFrame(ana.shit_ticks(daynum,'Shit'))
                 fig, ax = plt.subplots()
                 ax.plot(shit_day.index, shit_day['ticks'], 'o-')
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
-                ax.set_ylabel('平时拉屎间隔时间', fontsize=16, fontproperties=font)
+                ax.set_ylabel('平均拉屎间隔时间（分钟）', fontsize=16, fontproperties=font)
                 ax.set_title(str(name4), fontsize=16, fontproperties=font)
                 for a, b in zip(list(shit_day.index),list(shit_day['ticks'])):
                         plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
