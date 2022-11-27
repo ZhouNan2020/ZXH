@@ -209,11 +209,11 @@ class temper_metric:
                 self.datafrmae = datafrmae
         def temper(self):
                 datafrmae = pd.DataFrame(self.datafrmae)
-                datafrmae = datafrmae.set_index('date')
+                datafrmae = datafrmae.set_index('time')
                 st.write(datafrmae)
                 datafrmae = datafrmae['temper']
                 datafrmae = datafrmae.astype('float')
-                
+
                 current = datafrmae.values[-1]
                 last = datafrmae.values[-2]
                 delta = current-last
