@@ -65,25 +65,26 @@ class he_we:
 
 
 with st.sidebar:
-        height_weight = he_we()
-        x, y1, y2 = height_weight.plot()
-        fig, ax1 = plt.subplots()
-        ax1.plot(x, y1, color='red', label='身高')
-        ax1.set_xlabel('日期', fontproperties=font)
-        ax1.set_ylabel('身高', fontproperties=font)
-        ax1.tick_params(axis='y', labelcolor='red')
-        ax1.legend(loc='upper left', prop=font)
-        ax2 = ax1.twinx()
-        ax2.plot(x, y2, color='blue', label='体重')
-        ax2.set_ylabel('体重', fontproperties=font)
-        ax2.tick_params(axis='y', labelcolor='blue')
-        ax2.legend(loc='upper right', prop=font)
-        st.pyplot(fig)
+
         height = st.number_input('身高(cm)', value=0.0, step=0.1)
         weight= st.number_input('体重(kg)', value=0.0, step=0.1)
         if st.button('提交', key='submit_2'):
                 sheet3.append_row([date, height, weight])
                 st.success('提交成功')
+                height_weight = he_we()
+                x, y1, y2 = height_weight.plot()
+                fig, ax1 = plt.subplots()
+                ax1.plot(x, y1, color='red', label='身高')
+                ax1.set_xlabel('日期', fontproperties=font)
+                ax1.set_ylabel('身高', fontproperties=font)
+                ax1.tick_params(axis='y', labelcolor='red')
+                ax1.legend(loc='upper left', prop=font)
+                ax2 = ax1.twinx()
+                ax2.plot(x, y2, color='blue', label='体重')
+                ax2.set_ylabel('体重', fontproperties=font)
+                ax2.tick_params(axis='y', labelcolor='blue')
+                ax2.legend(loc='upper right', prop=font)
+                st.pyplot(fig)
 
 
 
