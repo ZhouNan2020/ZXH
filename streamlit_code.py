@@ -50,7 +50,7 @@ global sheet1, sheet2
 sheet1, sheet2, sheet3 = connect_to_google_sheet()
 
 
-
+st.cache(ttl=300)
 class he_we:
     def __init__(self):
             dataframe = pd.DataFrame(sheet3.get_all_records())
@@ -66,30 +66,31 @@ class he_we:
 
 with st.sidebar:
         st.header('身高体重记录')
+        height_weight = he_we()
+        x, y1, y2 = height_weight.plot()
+        fig, ax1 = plt.subplots()
+        ax1.plot(x, y1, color='red', label='身高')
+        ax1.set_xlabel('日期', fontproperties=font)
+        plt.xticks(rotation=45)
+        ax1.set_ylabel('身高', fontproperties=font)
+        ax1.tick_params(axis='y', labelcolor='red')
+        ax1.legend(loc='upper left', prop=font)
+        ax2 = ax1.twinx()
+        ax2.plot(x, y2, color='blue', label='体重')
+        ax2.set_ylabel('体重', fontproperties=font)
+        ax2.tick_params(axis='y', labelcolor='blue')
+        ax2.legend(loc='upper right', prop=font)
+        for a, b in zip(list(x), list(y1)):
+                ax1.text(a, b + 1, b, ha='center', va='bottom', fontsize=10)
+        for a, c in zip(list(x), list(y2)):
+                ax2.text(a, c + 1, c, ha='center', va='bottom', fontsize=10)
+        st.pyplot(fig)
         height = st.number_input('身高(cm)', value=0.0, step=0.1)
         weight= st.number_input('体重(kg)', value=0.0, step=0.1)
         if st.button('提交', key='submit_2'):
                 sheet3.append_row([date, height, weight])
                 st.success('提交成功')
-                height_weight = he_we()
-                x, y1, y2 = height_weight.plot()
-                fig, ax1 = plt.subplots()
-                ax1.plot(x, y1, color='red', label='身高')
-                ax1.set_xlabel('日期', fontproperties=font)
-                plt.xticks(rotation=45)
-                ax1.set_ylabel('身高', fontproperties=font)
-                ax1.tick_params(axis='y', labelcolor='red')
-                ax1.legend(loc='upper left', prop=font)
-                ax2 = ax1.twinx()
-                ax2.plot(x, y2, color='blue', label='体重')
-                ax2.set_ylabel('体重', fontproperties=font)
-                ax2.tick_params(axis='y', labelcolor='blue')
-                ax2.legend(loc='upper right', prop=font)
-                for a, b in zip(list(x), list(y1)):
-                        ax1.text(a, b + 1, b, ha='center', va='bottom', fontsize=10)
-                for a, c in zip(list(x), list(y2)):
-                        ax2.text(a, c + 1, c, ha='center', va='bottom', fontsize=10)
-                st.pyplot(fig)
+
 
 
 
