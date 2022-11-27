@@ -225,10 +225,6 @@ with tab3:
                 for a, b in zip(list(mean_breastfeeding.index), list(mean_breastfeeding['Breastfeeding'])):
                         plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
-                median = ana.day_mean(daynum,'Breastfeeding')[1]
-                max = ana.day_mean(daynum,'Breastfeeding')[2]
-                min = ana.day_mean(daynum,'Breastfeeding')[3]
-                st.write('近{}日母乳亲喂时间中位数为{}分钟，最大值为{}分钟，最小值为{}分钟'.format(daynum,median,max,min))
 
                 name2 = '近{}日每日平均喂养量'.format(daynum)
                 mean_bottle=pd.DataFrame(ana.day_mean(daynum,'BreastBottleFeeding')[0])
