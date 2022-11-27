@@ -243,6 +243,14 @@ with tab3:
                 for a, b in zip(list(mean_formulamilkpowder.index), list(mean_formulamilkpowder['FormulaMilkPowder'])):
                         plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
+                median = ana.day_mean(daynum,'BreastBottleFeeding')[1]
+                max = ana.day_mean(daynum,'BreastBottleFeeding')[2]
+                min = ana.day_mean(daynum,'BreastBottleFeeding')[3]
+                st.write('近{}日母乳瓶喂量中位数为{}毫升，最大值为{}毫升，最小值为{}毫升'.format(daynum,median,max,min))
+                median = ana.day_mean(daynum,'FormulaMilkPowder')[1]
+                max = ana.day_mean(daynum,'FormulaMilkPowder')[2]
+                min = ana.day_mean(daynum,'FormulaMilkPowder')[3]
+                st.write('近{}日配方奶粉喂量中位数为{}毫升，最大值为{}毫升，最小值为{}毫升'.format(daynum,median,max,min))
 
                 name3 = '近{}日每日拉屎次数'.format(daynum)
                 shit_sum = pd.DataFrame(ana.day_sum(daynum,'Shit'))
