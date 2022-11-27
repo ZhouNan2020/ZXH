@@ -51,7 +51,7 @@ sheet1, sheet2, sheet3 = connect_to_google_sheet()
 class he_we:
     def __init__(self):
             dataframe = pd.DataFrame(sheet3.get_all_records())
-            self.dataframe = dataframe
+            self.dataframe = dataframe.tail(10)
     def plot(self):
             dataframe = pd.DataFrame(self.dataframe)
             dataframe = dataframe.set_index('date')
