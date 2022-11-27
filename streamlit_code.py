@@ -214,8 +214,8 @@ class temper_metric:
                 self.datafrmae = datafrmae
         def temper(self):
                 datafrmae = pd.DataFrame(self.datafrmae)
-                st.write(datafrmae)
-                datafrmae.set_index('date', inplace=True)
+
+                datafrmae = datafrmae.set_index('date')
                 datafrmae = datafrmae['temper']
                 datafrmae = datafrmae.astype('float')
                 current = datafrmae.iloc[-1]
