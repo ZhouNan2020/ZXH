@@ -89,12 +89,12 @@ with st.sidebar:
         st.pyplot(fig)
         height_value = st.number_input('身高(cm)', value=0.0, step=0.1)
         weight_value= st.number_input('体重(kg)', value=0.0, step=0.1)
-        if height_value ==0.0:
-                height=y1[-1]
+        if height_value ==0.00:
+                height=list(y1[-1])
         else:
                 height = height_value
-        if weight_value ==0.0:
-                weight=y2[-1]
+        if weight_value ==0.00:
+                weight=list(y2[-1])
         else:
                 weight = weight_value
         if st.button('提交', key='submit_2'):
