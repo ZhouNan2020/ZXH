@@ -211,17 +211,12 @@ class temper_metric:
                 datafrmae = pd.DataFrame(self.datafrmae)
                 datafrmae = datafrmae.set_index('time')
                 today = datafrmae[datafrmae['date']==date]
-                st.write(today)
-                temper = datafrmae['temper']
-                st.write('今日体温：',temper)
-                #datafrmae = pd.concat([today,temper],axis=1)
                 datafrmae = datafrmae['temper']
                 datafrmae = datafrmae.astype('float')
-
                 current = datafrmae.values[-1]
                 last = datafrmae.values[-2]
                 delta = current-last
-                return delta
+                return delta,today
 
 
 with tab2:
@@ -232,10 +227,16 @@ with tab2:
         if st.button('提交本次体温记录',key='temper'):
                 sheet4.append_row([timeticks,date,time,temper],1)
         temp = temper_metric()
-        delta = temp.temper()
+        delta = temp.temper()[0]
         st.metric(label="目前体温", value=temper, delta=delta,delta_color="inverse")
         st.write('本日体温曲线')
-
+        temp_plot = pd.DataFrame(temp.temper()[1])
+        fig, ax = plt.subplots()
+        ax.plot(temp_plot.index, temp_plot['temper'])
+        ax.set_xlabel('时间')
+        ax.set_ylabel('体温')
+        ax.set_title('本日体温曲线')
+        st.pyplot(fig)
 
 
         st.subheader('2.大便颜色')
