@@ -61,11 +61,15 @@ class he_we:
             x = dataframe.index
             y1 = dataframe['height']
             y2 = dataframe['weight']
+            for a,b in zip(x,y1):
+                plt.text(a,b,b,ha='center',va='bottom',fontsize=10)
+            for a,b in zip(x,y2):
+                plt.text(a,b,b,ha='center',va='bottom',fontsize=10)
             return x, y1, y2
 
 
 with st.sidebar:
-
+        st.header('身高体重记录')
         height = st.number_input('身高(cm)', value=0.0, step=0.1)
         weight= st.number_input('体重(kg)', value=0.0, step=0.1)
         if st.button('提交', key='submit_2'):
