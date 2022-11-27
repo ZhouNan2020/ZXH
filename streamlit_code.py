@@ -35,17 +35,63 @@ def connect_to_google_sheet():
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").sheet1
         sheet_B = client.open_by_key(
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('工作表2')
-        return sheet_A, sheet_B
+        sheet_C = client.open_by_key(
+        "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('工作表3')
+        return sheet_A, sheet_B, sheet_C
 
 #%%
 #下面的就可以动了
-
 tab1, tab2, tab3,tab4 = st.tabs(["日常喂养记录", "特殊情况记录", "数据分析","覃薇吸奶记录"])
 timeticks = time.time()
 date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
 time = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
 global sheet1, sheet2
-sheet1, sheet2 = connect_to_google_sheet()
+sheet1, sheet2, sheet3 = connect_to_google_sheet()
+
+class he_we:
+    def __init__(self):
+            dataframe = pd.DataFrame(sheet3.get_all_records())
+            self.dataframe = dataframe
+    def plot(self):
+            dataframe = pd.DataFrame(self.dataframe)
+            dataframe = dataframe.set_index('date')
+            x = dataframe.index
+            y1 = dataframe['height']
+            y2 = dataframe['weight']
+            return x, y1, y2
+
+
+with st.sidebar:
+        height = st.number_input('身高', value=0, step=0.1)
+        weight= st.number_input('体重', value=0, step=0.1)
+        if st.button('提交', key='submit_2'):
+                sheet3.append_row([date, height, weight])
+                st.success('提交成功')
+                height_weight = he_we()
+                x, y1, y2 = height_weight.plot()
+                fig, ax1 = plt.subplots()
+                ax1.plot(x, y1, color='red', label='身高')
+                ax1.set_xlabel('日期', fontproperties=font)
+                ax1.set_ylabel('身高', fontproperties=font)
+                ax1.tick_params(axis='y', labelcolor='red')
+                ax1.legend(loc='upper left', prop=font)
+                ax2 = ax1.twinx()
+                ax2.plot(x, y2, color='blue', label='体重')
+                ax2.set_ylabel('体重', fontproperties=font)
+                ax2.tick_params(axis='y', labelcolor='blue')
+                ax2.legend(loc='upper right', prop=font)
+                st.pyplot(fig)
+
+
+
+
+
+
+
+
+
+
+
 #@st.cache(ttl=600)
 class today_count():
     def __init__(self):
@@ -96,7 +142,7 @@ with tab1:
         if ADconsole:
                 ADconsole_value = 1
 
-        if st.button('提交本次记录'):
+        if st.button('提交本次记录',key='submit_1'):
                 record = [timeticks, date, time, Breastfeeding, BreastBottleFeeding, FormulaMilkPowder, Shit_value,
                           Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value]
                 sheet1.append_row(record, 1)
