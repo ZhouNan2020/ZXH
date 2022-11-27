@@ -185,9 +185,12 @@ class Analysis:
             def day_sum(self,tail_num,name):
                     sum_all = self.datafrmae.groupby('date').sum()
                     sum_all = sum_all[str(name)]
+                    median = sum_all.median()
+                    max = sum_all.max()
+                    min = sum_all.min()
                     sum_tail = sum_all.tail(tail_num)
                     sum_tail = sum_tail.astype('int')
-                    return sum_tail
+                    return sum_tail,median,max,min
             def shit_ticks(self,tail_num,name):
                     datafrmae = self.datafrmae
                     dataframe = pd.DataFrame(datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index))
@@ -253,7 +256,7 @@ with tab3:
                 st.write('近{}日配方奶粉喂量中位数为{}毫升，最大值为{}毫升，最小值为{}毫升'.format(daynum,median,max,min))
 
                 name3 = '近{}日每日拉屎次数'.format(daynum)
-                shit_sum = pd.DataFrame(ana.day_sum(daynum,'Shit'))
+                shit_sum = pd.DataFrame(ana.day_sum(daynum,'Shit')[0])
                 fig, ax = plt.subplots()
                 ax.plot(shit_sum.index,shit_sum['Shit'],'o-')
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
@@ -263,6 +266,10 @@ with tab3:
                 for a, b in zip(list(shit_sum.index),list(shit_sum['Shit'])):
                         plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
+                median = ana.day_sum(daynum,'Shit')[1]
+                max = ana.day_sum(daynum,'Shit')[2]
+                min = ana.day_sum(daynum,'Shit')[3]
+                st.write('近{}日拉屎次数中位数为{}次，最大值为{}次，最小值为{}次'.format(daynum,median,max,min))
 
                 name4 = '近{}日每日平均拉屎间隔时间'.format(daynum)
                 shit_day = pd.DataFrame(ana.shit_ticks(daynum,'Shit'))
