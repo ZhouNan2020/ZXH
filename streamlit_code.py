@@ -176,9 +176,13 @@ class Analysis:
                     data_nozero.set_index('date', inplace=True)
                     data_nozero = data_nozero[str(name)]
                     mean_all = data_nozero.groupby('date').mean()
+                    median = mean_all.median()
+                    max = mean_all.max()
+                    min = mean_all.min()
+                    st.write('最近{}天{}的平均值为{}，中位数为{}，最大值为{}，最小值为{}'.format(tail_num,name,mean_all.tail(tail_num).mean(),median,max,min))
                     mean_tail = mean_all.tail(tail_num)
                     mean_tail = mean_tail.astype('int')
-                    return mean_tail
+                    return mean_tail,median,max,min
             def day_sum(self,tail_num,name):
                     sum_all = self.datafrmae.groupby('date').sum()
                     sum_all = sum_all[str(name)]
@@ -196,6 +200,11 @@ class Analysis:
                     dataframe = dataframe / 60
                     dataframe = round(dataframe, 2)
                     return dataframe
+            def meanDifference(self,tail_num,name):
+                    datafrmae = self.datafrmae
+                    dataframe = pd.DataFrame(datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index))
+
+
 
 with tab3:
         st.subheader('数据分析')
@@ -216,8 +225,8 @@ with tab3:
                 st.pyplot(fig)
 
                 name2 = '近{}日每日平均喂养量'.format(daynum)
-                mean_bottle=pd.DataFrame(ana.day_mean(daynum,'BreastBottleFeeding'))
-                mean_formulamilkpowder = pd.DataFrame(ana.day_mean(daynum, 'FormulaMilkPowder'))
+                mean_bottle=pd.DataFrame(ana.day_mean(daynum,'BreastBottleFeeding')[0])
+                mean_formulamilkpowder = pd.DataFrame(ana.day_mean(daynum, 'FormulaMilkPowder')[0])
                 fig, ax = plt.subplots()
                 ax.plot(mean_bottle.index, mean_bottle['BreastBottleFeeding'], 'o-')
                 ax.plot(mean_formulamilkpowder.index, mean_formulamilkpowder['FormulaMilkPowder'], 's-')
