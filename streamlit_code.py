@@ -178,6 +178,7 @@ class Analysis:
                     datafrmae = self.datafrmae
                     dataframe = pd.DataFrame(datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index))
                     dataframe = pd.concat([dataframe['date'], dataframe['ticks']], axis=1)
+                    st.write(dataframe)
                     dataframe.set_index('date', inplace=True)
                     dataframe = dataframe.tail(tail_num)
                     dataframe = dataframe.diff(axis=0, periods=1)
