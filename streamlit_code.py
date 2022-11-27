@@ -241,12 +241,7 @@ with tab2:
                 sheet4.append_row([timeticks,date,time,temper],1)
         temp = temper_metric()
         delta = temp.temper()
-        temp_color='off'
-        if delta>0:
-                temp_color = "normal"
-        else:
-                temp_color = 'inverse'
-        st.metric(label="目前体温", value=temper, delta=delta,delta_color=temp_color)
+        st.metric(label="目前体温", value=temper, delta=delta,delta_color="inverse")
 
 
         st.write('2.大便颜色')
