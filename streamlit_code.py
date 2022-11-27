@@ -213,7 +213,7 @@ class temper_metric:
                 datafrmae = pd.DataFrame(sheet4.get_all_records())
                 self.datafrmae = datafrmae
         def temper(self):
-                datafrmae = self.datafrmae
+                datafrmae = pd.DataFrame(self.datafrmae)
                 st.write(datafrmae)
                 datafrmae.set_index('date', inplace=True)
                 datafrmae = datafrmae['temper']
