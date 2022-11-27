@@ -211,9 +211,10 @@ class temper_metric:
                 datafrmae = pd.DataFrame(self.datafrmae)
                 datafrmae = datafrmae.set_index('time')
                 today = datafrmae[datafrmae['date']==date]
+                st.write(today)
                 temper = datafrmae['temper']
-                datafrmae = pd.concat([today,temper],axis=1)
-                st.write(datafrmae)
+                st.write('今日体温：',temper)
+                #datafrmae = pd.concat([today,temper],axis=1)
                 datafrmae = datafrmae['temper']
                 datafrmae = datafrmae.astype('float')
 
