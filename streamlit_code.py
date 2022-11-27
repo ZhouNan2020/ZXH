@@ -229,13 +229,12 @@ with tab2:
         temp = temper_metric()
         delta = temp.temper()[0]
         st.metric(label="目前体温", value=temper, delta=delta,delta_color="inverse")
-        st.write('本日体温曲线')
         temp_plot = pd.DataFrame(temp.temper()[1])
         fig, ax = plt.subplots()
         ax.plot(temp_plot.index, temp_plot['temper'])
-        ax.set_xlabel('时间',fontproperties=font)
-        ax.set_ylabel('体温',fontproperties=font)
-        ax.set_title('本日体温曲线',fontproperties=font)
+        ax.set_xlabel('时间',fontproperties=font,fontsize=12)
+        ax.set_ylabel('体温',fontproperties=font,fontsize=12)
+        ax.set_title('本日体温曲线',fontproperties=font,fontsize=12)
         st.pyplot(fig)
 
 
