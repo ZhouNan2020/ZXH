@@ -50,7 +50,7 @@ global sheet1, sheet2
 sheet1, sheet2, sheet3 = connect_to_google_sheet()
 
 
-st.cache(ttl=600)
+
 class he_we:
     def __init__(self):
             dataframe = pd.DataFrame(sheet3.get_all_records())
