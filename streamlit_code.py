@@ -214,6 +214,7 @@ class temper_metric:
                 self.datafrmae = datafrmae
         def temper(self):
                 datafrmae = self.datafrmae
+                st.write(datafrmae)
                 datafrmae.set_index('date', inplace=True)
                 datafrmae = datafrmae['temper']
                 datafrmae = datafrmae.astype('float')
