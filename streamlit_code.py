@@ -210,7 +210,9 @@ class temper_metric:
         def temper(self):
                 datafrmae = pd.DataFrame(self.datafrmae)
                 datafrmae = datafrmae.set_index('time')
-                datafrmae = datafrmae['date']==date
+                today = datafrmae['date']==date
+                temper = datafrmae['temper']
+                datafrmae = pd.concat([today,temper],axis=1)
                 st.write(datafrmae)
                 datafrmae = datafrmae['temper']
                 datafrmae = datafrmae.astype('float')
