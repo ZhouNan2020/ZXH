@@ -183,9 +183,10 @@ class Analysis:
                     dataframe = dataframe.groupby('date').mean()
                     dataframe = dataframe.astype('int')
                     dataframe = dataframe / 60
+                    dataframe = round(dataframe, 2)
                     st.write(dataframe)
 
-                   
+
 
                     return dataframe
 
