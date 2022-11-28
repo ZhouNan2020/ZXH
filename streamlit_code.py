@@ -320,12 +320,12 @@ class suctionOfMilk:
         def lastSuckingTime(self):
                 data = self.datafrmae
                 st.write('data')
-                data = data[(pd.DataFrame(self.datafrmae)).columns[2]]
+                data = data['time']
                 data = (data.tail(1)).values[0]
                 return data
         def lastMilkML(self):
                 data = self.datafrmae
-                data = data[(pd.DataFrame(self.datafrmae)).columns[3]]
+                data = data['Quantity']
                 data = data.tail(1).values[0]
                 return data
         def dailyMilkIntake(self):
