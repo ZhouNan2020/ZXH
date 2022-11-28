@@ -347,8 +347,7 @@ with tab4:
         st.subheader('覃薇吸奶记录')
         col1, col2= st.columns([1,2])
         suc = suctionOfMilk()
-        st.write('最近一次吸奶时间：', str(suc.lastSuckingTime()))
-        st.write('最近一次吸奶量：', str(suc.lastMilkML()))
+
         with col1:
                 suctionVolume = st.number_input('吸出量（单位:ml）')
                 dailytimes = pd.DataFrame(suc.dailyMilkIntake())
@@ -357,7 +356,8 @@ with tab4:
                         sheet2.append_row([timeticks,date,time,suctionVolume,1], 1)
                         st.success('记录成功')
         with col2:
-
+                st.write('最近一次吸奶时间：', str(suc.lastSuckingTime()))
+                st.write('最近一次吸奶量：', str(suc.lastMilkML()))
                 fig, ax = plt.subplots()
                 ax1 = ax.twinx()
                 ax.plot(dailytimes.index, dailytimes['count'], 'o-')
