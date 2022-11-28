@@ -312,7 +312,7 @@ with tab3:
                 st.pyplot(fig)
 
 
-@st.cache(ttl=600)
+#@st.cache(ttl=600)
 class suctionOfMilk:
         def __init__(self):
                 self.datafrmae = pd.DataFrame(sheet2.get_all_records())
