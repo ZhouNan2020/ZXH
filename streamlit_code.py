@@ -81,10 +81,10 @@ with st.sidebar:
         ax2.set_ylabel('体重', fontproperties=font)
         ax2.tick_params(axis='y', labelcolor='blue')
         ax2.legend(loc='upper right', prop=font)
-        for a, b in zip(list(x), list(y1)):
-                ax1.text(a, b + 1, b, ha='center', va='bottom', fontsize=10)
-        for a, c in zip(list(x), list(y2)):
-                ax2.text(a, c + 1, c, ha='center', va='bottom', fontsize=10)
+        #for a, b in zip(list(x), list(y1)):
+                #ax1.text(a, b + 1, b, ha='center', va='bottom', fontsize=10)
+        #for a, c in zip(list(x), list(y2)):
+                #ax2.text(a, c + 1, c, ha='center', va='bottom', fontsize=10)
         st.pyplot(fig)
         height_value = st.number_input('身高(cm)', value=0.0, step=0.1)
         weight_value= st.number_input('体重(kg)', value=0.0, step=0.1)
