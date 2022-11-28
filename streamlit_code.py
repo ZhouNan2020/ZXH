@@ -316,6 +316,7 @@ with tab3:
 class suctionOfMilk:
         def __init__(self):
                 self.datafrmae = pd.DataFrame(sheet2.get_all_records())
+                st.table(self.datafrmae)
         def lastSuckingTime(self):
                 data = self.datafrmae
                 st.write('data')
