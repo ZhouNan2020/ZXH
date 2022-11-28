@@ -216,6 +216,7 @@ class temper_metric:
                 current = datafrmae.values[-1]
                 last = datafrmae.values[-2]
                 delta = current-last
+                delta = round(delta,2)
                 return delta,today
 
 
@@ -236,8 +237,6 @@ with tab2:
         ax.set_ylabel('体温',fontproperties=font,fontsize=12)
         ax.set_title('本日体温曲线',fontproperties=font,fontsize=12)
         st.pyplot(fig)
-
-
         st.subheader('2.大便颜色')
 
 with tab3:
