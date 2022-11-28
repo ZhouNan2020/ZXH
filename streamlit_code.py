@@ -319,7 +319,6 @@ class suctionOfMilk:
 
         def lastSuckingTime(self):
                 data = self.datafrmae
-                st.write('data')
                 data = data['time']
                 data = (data.tail(1)).values[0]
                 return data
@@ -347,7 +346,6 @@ class suctionOfMilk:
 with tab4:
         st.subheader('覃薇吸奶记录')
         col1, col2= st.columns([1,2])
-        st.write()
         suc = suctionOfMilk()
         st.write('最近一次吸奶时间：', str(suc.lastSuckingTime()))
         st.write('最近一次吸奶量：', str(suc.lastMilkML()))
