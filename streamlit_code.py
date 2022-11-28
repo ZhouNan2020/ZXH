@@ -317,7 +317,7 @@ class suctionOfMilk:
         def __init__(self):
                 self.datafrmae = pd.DataFrame(sheet2.get_all_records())
         def lastSuckingTime(self):
-                data = self.datafrmae
+                data = pd.DataFrame(self.datafrmae)
                 data = data['time']
                 data = (data.tail(1)).values[0]
                 return data
