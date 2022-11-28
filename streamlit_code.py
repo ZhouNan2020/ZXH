@@ -319,7 +319,7 @@ class suctionOfMilk:
         def lastSuckingTime(self):
                 data = pd.DataFrame(self.datafrmae)
                 st.write(data)
-                data = data['time']
+                data = data.iloc[3]
                 data = (data.tail(1)).values[0]
                 return data
         def lastMilkML(self):
