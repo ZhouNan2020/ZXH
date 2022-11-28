@@ -316,7 +316,7 @@ with tab3:
 class suctionOfMilk:
         def __init__(self):
                 self.datafrmae = pd.DataFrame(sheet2.get_all_records())
-                st.table(sheet2.get_all_records())
+
         def lastSuckingTime(self):
                 data = self.datafrmae
                 st.write('data')
@@ -347,6 +347,7 @@ class suctionOfMilk:
 with tab4:
         st.subheader('覃薇吸奶记录')
         col1, col2= st.columns([1,2])
+        st.table(sheet2.get_all_records())
         suc = suctionOfMilk()
         #st.write('最近一次吸奶时间：', suc.lastSuckingTime())
         #st.write('最近一次吸奶量：', suc.lastMilkML())
