@@ -349,8 +349,8 @@ with tab4:
         col1, col2= st.columns([1,2])
         st.write()
         suc = suctionOfMilk()
-        #st.write('最近一次吸奶时间：', suc.lastSuckingTime())
-        #st.write('最近一次吸奶量：', suc.lastMilkML())
+        st.write('最近一次吸奶时间：', suc.lastSuckingTime())
+        st.write('最近一次吸奶量：', suc.lastMilkML())
         with col1:
                 suctionVolume = st.number_input('吸出量（单位:ml）')
                 if st.button('记录本次吸奶'):
