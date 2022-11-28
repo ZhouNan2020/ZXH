@@ -353,12 +353,13 @@ with tab4:
         st.write('最近一次吸奶量：', str(suc.lastMilkML()))
         with col1:
                 suctionVolume = st.number_input('吸出量（单位:ml）')
+                dailytimes = pd.DataFrame(suc.dailyMilkIntake())
+                dailymilk = pd.DataFrame(suc.dailyMilkMl())
                 if st.button('记录本次吸奶'):
                         sheet2.append_row([timeticks,date,time,suctionVolume,1], 1)
                         st.success('记录成功')
         with col2:
-                dailytimes = pd.DataFrame(suc.dailyMilkIntake())
-                dailymilk = pd.DataFrame(suc.dailyMilkMl())
+
                 fig, ax = plt.subplots()
                 ax1 = ax.twinx()
                 ax.plot(dailytimes.index, dailytimes['count'], 'o-')
@@ -367,8 +368,8 @@ with tab4:
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
                 ax1.set_ylabel('日均吸奶量', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
-                for a, c in zip(list(dailymilk.index), list(dailymilk['Quantity'])):
-                        plt.text(a, c + 2, c, ha='center', va='center', fontsize=14)
+                #for a, c in zip(list(dailymilk.index), list(dailymilk['Quantity'])):
+                        #plt.text(a, c + 2, c, ha='center', va='center', fontsize=14)
                 ax.legend(['日吸奶次数'], loc='upper left', prop=font)
                 ax1.legend(['日均吸奶量'], loc='upper right', prop=font)
                 st.pyplot(fig)
