@@ -291,7 +291,7 @@ with tab3:
                 name3 = '近{}日每日拉屎次数'.format(daynum)
                 shit_sum = pd.DataFrame(ana.day_sum(daynum,'Shit')[0])
                 fig, ax = plt.subplots()
-                ax.plot(shit_sum.index,shit_sum['Shit'],'o-')
+                ax.bar(x=shit_sum.index,height=shit_sum['Shit'],width=0.5,align='center',color='steelblue',alpha=0.8,edgecolor='black')
                 ax.set_xlabel('日期', fontsize=16, fontproperties=font)
                 plt.xticks(rotation=45)
                 ax.set_ylabel('拉屎次数', fontsize=16, fontproperties=font)
