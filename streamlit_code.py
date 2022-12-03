@@ -70,14 +70,14 @@ with st.sidebar:
         height_weight = he_we()
         x, y1, y2 = height_weight.plot()
         fig, ax1 = plt.subplots()
-        ax1.plot(x, y1, color='red', label='身高')
+        ax1.plot(x, y1, color='red', label='身高', marker='o')
         ax1.set_xlabel('日期', fontproperties=font)
         plt.xticks(rotation=45)
         ax1.set_ylabel('身高', fontproperties=font)
         ax1.tick_params(axis='y', labelcolor='red')
         ax1.legend(loc='upper left', prop=font)
         ax2 = ax1.twinx()
-        ax2.plot(x, y2, color='blue', label='体重')
+        ax2.plot(x, y2, color='blue', label='体重', marker='o')
         ax2.set_ylabel('体重', fontproperties=font)
         ax2.tick_params(axis='y', labelcolor='blue')
         ax2.legend(loc='upper right', prop=font)
@@ -104,6 +104,7 @@ with st.sidebar:
 class today_count():
     def __init__(self):
             datafrmae = pd.DataFrame(sheet1.get_all_records())
+            self.tail = datafrmae.iloc[-1:]
             all_sum = datafrmae.groupby('date').sum()
             today = all_sum.iloc[-1:]
             self.today = today
@@ -121,10 +122,15 @@ class today_count():
         return self.today['BreastBottleFeeding'].values[0]
     def FormulaMilkPowder(self):
         return self.today['FormulaMilkPowder'].values[0]
+    def lasteverything(self, name):
+        return self.tail[name].values[0]
 
 
 
 with tab1:
+        today = today_count()
+        st.write('上一次喂养：{},母乳亲喂{}分钟,母乳瓶喂{}ml,奶粉{}ml'.format(today.lasteverything('time'), today.lasteverything('Breastfeeding'), today.lasteverything('BreastBottleFeeding'), today.lasteverything('FormulaMilkPowder')))
+        st.write('上一次换尿布：{}'.format(today.lasteverything('ChangeDiapers')))
         Breastfeeding = st.number_input('母乳亲喂（单位:分钟）',value=0,step=1)
         BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）',value=0,step=1)
         FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）',value=0,step=1)
