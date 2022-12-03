@@ -259,8 +259,8 @@ with tab3:
                 plt.xticks(rotation=45)
                 ax.set_ylabel('日均亲喂时间', fontsize=16, fontproperties=font)
                 ax.set_title(str(name1), fontsize=16, fontproperties=font)
-                for a, b in zip(list(mean_breastfeeding.index), list(mean_breastfeeding['Breastfeeding'])):
-                        plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
+                #for a, b in zip(list(mean_breastfeeding.index), list(mean_breastfeeding['Breastfeeding'])):
+                        #plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
 
                 name2 = '近{}日每日平均喂养量'.format(daynum)
@@ -274,10 +274,10 @@ with tab3:
                 plt.legend(['母乳瓶喂', '配方奶粉'], loc='upper left', prop=font)
                 ax.set_ylabel('喂养量', fontsize=16, fontproperties=font)
                 ax.set_title(str(name2), fontsize=16, fontproperties=font)
-                for a, b in zip(list(mean_bottle.index), list(mean_bottle['BreastBottleFeeding'])):
-                        plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
-                for a, b in zip(list(mean_formulamilkpowder.index), list(mean_formulamilkpowder['FormulaMilkPowder'])):
-                        plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
+                #for a, b in zip(list(mean_bottle.index), list(mean_bottle['BreastBottleFeeding'])):
+                        #plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
+                #for a, b in zip(list(mean_formulamilkpowder.index), list(mean_formulamilkpowder['FormulaMilkPowder'])):
+                        #plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
                 median = ana.day_mean(daynum,'BreastBottleFeeding')[1]
                 max = ana.day_mean(daynum,'BreastBottleFeeding')[2]
@@ -296,8 +296,8 @@ with tab3:
                 plt.xticks(rotation=45)
                 ax.set_ylabel('拉屎次数', fontsize=16, fontproperties=font)
                 ax.set_title(str(name3), fontsize=16, fontproperties=font)
-                for a, b in zip(list(shit_sum.index),list(shit_sum['Shit'])):
-                        plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
+                #for a, b in zip(list(shit_sum.index),list(shit_sum['Shit'])):
+                        #plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
                 median = ana.day_sum(daynum,'Shit')[1]
                 max = ana.day_sum(daynum,'Shit')[2]
@@ -312,8 +312,8 @@ with tab3:
                 plt.xticks(rotation=45)
                 ax.set_ylabel('平均拉屎间隔时间（分钟）', fontsize=16, fontproperties=font)
                 ax.set_title(str(name4), fontsize=16, fontproperties=font)
-                for a, b in zip(list(shit_day.index),list(shit_day['ticks'])):
-                        plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
+                #for a, b in zip(list(shit_day.index),list(shit_day['ticks'])):
+                        #plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
                 st.pyplot(fig)
 
 
