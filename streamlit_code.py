@@ -75,12 +75,12 @@ with st.sidebar:
         plt.xticks(rotation=45)
         ax1.set_ylabel('身高', fontproperties=font)
         ax1.tick_params(axis='y', labelcolor='red')
-        ax1.legend(loc='upper left', prop=font)
+        ax1.legend(loc='best', prop=font)
         ax2 = ax1.twinx()
         ax2.plot(x, y2, color='blue', label='体重', marker='o')
         ax2.set_ylabel('体重', fontproperties=font)
         ax2.tick_params(axis='y', labelcolor='blue')
-        ax2.legend(loc='center', prop=font)
+        ax2.legend(loc='best', prop=font)
         #for a, b in zip(list(x), list(y1)):
                 #ax1.text(a, b + 1, b, ha='center', va='bottom', fontsize=10)
         #for a, c in zip(list(x), list(y2)):
