@@ -129,8 +129,7 @@ class today_count():
 
 with tab1:
         today = today_count()
-        st.write('上一次喂养：{},母乳亲喂{}分钟,母乳瓶喂{}ml,奶粉{}ml'.format(today.lasteverything('time'), today.lasteverything('Breastfeeding'), today.lasteverything('BreastBottleFeeding'), today.lasteverything('FormulaMilkPowder')))
-        st.write('上一次换尿布：{}'.format(today.lasteverything('ChangeDiapers')))
+        st.write('上一次喂养：{}，母乳亲喂{}分钟，母乳瓶喂{}ml，奶粉{}ml'.format(today.lasteverything('time'), today.lasteverything('Breastfeeding'), today.lasteverything('BreastBottleFeeding'), today.lasteverything('FormulaMilkPowder')))
         Breastfeeding = st.number_input('母乳亲喂（单位:分钟）',value=0,step=1)
         BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）',value=0,step=1)
         FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）',value=0,step=1)
