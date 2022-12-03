@@ -196,7 +196,7 @@ class Analysis:
                     return sum_tail,median,max,min
             def shit_ticks(self,tail_num,name):
                     datafrmae = self.datafrmae
-                    dataframe = pd.DataFrame(datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index))
+                    dataframe = pd.DataFrame(datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 1].index))
                     dataframe = pd.concat([dataframe['date'], dataframe['ticks']], axis=1)
                     dataframe.set_index('date', inplace=True)
                     dataframe = dataframe.diff(axis=0, periods=1)
@@ -205,9 +205,7 @@ class Analysis:
                     dataframe = dataframe / 60
                     dataframe = round(dataframe, 2)
                     return dataframe
-            def meanDifference(self,tail_num,name):
-                    datafrmae = self.datafrmae
-                    dataframe = pd.DataFrame(datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index))
+
 
 class temper_metric:
         def __init__(self):
