@@ -111,7 +111,7 @@ class today:
         self.tail = eattabel.iloc[-1:]
         shittable = pd.DataFrame(sheet5.get_all_records())
         all_sum = shittable.groupby('date').sum()
-        today = all_sum.loc[-1:]
+        today = all_sum.iloc[-1:]
         self.today = today
     def lasteverything(self, name):
         return self.tail[name].values[0]
