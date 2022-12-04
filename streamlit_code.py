@@ -40,7 +40,10 @@ def connect_to_google_sheet():
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('工作表3')
         sheet_D = client.open_by_key(
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('特殊记录')
-        return sheet_A, sheet_B, sheet_C, sheet_D
+        sheet_E = client.open_by_key(
+        "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('屎尿吃药表')
+        return sheet_A, sheet_B, sheet_C, sheet_D, sheet_E
+
 
 #%%
 #下面的就可以动了
@@ -49,7 +52,7 @@ timeticks = time.time()
 date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
 time = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
 global sheet1, sheet2, sheet3, sheet4
-sheet1, sheet2, sheet3, sheet4 = connect_to_google_sheet()
+sheet1, sheet2, sheet3, sheet4,sheet5 = connect_to_google_sheet()
 
 
 st.cache(ttl=600)
@@ -100,6 +103,21 @@ with st.sidebar:
                 sheet3.append_row([date, height, weight])
                 st.success('提交成功')
 
+
+
+class today:
+    def __init__(self):
+        eattabel = pd.DataFrame(sheet1.get_all_records())
+        self.tail = eattabel.iloc[-1:]
+        shittable = pd.DataFrame(sheet5.get_all_records())
+        all_sum = shittable.groupby('date').sum()
+        today = all_sum.loc[-1:]
+        self.today = today
+    def lasteverything(self, name):
+        return self.tail[name].values[0]
+    def todayeverything(self, name):
+        return self.today[name].values[0]
+
 #@st.cache(ttl=600)
 class today_count():
     def __init__(self):
@@ -128,7 +146,7 @@ class today_count():
 
 
 with tab1:
-        today = today_count()
+        today = today()
         st.write('上一次喂养：{}，母乳亲喂{}分钟，母乳瓶喂{}ml，奶粉{}ml'.format(today.lasteverything('time'), today.lasteverything('Breastfeeding'), today.lasteverything('BreastBottleFeeding'), today.lasteverything('FormulaMilkPowder')))
         st.subheader('本次记录↓↓↓')
         Breastfeeding = st.number_input('母乳亲喂（单位:分钟）',value=0,step=1)
@@ -161,12 +179,12 @@ with tab1:
                           Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value]
                 sheet1.append_row(record, 1)
                 st.success('提交成功')
-                today = today_count()
-                st.write('今日喂养总量: ',today.Bottle() + today.FormulaMilkPowder())
-                st.write('母乳亲喂{}分钟 '.format(today.Breastfeeding()))
-                st.write('母乳瓶喂{}毫升 '.format(today.Bottle()))
-                st.write('配方奶粉{}毫升 '.format(today.FormulaMilkPowder()))
-                st.write('今日已拉粑粑{}次，已换尿布{}次，已服用妈咪爱{}次，已服用AD滴丸{}次'.format(today.shit(),today.ChangeDiapers(),today.Mamiai(),today.ADconsole()))
+                today = today()
+                st.write('今日喂养总量: ',today.todayeverything('Breastfeeding')+today.todayeverything('BreastBottleFeeding')+today.todayeverything('FormulaMilkPowder'))
+                st.write('母乳亲喂{}分钟 '.format(today.todayeverything('Breastfeeding')))
+                st.write('母乳瓶喂{}毫升 '.format(today.todayeverything('BreastBottleFeeding')))
+                st.write('配方奶粉{}毫升 '.format(today.todayeverything('FormulaMilkPowder')))
+                st.write('今日已拉粑粑{}次，已换尿布{}次，已服用妈咪爱{}次，已服用AD滴丸{}次'.format(today.todayeverything('Shit'), today.todayeverything('ChangeDiapers'), today.todayeverything('Mamiai'), today.todayeverything('ADconsole')))
 
 
 
