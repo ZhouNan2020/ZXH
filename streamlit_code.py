@@ -55,7 +55,7 @@ global sheet1, sheet2, sheet3, sheet4
 sheet1, sheet2, sheet3, sheet4,sheet5 = connect_to_google_sheet()
 
 
-st.cache(ttl=600)
+@st.cache(ttl=60)
 class he_we:
     def __init__(self):
             dataframe = pd.DataFrame(sheet3.get_all_records())
@@ -104,7 +104,7 @@ with st.sidebar:
                 st.success('提交成功')
 
 
-@st.cache(ttl=60)
+#@st.cache(ttl=60)
 class today:
     def __init__(self):
         eattabel = pd.DataFrame(sheet1.get_all_records())
@@ -149,9 +149,10 @@ with tab1:
                 ADconsole_value = 1
 
         if st.button('提交本次记录',key='submit_1'):
-                record = [timeticks, date, time, Breastfeeding, BreastBottleFeeding, FormulaMilkPowder, Shit_value,
-                          Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value]
-                sheet1.append_row(record, 1)
+                record_1 = [timeticks, date, time, Breastfeeding, BreastBottleFeeding, FormulaMilkPowder]
+                record_2 = [timeticks, date, time, Shit_value,Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value]
+                sheet1.append_row(record_1, 1)
+                sheet5.append_row(record_2, 1)
                 st.success('提交成功')
                 today = today()
                 st.write('今日喂养总量: ',today.todayeverything('Breastfeeding')+today.todayeverything('BreastBottleFeeding')+today.todayeverything('FormulaMilkPowder'))
