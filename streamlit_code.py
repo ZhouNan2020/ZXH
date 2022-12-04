@@ -104,7 +104,7 @@ with st.sidebar:
                 st.success('提交成功')
 
 
-
+@st.cache(ttl=60)
 class today:
     def __init__(self):
         eattabel = pd.DataFrame(sheet1.get_all_records())
@@ -117,32 +117,6 @@ class today:
         return self.tail[name].values[0]
     def todayeverything(self, name):
         return self.today[name].values[0]
-
-#@st.cache(ttl=600)
-class today_count():
-    def __init__(self):
-            datafrmae = pd.DataFrame(sheet1.get_all_records())
-            self.tail = datafrmae.iloc[-1:]
-            all_sum = datafrmae.groupby('date').sum()
-            today = all_sum.iloc[-1:]
-            self.today = today
-    def shit(self):
-        return self.today['Shit'].values[0]
-    def ChangeDiapers(self):
-        return self.today['ChangeDiapers'].values[0]
-    def Mamiai(self):
-        return self.today['Mamiai'].values[0]
-    def ADconsole(self):
-        return self.today['ADconsole'].values[0]
-    def Breastfeeding(self):
-        return self.today['Breastfeeding'].values[0]
-    def Bottle(self):
-        return self.today['BreastBottleFeeding'].values[0]
-    def FormulaMilkPowder(self):
-        return self.today['FormulaMilkPowder'].values[0]
-    def lasteverything(self, name):
-        return self.tail[name].values[0]
-
 
 
 with tab1:
