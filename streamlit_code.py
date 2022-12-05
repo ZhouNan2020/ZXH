@@ -171,14 +171,16 @@ with tab1:
                                                                                           today_eat.todayeverything('BreastBottleFeeding'),
                                                                                           today_eat.todayeverything('FormulaMilkPowder'),
                                                                                           today_eat.todayeverything('Breastfeeding'),
+
                                                                                           today_eat.todayeverything('BreastBottleFeeding')+today_eat.todayeverything('FormulaMilkPowder')))
+        st.subheader('今日杂项：')
         st.write('上一次大便：{}'.format(today_shit.lastcoltime('Shit')))
         st.write('今日大便次数：{}次'.format(today_shit.todayeverything('Shit')))
         st.write('今日服用妈咪爱：{}次'.format(today_shit.todayeverything('Mamiai')))
         st.write('今日服用AD滴丸：{}'.format(today_shit.todayeverything('ADconsole')))
-        st.write('最近10次喂养记录：')
+        st.subheader('最近10次喂养记录：')
         st.write(today_eat.show())
-        st.write('最近10次屎尿吃药记录：')
+        st.subheader('最近10次屎尿吃药记录：')
         st.write(today_shit.show())
 with tab2:
         st.subheader('本次记录↓↓↓')
