@@ -184,7 +184,7 @@ with tab1:
         st.write(today_shit.show())
 with tab2:
         st.subheader('本次记录↓↓↓')
-        time_input = st.time_input('手动输入时间（如果不输入则自动记录当前时间）', datetime.time(0, 0))
+        time_input = st.time_input('手动输入时间（如果不输入则自动记录当前时间）', datetime.time(time_auto.hour, time_auto.minute))
         if time_input == None:
                 time = time_auto
         else:
@@ -231,7 +231,8 @@ class Analysis:
                     data_eat = pd.DataFrame(sheet1.get_all_records())
                     data_shit = pd.DataFrame(sheet5.get_all_records())
 
-                    self.datafrmae = datafrmae
+                    self.datafrmae_1 = data_eat
+                    self.datafrmae_2 = data_shit
             def day_mean(self,tail_num,name):
                     data_nozero = self.datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index)
                     data_nozero.set_index('date', inplace=True)
