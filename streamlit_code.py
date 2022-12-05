@@ -187,7 +187,7 @@ with tab1:
         st.write(today_shit.show())
 with tab2:
         st.subheader('本次记录↓↓↓')
-        time_input = st.time_input('手动输入时间（如果不输入则自动记录当前时间）', datetime.time(time_value.strftime("%H"), time_value.strftime("%M"), time_auto.strftime("%S")))
+        time_input = st.time_input('手动输入时间（如果不输入则自动记录当前时间）', datetime.time(time_value.strftime("%H"), time_value.strftime("%M"), time_value.strftime("%S")))
         if time_input == None:
                 time = time_auto
         else:
