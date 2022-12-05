@@ -54,8 +54,8 @@ tab1, tab2, tab3,tab4,tab5,tab6 = st.tabs(["喂养状态总览","追加喂养记
 timeticks = time.time()
 date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
 time_auto = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
-st.write(time_auto.hour)
-st.write(time_auto.minute)
+st.write(time_auto)
+
 global sheet1, sheet2, sheet3, sheet4
 sheet1, sheet2, sheet3, sheet4, sheet5,sheet6 = connect_to_google_sheet()
 
