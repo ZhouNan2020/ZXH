@@ -47,12 +47,12 @@ def connect_to_google_sheet():
 
 #%%
 #下面的就可以动了
-tab1, tab2, tab3,tab4 = st.tabs(["日常喂养记录", "特殊情况记录", "数据分析","覃薇吸奶记录"])
+tab1, tab2, tab3,tab4,tab5,tab6 = st.tabs(["喂养状态总览","喂养记录", "特殊情况记录", "数据分析","覃薇吸奶记录",'测试页面'])
 timeticks = time.time()
 date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
 time = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
 global sheet1, sheet2, sheet3, sheet4
-sheet1, sheet2, sheet3, sheet4,sheet5 = connect_to_google_sheet()
+sheet1, sheet2, sheet3, sheet4, sheet5 = connect_to_google_sheet()
 
 
 @st.cache(ttl=60)
@@ -105,11 +105,35 @@ with st.sidebar:
 
 
 #@st.cache(ttl=60)
-class today:
+class today_eatable:
     def __init__(self):
         eattabel = pd.DataFrame(sheet1.get_all_records())
+        self.table = eattabel
         self.tail = eattabel.iloc[-1:]
+        all_sum = eattabel.groupby('date').sum()
+        today = all_sum.iloc[-1:]
+        self.today = today
+    def lasteverything(self, name):
+        return self.tail[name].values[0]
+    def todayeverything(self, name):
+        return self.today[name].values[0]
+    def lastcoltime(self, name):
+        coltable = pd.DataFrame(self.table.drop(self.table[self.table[name] == 0].index))
+        coltable = coltable.iloc[-1:]
+        time=coltable['time'].values[0]
+        return time
+    def show(self):
+        table = pd.DataFrame(self.table)
+        table = table['time','Breastfeeding','BreastBottleFeeding','FormulaMilkPowder']
+        table = table.set_index('time')
+        table.rename(columns={'Breastfeeding':'母乳亲喂','BreastBottleFeeding':'母乳瓶喂','FormulaMilkPowder':'配方奶粉'},inplace=True)
+        return table.tail(10)
+
+class today_shittable:
+    def __init__(self):
         shittable = pd.DataFrame(sheet5.get_all_records())
+        self.table = shittable
+        self.tail = shittable.iloc[-1:]
         all_sum = shittable.groupby('date').sum()
         today = all_sum.iloc[-1:]
         self.today = today
@@ -117,11 +141,42 @@ class today:
         return self.tail[name].values[0]
     def todayeverything(self, name):
         return self.today[name].values[0]
+    def lastcoltime(self, name):
+        coltable = pd.DataFrame(self.table.drop(self.table[self.table[name] == 0].index))
+        coltable = coltable.iloc[-1:]
+        time=coltable['time'].values[0]
+        return time
+    def show(self):
+        table = pd.DataFrame(self.table)
+        table = table['time','Breastfeeding','BreastBottleFeeding','FormulaMilkPowder']
+        table = table.set_index('time')
+        table.rename(columns={'Breastfeeding':'母乳亲喂','BreastBottleFeeding':'母乳瓶喂','FormulaMilkPowder':'配方奶粉'},inplace=True)
+        return table.tail(10)
+
 
 
 with tab1:
-        today = today()
-        st.write('上一次喂养：{}，母乳亲喂{}分钟，母乳瓶喂{}ml，奶粉{}ml'.format(today.lasteverything('time'), today.lasteverything('Breastfeeding'), today.lasteverything('BreastBottleFeeding'), today.lasteverything('FormulaMilkPowder')))
+        today_eat = today_eatable()
+        today_shit = today_shittable()
+        st.write('上一次喂养：{}，母乳亲喂{}分钟，母乳瓶喂{}ml，奶粉{}ml'.format(today_eat.lasteverything('time'),
+                                                                             today_eat.lasteverything('Breastfeeding'),
+                                                                             today_eat.lasteverything('BreastBottleFeeding'),
+                                                                             today_eat.lasteverything('FormulaMilkPowder')))
+        st.write('今日喂养总量：母乳亲喂{}分钟，母乳瓶喂{}ml，奶粉{}ml，共{}分钟+{}ml'.format(today_eat.todayeverything('Breastfeeding'),
+                                                                                          today_eat.todayeverything('BreastBottleFeeding'),
+                                                                                          today_eat.todayeverything('FormulaMilkPowder'),
+                                                                                          today_eat.todayeverything('Breastfeeding'),
+                                                                                          today_eat.todayeverything('BreastBottleFeeding')+today_eat.todayeverything('FormulaMilkPowder')))
+        st.write('上一次大便：{}'.format(today_shit.lastcoltime('Shit')))
+        st.write('今日大便次数：{}次'.format(today_shit.todayeverything('Shit')))
+        st.write('今日服用妈咪爱：{}次'.format(today_shit.todayeverything('Mamiai')))
+        st.write('今日服用AD滴丸：{}'.format(today_shit.todayeverything('ADconsole')))
+        st.write('最近10次喂养记录：')
+        st.write(today_eat.show())
+        st.write('最近10次屎尿吃药记录：')
+        st.write(today_shit.show())
+with tab2:
+
         st.subheader('本次记录↓↓↓')
         Breastfeeding = st.number_input('母乳亲喂（单位:分钟）',value=0,step=1)
         BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）',value=0,step=1)
@@ -154,12 +209,9 @@ with tab1:
                 sheet1.append_row(record_1, 1)
                 sheet5.append_row(record_2, 1)
                 st.success('提交成功')
-                today = today()
-                st.write('今日喂养总量: ',today.todayeverything('Breastfeeding')+today.todayeverything('BreastBottleFeeding')+today.todayeverything('FormulaMilkPowder'))
-                st.write('母乳亲喂{}分钟 '.format(today.todayeverything('Breastfeeding')))
-                st.write('母乳瓶喂{}毫升 '.format(today.todayeverything('BreastBottleFeeding')))
-                st.write('配方奶粉{}毫升 '.format(today.todayeverything('FormulaMilkPowder')))
-                st.write('今日已拉粑粑{}次，已换尿布{}次，已服用妈咪爱{}次，已服用AD滴丸{}次'.format(today.todayeverything('Shit'), today.todayeverything('ChangeDiapers'), today.todayeverything('Mamiai'), today.todayeverything('ADconsole')))
+
+
+
 
 
 
@@ -189,7 +241,7 @@ class Analysis:
                     return sum_tail,median,max,min
             def shit_ticks(self,tail_num,name):
                     datafrmae = self.datafrmae
-                    dataframe = pd.DataFrame(datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 1].index))
+                    dataframe = pd.DataFrame(datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index))
                     dataframe = pd.concat([dataframe['date'], dataframe['ticks']], axis=1)
                     dataframe.set_index('date', inplace=True)
                     dataframe = dataframe.diff(axis=0, periods=1)
@@ -217,7 +269,7 @@ class temper_metric:
                 return delta,today
 
 
-with tab2:
+with tab3:
         st.write('该版面会依据周栩珩当前需要记录的特殊情况调整')
         st.subheader('目前仅开放记录体温和大便颜色')
         st.subheader('1.体温')
@@ -236,7 +288,7 @@ with tab2:
         st.pyplot(fig)
         st.subheader('2.大便颜色')
 
-with tab3:
+with tab4:
         st.subheader('数据分析')
         daynum = st.slider('想分析周栩珩最近多少天的状态？', 1, 15, 3)
 
@@ -339,7 +391,7 @@ class suctionOfMilk:
                 return data
 
 
-with tab4:
+with tab5:
         st.subheader('覃薇吸奶记录')
         col1, col2= st.columns([1,2])
         suc = suctionOfMilk()
