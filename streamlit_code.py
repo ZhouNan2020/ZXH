@@ -53,7 +53,7 @@ def connect_to_google_sheet():
 tab1, tab2, tab3,tab4,tab5,tab6 = st.tabs(["喂养状态总览","追加喂养记录", "特殊情况记录", "数据分析","覃薇吸奶记录",'测试页面'])
 timeticks = time.time()
 date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
-time = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
+time_auto = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
 global sheet1, sheet2, sheet3, sheet4
 sheet1, sheet2, sheet3, sheet4, sheet5,sheet6 = connect_to_google_sheet()
 
@@ -184,6 +184,11 @@ with tab1:
         st.write(today_shit.show())
 with tab2:
         st.subheader('本次记录↓↓↓')
+        time_input = st.time_input('手动输入时间（如果不输入则自动记录当前时间）', datetime.time(0, 0))
+        if time_input == None:
+                time = time_auto
+        else:
+                time = time_input
         Breastfeeding = st.number_input('母乳亲喂（单位:分钟）',value=0,step=1)
         BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）',value=0,step=1)
         FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）',value=0,step=1)
@@ -223,7 +228,9 @@ with tab2:
 
 class Analysis:
             def __init__(self):
-                    datafrmae = pd.DataFrame(sheet1.get_all_records())
+                    data_eat = pd.DataFrame(sheet1.get_all_records())
+                    data_shit = pd.DataFrame(sheet5.get_all_records())
+
                     self.datafrmae = datafrmae
             def day_mean(self,tail_num,name):
                     data_nozero = self.datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index)
@@ -282,17 +289,17 @@ with tab3:
         temper=st.number_input('本次体温',step=0.1,min_value=35.0,max_value=42.0)
         if st.button('提交本次体温记录',key='temper'):
                 sheet4.append_row([timeticks,date,time,temper],1)
-        temp = temper_metric()
-        delta = temp.temper()[0]
-        st.metric(label="目前体温", value=temper, delta=delta,delta_color="inverse")
-        temp_plot = pd.DataFrame(temp.temper()[1])
-        fig, ax = plt.subplots()
-        ax.plot(temp_plot.index, temp_plot['temper'])
-        ax.set_xlabel('时间',fontproperties=font,fontsize=12)
-        ax.set_ylabel('体温',fontproperties=font,fontsize=12)
-        ax.set_title('本日体温曲线',fontproperties=font,fontsize=12)
-        st.pyplot(fig)
-        st.subheader('2.大便颜色')
+                temp = temper_metric()
+                delta = temp.temper()[0]
+                st.metric(label="目前体温", value=temper, delta=delta,delta_color="inverse")
+                temp_plot = pd.DataFrame(temp.temper()[1])
+                fig, ax = plt.subplots()
+                ax.plot(temp_plot.index, temp_plot['temper'])
+                ax.set_xlabel('时间',fontproperties=font,fontsize=12)
+                ax.set_ylabel('体温',fontproperties=font,fontsize=12)
+                ax.set_title('本日体温曲线',fontproperties=font,fontsize=12)
+                st.pyplot(fig)
+                st.subheader('2.大便颜色')
 
 with tab4:
         st.subheader('数据分析')
@@ -426,6 +433,33 @@ with tab5:
                 ax1.legend(['日均吸奶量'], loc='upper right', prop=font)
                 st.pyplot(fig)
 
+
+
+ class submit:
+        def __init__(self):
+                self.dataframe = pd.DataFrame(sheet6.get_all_records())
+
+                BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）', value=0, step=1)
+                FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）', value=0, step=1)
+
+                Shit = st.checkbox('大便')
+                Shit_value = 0
+                if Shit:
+                        Shit_value = 1
+        def lastSubmitTime(self):
+                data = self.dataframe
+                data = data['time']
+                data = (data.tail(1)).values[0]
+                return data
+        def dailySubmit(self):
+                data = self.dataframe
+                data = data.set_index('date')
+                data = data['count']
+                data = data.groupby('date').sum()
+                data = data.tail(7)
+                return data
 with tab6:
         st.header('测试提交记录')
-        st.write('目前测试：st.cache(ttl=600)')
+        st.write('目前测试：st.cache')
+
+
