@@ -252,12 +252,12 @@ class Analysis:
 
 class temper_metric:
         def __init__(self):
-                datafrmae = pd.DataFrame(sheet4.get_all_records())
+                datafrmae = pd.DataFrame(sheet5.get_all_records())
                 self.datafrmae = datafrmae
         def temper(self):
                 datafrmae = pd.DataFrame(self.datafrmae)
                 datafrmae = datafrmae.set_index('time')
-                today = datafrmae[datafrmae['date']==date]
+                today = datafrmae[datafrmae['date'] == date]
                 datafrmae = datafrmae['temper']
                 datafrmae = datafrmae.astype('float')
                 current = datafrmae.values[-1]
@@ -273,18 +273,18 @@ with tab3:
         st.subheader('1.体温')
         temper=st.number_input('本次体温',step=0.1,min_value=35.0,max_value=42.0)
         if st.button('提交本次体温记录',key='temper'):
-                sheet4.append_row([timeticks,date,time,temper],1)
-                temp = temper_metric()
-                delta = temp.temper()[0]
-                st.metric(label="目前体温", value=temper, delta=delta,delta_color="inverse")
-                temp_plot = pd.DataFrame(temp.temper()[1])
-                fig, ax = plt.subplots()
-                ax.plot(temp_plot.index, temp_plot['temper'])
-                ax.set_xlabel('时间',fontproperties=font,fontsize=12)
-                ax.set_ylabel('体温',fontproperties=font,fontsize=12)
-                ax.set_title('本日体温曲线',fontproperties=font,fontsize=12)
-                st.pyplot(fig)
-                st.subheader('2.大便颜色')
+                sheet5.append_row([timeticks,date,time,0,0,0,0,0,temper],1)
+        temp = temper_metric()
+        delta = temp.temper()[0]
+        st.metric(label="目前体温", value=temper, delta=delta, delta_color="inverse")
+        temp_plot = pd.DataFrame(temp.temper()[1])
+        fig, ax = plt.subplots()
+        ax.plot(temp_plot.index, temp_plot['temper'])
+        ax.set_xlabel('时间', fontproperties=font, fontsize=12)
+        ax.set_ylabel('体温', fontproperties=font, fontsize=12)
+        ax.set_title('本日体温曲线', fontproperties=font, fontsize=12)
+        st.pyplot(fig)
+        st.subheader('2.大便颜色')
 
 with tab4:
         st.subheader('数据分析')
