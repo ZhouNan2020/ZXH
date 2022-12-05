@@ -55,7 +55,7 @@ timeticks = time.time()
 date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
 time_value = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai'))
 time_auto = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
-st.write(time_value.strftime("%H"))
+#st.write(time_value.strftime("%H"))
 
 global sheet1, sheet2, sheet3, sheet4
 sheet1, sheet2, sheet3, sheet4, sheet5,sheet6 = connect_to_google_sheet()
@@ -187,7 +187,7 @@ with tab1:
         st.write(today_shit.show())
 with tab2:
         st.subheader('本次记录↓↓↓')
-        time_input = st.time_input('手动输入时间（如果不输入则自动记录当前时间）',value=datetime.time(int(time_value.strftime('%H')), int(time_value.strftime('%M'))))
+        time_input = st.time_input('手动输入时间（如果不输入则自动记录当前时间）',value=datetime.time(int(time_value.strftime('%H')), int(time_value.strftime('%M')), int(time_value.strftime('%S'))))
         if time_input == None:
                 time = time_auto
         else:
@@ -218,8 +218,8 @@ with tab2:
                 ADconsole_value = 1
 
         if st.button('提交本次记录',key='submit_1'):
-                record_1 = [timeticks, date, time, Breastfeeding, BreastBottleFeeding, FormulaMilkPowder]
-                record_2 = [timeticks, date, time, Shit_value,Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value]
+                record_1 = [time.timetuple(), date, time, Breastfeeding, BreastBottleFeeding, FormulaMilkPowder]
+                record_2 = [time.timetuple(), date, time, Shit_value,Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value]
                 sheet1.append_row(record_1, 1)
                 sheet5.append_row(record_2, 1)
                 st.success('提交成功')
