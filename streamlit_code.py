@@ -57,7 +57,6 @@ time_value = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai'))
 time_auto = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
 #st.write(time_value.strftime("%H"))
 
-global sheet1, sheet2, sheet3, sheet4
 sheet1, sheet2, sheet3, sheet4, sheet5,sheet6 = connect_to_google_sheet()
 
 
@@ -189,18 +188,23 @@ with tab1:
 
 with tab2:
         st.subheader('本次记录↓↓↓')
-        time_input = st.time_input('手动输入时间（如果不输入则自动记录当前时间）',value=datetime.time(int(time_value.strftime('%H')), int(time_value.strftime('%M')), int(time_value.strftime('%S'))))
-        time = time_auto
-        if time_input != None:
-                time = time_input
+        time_input = st.time_input('手动输入时间（如果不输入则自动记录当前时间）',value=datetime.time(int(time_value.strftime('%H')),
+                                                                                                    int(time_value.strftime('%M')),
+                                                                                                    int(time_value.strftime('%S'))))
 
         Breastfeeding = st.number_input('母乳亲喂（单位:分钟）',value=0,step=1)
         BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）',value=0,step=1)
         FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）',value=0,step=1)
         if st.button('提交喂养记录',key='feed'):
-                sheet1.append_row([time,Breastfeeding,BreastBottleFeeding,FormulaMilkPowder],1)
+                sheet1.append_row([timeticks, date,str(time_input),Breastfeeding,BreastBottleFeeding,FormulaMilkPowder],1)
                 st.success('喂养记录已提交')
 
+
+
+        time_input = st.time_input('手动输入时间（如果不输入则自动记录当前时间）',
+                                   value=datetime.time(int(time_value.strftime('%H')),
+                                                       int(time_value.strftime('%M')),
+                                                       int(time_value.strftime('%S'))))
         Shit = st.checkbox('大便')
         Shit_value = 0
         if Shit:
@@ -222,7 +226,7 @@ with tab2:
         if ADconsole:
                 ADconsole_value = 1
         if st.button('提交屎尿屁记录',key='shit'):
-                record_2 = [timeticks, date, time, Shit_value,Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value]
+                record_2 = [timeticks, date, str(time_input), Shit_value,Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value]
                 sheet5.append_row(record_2, 1)
                 st.success('屎尿屁记录已提交')
 
