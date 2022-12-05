@@ -163,9 +163,10 @@ with tab1:
 
 with tab2:
         st.subheader('本次记录↓↓↓')
-        time_input = st.time_input('手动输入时间（如果不输入则自动记录当前时间）',value=datetime.time(int(time_value.strftime('%H')),
-                                                                                                    int(time_value.strftime('%M')),
-                                                                                                    int(time_value.strftime('%S'))),key = 'input2')
+        time_input = st.time_input('手动选择时间（如果不更改则自动记录当前时间）',
+                                   value=datetime.time(int(time_value.strftime('%H')),
+                                                       int(time_value.strftime('%M')),
+                                                       int(time_value.strftime('%S'))),key = 'input2')
 
         Breastfeeding = st.number_input('母乳亲喂（单位:分钟）',value=0,step=1)
         BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）',value=0,step=1)
@@ -174,9 +175,9 @@ with tab2:
                 sheet1.append_row([timeticks, date,str(time_input),Breastfeeding,BreastBottleFeeding,FormulaMilkPowder],1)
                 st.success('喂养记录已提交')
 
+        st.markdown('---')
 
-
-        time_input = st.time_input('手动输入时间（如果不输入则自动记录当前时间）',
+        time_input = st.time_input('手动选择时间（如果不输入则自动记录当前时间）',
                                    value=datetime.time(int(time_value.strftime('%H')),
                                                        int(time_value.strftime('%M')),
                                                        int(time_value.strftime('%S'))),key = 'input1')
