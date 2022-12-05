@@ -203,7 +203,7 @@ with tab2:
         if ADconsole:
                 ADconsole_value = 1
         if st.button('提交屎尿屁记录',key='shit'):
-                record_2 = [timeticks, date, str(time_input), Shit_value,Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value]
+                record_2 = [timeticks, date, str(time_input), Shit_value,Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value,0]
                 sheet5.append_row(record_2, 1)
                 st.success('屎尿屁记录已提交')
 
@@ -257,14 +257,15 @@ class temper_metric:
         def temper(self):
                 datafrmae = pd.DataFrame(self.datafrmae)
                 datafrmae = datafrmae.set_index('time')
-                today = datafrmae[datafrmae['date'] == date]
-                datafrmae = datafrmae['temper']
-                datafrmae = datafrmae.astype('float')
-                current = datafrmae.values[-1]
+                datafrmae = datafrmae.drop(datafrmae[datafrmae['temper'] == 0].index)
+                last10 = datafrmae.tail(10)
+                last10 = last10['temper']
+                last10 = last10.astype('float')
+                current = last10.values[-1]
                 last = datafrmae.values[-2]
                 delta = current-last
                 delta = round(delta,2)
-                return delta,today
+                return delta,last10
 
 
 with tab3:
@@ -273,7 +274,7 @@ with tab3:
         st.subheader('1.体温')
         temper=st.number_input('本次体温',step=0.1,min_value=35.0,max_value=42.0)
         if st.button('提交本次体温记录',key='temper'):
-                sheet5.append_row([timeticks,date,time,0,0,0,0,0,temper],1)
+                sheet5.append_row([timeticks,date,time_auto,0,0,0,0,0,temper],1)
         temp = temper_metric()
         delta = temp.temper()[0]
         st.metric(label="目前体温", value=temper, delta=delta, delta_color="inverse")
@@ -283,6 +284,7 @@ with tab3:
         ax.set_xlabel('时间', fontproperties=font, fontsize=12)
         ax.set_ylabel('体温', fontproperties=font, fontsize=12)
         ax.set_title('本日体温曲线', fontproperties=font, fontsize=12)
+        plt.xticks(rotation=45)
         st.pyplot(fig)
         st.subheader('2.大便颜色')
 
