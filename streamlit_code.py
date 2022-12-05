@@ -53,10 +53,9 @@ time_value = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai'))
 time_auto = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
 #st.write(time_value.strftime("%H"))
 
-sheet1, sheet2 = connect_to_google_sheet()[0][1]
+sheet1 = connect_to_google_sheet()[0]
+sheet2 = connect_to_google_sheet()[1]
 sheet5 = connect_to_google_sheet()[3]
-
-
 
 #@st.cache(ttl=60)
 class he_we:
