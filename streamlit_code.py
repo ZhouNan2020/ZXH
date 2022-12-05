@@ -42,7 +42,10 @@ def connect_to_google_sheet():
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('特殊记录')
         sheet_E = client.open_by_key(
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('屎尿吃药表')
-        return sheet_A, sheet_B, sheet_C, sheet_D, sheet_E
+        sheet_F = client.open_by_key(
+        "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('测试表')
+        return sheet_A,sheet_B,sheet_C,sheet_D,sheet_E,sheet_F
+
 
 
 #%%
@@ -52,7 +55,7 @@ timeticks = time.time()
 date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
 time = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
 global sheet1, sheet2, sheet3, sheet4
-sheet1, sheet2, sheet3, sheet4, sheet5 = connect_to_google_sheet()
+sheet1, sheet2, sheet3, sheet4, sheet5,sheet6 = connect_to_google_sheet()
 
 
 @st.cache(ttl=60)
@@ -176,7 +179,6 @@ with tab1:
         st.write('最近10次屎尿吃药记录：')
         st.write(today_shit.show())
 with tab2:
-
         st.subheader('本次记录↓↓↓')
         Breastfeeding = st.number_input('母乳亲喂（单位:分钟）',value=0,step=1)
         BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）',value=0,step=1)
