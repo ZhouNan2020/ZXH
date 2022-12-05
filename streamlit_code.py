@@ -190,7 +190,7 @@ with tab2:
         st.subheader('本次记录↓↓↓')
         time_input = st.time_input('手动输入时间（如果不输入则自动记录当前时间）',value=datetime.time(int(time_value.strftime('%H')),
                                                                                                     int(time_value.strftime('%M')),
-                                                                                                    int(time_value.strftime('%S'))))
+                                                                                                    int(time_value.strftime('%S'))),key = 'input2')
 
         Breastfeeding = st.number_input('母乳亲喂（单位:分钟）',value=0,step=1)
         BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）',value=0,step=1)
@@ -204,7 +204,7 @@ with tab2:
         time_input = st.time_input('手动输入时间（如果不输入则自动记录当前时间）',
                                    value=datetime.time(int(time_value.strftime('%H')),
                                                        int(time_value.strftime('%M')),
-                                                       int(time_value.strftime('%S'))))
+                                                       int(time_value.strftime('%S'))),key = 'input1')
         Shit = st.checkbox('大便')
         Shit_value = 0
         if Shit:
