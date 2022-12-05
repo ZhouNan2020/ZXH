@@ -435,31 +435,31 @@ with tab5:
 
 
 
- class submit:
-        def __init__(self):
-                self.dataframe = pd.DataFrame(sheet6.get_all_records())
-
-                BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）', value=0, step=1)
-                FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）', value=0, step=1)
-
-                Shit = st.checkbox('大便')
-                Shit_value = 0
-                if Shit:
-                        Shit_value = 1
-        def lastSubmitTime(self):
-                data = self.dataframe
-                data = data['time']
-                data = (data.tail(1)).values[0]
-                return data
-        def dailySubmit(self):
-                data = self.dataframe
-                data = data.set_index('date')
-                data = data['count']
-                data = data.groupby('date').sum()
-                data = data.tail(7)
-                return data
-with tab6:
-        st.header('测试提交记录')
-        st.write('目前测试：st.cache')
+ #class submit:
+ #       def __init__(self):
+ #               self.dataframe = pd.DataFrame(sheet6.get_all_records())
+ #
+ #               BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）', value=0, step=1)
+ #               FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）', value=0, step=1)
+ #
+ #               Shit = st.checkbox('大便')
+ #               Shit_value = 0
+ #               if Shit:
+ #                       Shit_value = 1
+ #       def lastSubmitTime(self):
+ #               data = self.dataframe
+ #               data = data['time']
+ #               data = (data.tail(1)).values[0]
+ #               return data
+ #       def dailySubmit(self):
+ #               data = self.dataframe
+ #               data = data.set_index('date')
+ #               data = data['count']
+ #               data = data.groupby('date').sum()
+ #               data = data.tail(7)
+ #               return data
+#with tab6:
+#        st.header('测试提交记录')
+#        st.write('目前测试：st.cache')
 
 
