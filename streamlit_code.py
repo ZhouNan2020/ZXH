@@ -53,6 +53,7 @@ def connect_to_google_sheet():
 tab1, tab2, tab3,tab4,tab5,tab6 = st.tabs(["喂养状态总览","追加喂养记录", "特殊情况记录", "数据分析","覃薇吸奶记录",'测试页面'])
 timeticks = time.time()
 date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
+time_value = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai'))
 time_auto = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
 st.write(time_auto.strftime("%H"))
 
@@ -186,7 +187,7 @@ with tab1:
         st.write(today_shit.show())
 with tab2:
         st.subheader('本次记录↓↓↓')
-        time_input = st.time_input('手动输入时间（如果不输入则自动记录当前时间）', datetime.time(time_auto.strftime("%H"), time_auto.strftime("%M"), time_auto.strftime("%S")))
+        time_input = st.time_input('手动输入时间（如果不输入则自动记录当前时间）', datetime.time(time_value.strftime("%H"), time_value.strftime("%M"), time_auto.strftime("%S")))
         if time_input == None:
                 time = time_auto
         else:
