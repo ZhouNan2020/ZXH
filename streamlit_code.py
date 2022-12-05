@@ -49,7 +49,7 @@ def connect_to_google_sheet():
 
 #%%
 #下面的就可以动了
-tab1, tab2, tab3,tab4,tab5,tab6 = st.tabs(["喂养状态总览","追加喂养记录", "特殊情况记录", "数据分析","覃薇吸奶记录",'测试页面'])
+tab1, tab2, tab3,tab4,tab5,tab6 = st.tabs(["喂养状态总览","追加记录", "特殊情况记录", "数据分析","覃薇吸奶记录",'测试页面'])
 timeticks = time.time()
 date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
 time_value = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai'))
@@ -162,7 +162,7 @@ with tab1:
 
 
 with tab2:
-        st.subheader('本次记录↓↓↓')
+        st.subheader('喂养记录')
         time_input = st.time_input('手动选择时间（如果不更改则自动记录当前时间）',
                                    value=datetime.time(int(time_value.strftime('%H')),
                                                        int(time_value.strftime('%M')),
@@ -177,6 +177,7 @@ with tab2:
 
         st.markdown('---')
 
+        st.subheader('屎尿吃药记录')
         time_input = st.time_input('手动选择时间（如果不输入则自动记录当前时间）',
                                    value=datetime.time(int(time_value.strftime('%H')),
                                                        int(time_value.strftime('%M')),
