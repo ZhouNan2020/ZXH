@@ -274,6 +274,7 @@ with tab3:
         temper=st.number_input('本次体温',step=0.1,min_value=35.0,max_value=42.0)
         if st.button('提交本次体温记录',key='temper'):
                 sheet5.append_row([timeticks,date,time_auto,0,0,0,0,0,temper],1)
+                st.success('体温记录已提交')
         temp = temper_metric()
         delta = temp.temper()[0]
         st.metric(label="目前体温", value=temper, delta=delta, delta_color="inverse")
