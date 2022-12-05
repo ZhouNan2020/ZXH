@@ -124,7 +124,7 @@ class today_eatable:
         return time
     def show(self):
         table = pd.DataFrame(self.table)
-        table = table.loc[2:5]
+        table = table.iloc[:,2:5]
         table = table.set_index('time')
         table.rename(columns={'Breastfeeding':'母乳亲喂','BreastBottleFeeding':'母乳瓶喂','FormulaMilkPowder':'配方奶粉'},inplace=True)
         return table.tail(10)
@@ -148,7 +148,7 @@ class today_shittable:
         return time
     def show(self):
         table = pd.DataFrame(self.table)
-        table = table.loc[2:7]
+        table = table.iloc[:,2:7]
         table = table.set_index('time')
         table.rename(columns={'Breastfeeding':'母乳亲喂','BreastBottleFeeding':'母乳瓶喂','FormulaMilkPowder':'配方奶粉'},inplace=True)
         return table.tail(10)
