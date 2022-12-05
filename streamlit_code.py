@@ -218,8 +218,8 @@ with tab2:
                 ADconsole_value = 1
 
         if st.button('提交本次记录',key='submit_1'):
-                record_1 = [time.timetuple(), date, time, Breastfeeding, BreastBottleFeeding, FormulaMilkPowder]
-                record_2 = [time.timetuple(), date, time, Shit_value,Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value]
+                record_1 = [timeticks, date, time, Breastfeeding, BreastBottleFeeding, FormulaMilkPowder]
+                record_2 = [timeticks, date, time, Shit_value,Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value]
                 sheet1.append_row(record_1, 1)
                 sheet5.append_row(record_2, 1)
                 st.success('提交成功')
