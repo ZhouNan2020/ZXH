@@ -58,34 +58,34 @@ sheet2 = connect_to_google_sheet()[1]
 sheet5 = connect_to_google_sheet()[3]
 
 #@st.cache(ttl=60)
-class he_we:
-    def __init__(self):
-            sheet3 = connect_to_google_sheet()[2]
-            dataframe = pd.DataFrame(sheet3.get_all_records())
-            self.dataframe = dataframe.tail(10)
-            self.sheet3 = sheet3
-    def show(self):
-            dataframe = pd.DataFrame(self.dataframe)
-            dataframe = dataframe.set_index('date')
-            dataframe.rename(columns={'height':'身高','weight':'体重',},inplace=True)
-            return dataframe
-    def append(self, date, height, weight):
-            self.sheet3.append_row([date, height, weight])
-
-
-with st.sidebar:
-
-        st.header('身高体重记录')
-        height_value = st.number_input('身高(cm)', value=0.0, step=0.1)
-        weight_value= st.number_input('体重(kg)', value=0.0, step=0.1)
-        if st.button('提交', key='submit_2'):
-                sheet3 = connect_to_google_sheet()[2]
-                sheet3.append(date, height_value, weight_value)
-                st.success('提交成功')
-        if st.button('显示身高体重记录',key = 'height_weight'):
-                hw = he_we()
-                hewe = hw.show()
-                st.write(hewe)
+#class he_we:
+#    def __init__(self):
+#            sheet3 = connect_to_google_sheet()[2]
+#            dataframe = pd.DataFrame(sheet3.get_all_records())
+#            self.dataframe = dataframe.tail(10)
+#            self.sheet3 = sheet3
+#    def show(self):
+#            dataframe = pd.DataFrame(self.dataframe)
+#            dataframe = dataframe.set_index('date')
+#            dataframe.rename(columns={'height':'身高','weight':'体重',},inplace=True)
+#            return dataframe
+#    def append(self, date, height, weight):
+#            self.sheet3.append_row([date, height, weight])
+#
+#
+#with st.sidebar:
+#
+#        st.header('身高体重记录')
+#        height_value = st.number_input('身高(cm)', value=0.0, step=0.1)
+#        weight_value= st.number_input('体重(kg)', value=0.0, step=0.1)
+#        if st.button('提交', key='submit_2'):
+#                sheet3 = connect_to_google_sheet()[2]
+#                sheet3.append(date, height_value, weight_value)
+#                st.success('提交成功')
+#        if st.button('显示身高体重记录',key = 'height_weight'):
+#                hw = he_we()
+#                hewe = hw.show()
+#                st.write(hewe)
 
 
 
