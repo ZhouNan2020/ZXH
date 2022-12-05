@@ -66,6 +66,7 @@ class he_we:
     def show(self):
             dataframe = pd.DataFrame(self.dataframe)
             dataframe = dataframe.set_index('date')
+            dataframe.rename(columns={'weight':'体重','height':'身高'})
             return dataframe
 
 with st.sidebar:
