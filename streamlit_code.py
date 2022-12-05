@@ -2,13 +2,10 @@ import pandas as pd
 import pytz
 import streamlit as st
 import gspread
-from matplotlib.ticker import MultipleLocator
 from oauth2client.service_account import ServiceAccountCredentials
-import copy as cp
 import time
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
-import matplotlib as mpl
 import datetime
 #%%
 st.title('周栩珩成长日记')
