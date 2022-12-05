@@ -55,7 +55,7 @@ timeticks = time.time()
 date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
 time_value = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai'))
 time_auto = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
-st.write(time_auto.strftime("%H"))
+st.write(time_value.strftime("%H"))
 
 global sheet1, sheet2, sheet3, sheet4
 sheet1, sheet2, sheet3, sheet4, sheet5,sheet6 = connect_to_google_sheet()
