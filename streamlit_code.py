@@ -262,7 +262,7 @@ class temper_metric:
                 last10 = last10['temper']
                 last10 = last10.astype('float')
                 current = last10.values[-1]
-                last = datafrmae.values[-2]
+                last = last10.values[-2]
                 delta = current-last
                 delta = round(delta,2)
                 return delta,last10
