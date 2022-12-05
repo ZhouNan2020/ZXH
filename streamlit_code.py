@@ -38,12 +38,11 @@ def connect_to_google_sheet():
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('工作表2')
         sheet_C = client.open_by_key(
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('工作表3')
+
         sheet_D = client.open_by_key(
-        "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('特殊记录')
-        sheet_E = client.open_by_key(
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('屎尿吃药表')
 
-        return sheet_A,sheet_B,sheet_C,sheet_D,sheet_E
+        return sheet_A,sheet_B,sheet_C,sheet_D
 
 
 
@@ -56,7 +55,7 @@ time_value = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai'))
 time_auto = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
 #st.write(time_value.strftime("%H"))
 
-sheet1, sheet2, sheet3, sheet4, sheet5 = connect_to_google_sheet()
+sheet1, sheet2, sheet3, sheet5 = connect_to_google_sheet()
 
 
 #@st.cache(ttl=60)
