@@ -61,7 +61,7 @@ global sheet1, sheet2, sheet3, sheet4
 sheet1, sheet2, sheet3, sheet4, sheet5,sheet6 = connect_to_google_sheet()
 
 
-@st.cache(ttl=60)
+#@st.cache(ttl=60)
 class he_we:
     def __init__(self):
             dataframe = pd.DataFrame(sheet3.get_all_records())
@@ -185,16 +185,21 @@ with tab1:
         st.write(today_eat.show())
         st.subheader('最近10次屎尿吃药记录：')
         st.write(today_shit.show())
+
+
 with tab2:
         st.subheader('本次记录↓↓↓')
         time_input = st.time_input('手动输入时间（如果不输入则自动记录当前时间）',value=datetime.time(int(time_value.strftime('%H')), int(time_value.strftime('%M')), int(time_value.strftime('%S'))))
-        if time_input == None:
-                time = time_auto
-        else:
+        time = time_auto
+        if time_input != None:
                 time = time_input
+
         Breastfeeding = st.number_input('母乳亲喂（单位:分钟）',value=0,step=1)
         BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）',value=0,step=1)
         FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）',value=0,step=1)
+        if st.button('提交喂养记录',key='feed'):
+                sheet1.append_row([time,Breastfeeding,BreastBottleFeeding,FormulaMilkPowder],1)
+                st.success('喂养记录已提交')
 
         Shit = st.checkbox('大便')
         Shit_value = 0
@@ -216,15 +221,10 @@ with tab2:
         ADconsole_value = 0
         if ADconsole:
                 ADconsole_value = 1
-
-        if st.button('提交本次记录',key='submit_1'):
-                record_1 = [timeticks, date, str(time), Breastfeeding, BreastBottleFeeding, FormulaMilkPowder]
-                record_2 = [timeticks, date, str(time), Shit_value,Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value]
-                sheet1.append_row(record_1, 1)
+        if st.button('提交屎尿屁记录',key='shit'):
+                record_2 = [timeticks, date, time, Shit_value,Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value]
                 sheet5.append_row(record_2, 1)
-                st.success('提交成功')
-
-
+                st.success('屎尿屁记录已提交')
 
 
 
