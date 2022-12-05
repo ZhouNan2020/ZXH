@@ -161,11 +161,13 @@ class today_shittable:
 with tab1:
         today_eat = today_eatable()
         today_shit = today_shittable()
-        st.write('上一次喂养：{}，母乳亲喂{}分钟，母乳瓶喂{}ml，奶粉{}ml'.format(today_eat.lasteverything('time'),
+        st.subheader('上一次喂养：')
+        st.write('{}，母乳亲喂{}分钟，母乳瓶喂{}ml，奶粉{}ml'.format(today_eat.lasteverything('time'),
                                                                              today_eat.lasteverything('Breastfeeding'),
                                                                              today_eat.lasteverything('BreastBottleFeeding'),
                                                                              today_eat.lasteverything('FormulaMilkPowder')))
-        st.write('今日喂养总量：母乳亲喂{}分钟，母乳瓶喂{}ml，奶粉{}ml，共{}分钟+{}ml'.format(today_eat.todayeverything('Breastfeeding'),
+        st.subheader('今日喂养总览：')
+        st.write('母乳亲喂{}分钟，母乳瓶喂{}ml，奶粉{}ml，共{}分钟亲喂+{}ml'.format(today_eat.todayeverything('Breastfeeding'),
                                                                                           today_eat.todayeverything('BreastBottleFeeding'),
                                                                                           today_eat.todayeverything('FormulaMilkPowder'),
                                                                                           today_eat.todayeverything('Breastfeeding'),
@@ -422,36 +424,6 @@ with tab5:
                 ax1.legend(['日均吸奶量'], loc='upper right', prop=font)
                 st.pyplot(fig)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# append_row这个是谷歌的方法，可以直接在sheet中添加一行数据
-#tes=("hjj","king")
-#sheet1.append_row(tes,1)
-
-#sheet1 = pd.DataFrame(sheet1.get_all_records())
-
-#st.write(sheet1)
+with tab6:
+        st.header('测试提交记录')
+        st.write('目前测试：st.cache(ttl=600)')
