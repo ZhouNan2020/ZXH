@@ -74,15 +74,17 @@ class he_we:
 
 
 with st.sidebar:
+
         st.header('身高体重记录')
         height_value = st.number_input('身高(cm)', value=0.0, step=0.1)
         weight_value= st.number_input('体重(kg)', value=0.0, step=0.1)
         if st.button('提交', key='submit_2'):
-                he_we().append(date, height_value, weight_value)
+                hw = he_we()
+                hw.append(date, height_value, weight_value)
                 st.success('提交成功')
         if st.button('显示身高体重记录',key = 'height_weight'):
-                height_weight = he_we()
-                hewe = height_weight.show()
+                hw = he_we()
+                hewe = hw.show()
                 st.write(hewe)
 
 
