@@ -151,7 +151,7 @@ with tab1:
         st.write('上一次大便：{}'.format(today_shit.lastcoltime('Shit')))
         st.write('今日大便次数：{}次'.format(today_shit.todayeverything('Shit')))
         st.write('今日服用妈咪爱：{}次'.format(today_shit.todayeverything('Mamiai')))
-        st.write('今日服用AD滴丸：{}'.format(today_shit.todayeverything('ADconsole')))
+        st.write('今日服用AD滴丸：{}次'.format(today_shit.todayeverything('ADconsole')))
         st.subheader('最近10次喂养记录：')
         st.write(today_eat.show())
         st.subheader('最近10次屎尿吃药记录：')
@@ -199,10 +199,10 @@ with tab2:
         ADconsole_value = 0
         if ADconsole:
                 ADconsole_value = 1
-        if st.button('提交屎尿屁记录',key='shit'):
+        if st.button('提交屎尿吃药记录',key='shit'):
                 record_2 = [timeticks, date, str(time_input), Shit_value,Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value,0]
                 sheet5.append_row(record_2, 1)
-                st.success('屎尿屁记录已提交')
+                st.success('屎尿吃药记录已提交')
 
 
 
