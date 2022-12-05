@@ -150,7 +150,7 @@ class today_shittable:
         table = pd.DataFrame(self.table)
         table = table.iloc[:,2:7]
         table = table.set_index('time')
-        table.rename(columns={'Breastfeeding':'母乳亲喂','BreastBottleFeeding':'母乳瓶喂','FormulaMilkPowder':'配方奶粉'},inplace=True)
+        table.rename(columns={'Shit':'屎','Pee':'尿','ChangeDiapers':'换尿布','Mamiai':'妈咪爱','ADconsole':'AD滴丸'},inplace=True)
         return table.tail(10)
 
 
