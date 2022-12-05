@@ -42,9 +42,8 @@ def connect_to_google_sheet():
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('特殊记录')
         sheet_E = client.open_by_key(
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('屎尿吃药表')
-        sheet_F = client.open_by_key(
-        "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('测试表')
-        return sheet_A,sheet_B,sheet_C,sheet_D,sheet_E,sheet_F
+
+        return sheet_A,sheet_B,sheet_C,sheet_D,sheet_E
 
 
 
@@ -57,7 +56,7 @@ time_value = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai'))
 time_auto = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
 #st.write(time_value.strftime("%H"))
 
-sheet1, sheet2, sheet3, sheet4, sheet5,sheet6 = connect_to_google_sheet()
+sheet1, sheet2, sheet3, sheet4, sheet5 = connect_to_google_sheet()
 
 
 #@st.cache(ttl=60)
@@ -65,48 +64,24 @@ class he_we:
     def __init__(self):
             dataframe = pd.DataFrame(sheet3.get_all_records())
             self.dataframe = dataframe.tail(10)
-    def plot(self):
+    def show(self):
             dataframe = pd.DataFrame(self.dataframe)
             dataframe = dataframe.set_index('date')
-            x = dataframe.index
-            y1 = dataframe['height']
-            y2 = dataframe['weight']
-            return x, y1, y2
+            return dataframe
 
 with st.sidebar:
         st.header('身高体重记录')
-        height_weight = he_we()
-        x, y1, y2 = height_weight.plot()
-        fig, ax1 = plt.subplots()
-        ax1.plot(x, y1, color='red', label='身高', marker='o')
-        ax1.set_xlabel('日期', fontproperties=font)
-        plt.xticks(rotation=45)
-        ax1.set_ylabel('身高', fontproperties=font)
-        ax1.tick_params(axis='y', labelcolor='red')
-        ax1.legend(loc='best', prop=font)
-        ax2 = ax1.twinx()
-        ax2.plot(x, y2, color='blue', label='体重', marker='o')
-        ax2.set_ylabel('体重', fontproperties=font)
-        ax2.tick_params(axis='y', labelcolor='blue')
-        ax2.legend(loc='best', prop=font)
-        #for a, b in zip(list(x), list(y1)):
-                #ax1.text(a, b + 1, b, ha='center', va='bottom', fontsize=10)
-        #for a, c in zip(list(x), list(y2)):
-                #ax2.text(a, c + 1, c, ha='center', va='bottom', fontsize=10)
-        st.pyplot(fig)
         height_value = st.number_input('身高(cm)', value=0.0, step=0.1)
-        weight_value= st.number_input('体重(kg)', value=0.0, step=0.1)
-        if height_value ==0.00:
-                height=y1.tolist()[-1]
-        else:
-                height = height_value
-        if weight_value ==0.00:
-                weight=y2.tolist()[-1]
-        else:
-                weight = weight_value
+        height_value= st.number_input('体重(kg)', value=0.0, step=0.1)
         if st.button('提交', key='submit_2'):
-                sheet3.append_row([date, height, weight])
+                sheet3.append_row([date, height_value, height_value])
                 st.success('提交成功')
+        if st.button('显示身高体重记录',key = 'height_weight'):
+                height_weight = he_we()
+                hewe = height_weight.show()
+                st.write(hewe)
+
+
 
 
 #@st.cache(ttl=60)
@@ -443,31 +418,5 @@ with tab5:
 
 
 
- #class submit:
- #       def __init__(self):
- #               self.dataframe = pd.DataFrame(sheet6.get_all_records())
- #
- #               BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）', value=0, step=1)
- #               FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）', value=0, step=1)
- #
- #               Shit = st.checkbox('大便')
- #               Shit_value = 0
- #               if Shit:
- #                       Shit_value = 1
- #       def lastSubmitTime(self):
- #               data = self.dataframe
- #               data = data['time']
- #               data = (data.tail(1)).values[0]
- #               return data
- #       def dailySubmit(self):
- #               data = self.dataframe
- #               data = data.set_index('date')
- #               data = data['count']
- #               data = data.groupby('date').sum()
- #               data = data.tail(7)
- #               return data
-#with tab6:
-#        st.header('测试提交记录')
-#        st.write('目前测试：st.cache')
 
 
