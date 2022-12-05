@@ -54,7 +54,7 @@ tab1, tab2, tab3,tab4,tab5,tab6 = st.tabs(["喂养状态总览","追加喂养记
 timeticks = time.time()
 date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
 time_auto = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
-st.write(time_auto)
+st.write(time_auto.strftime("%H"))
 
 global sheet1, sheet2, sheet3, sheet4
 sheet1, sheet2, sheet3, sheet4, sheet5,sheet6 = connect_to_google_sheet()
@@ -186,7 +186,7 @@ with tab1:
         st.write(today_shit.show())
 with tab2:
         st.subheader('本次记录↓↓↓')
-        time_input = st.time_input('手动输入时间（如果不输入则自动记录当前时间）', datetime.time(time_auto))
+        time_input = st.time_input('手动输入时间（如果不输入则自动记录当前时间）', datetime.time(time_auto.strftime("%H"), time_auto.strftime("%M"), time_auto.strftime("%S")))
         if time_input == None:
                 time = time_auto
         else:
