@@ -47,31 +47,39 @@ def connect_to_google_sheet():
 #下面的就可以动了
 tab1, tab2, tab3,tab4,tab5,tab6 = st.tabs(["喂养状态总览","新增记录", "特殊情况记录", "数据分析","覃薇吸奶记录",'测试页面'])
 timeticks = time.time()
+global date,time_value,time_auto
 date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
 time_value = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai'))
 time_auto = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
 #st.write(time_value.strftime("%H"))
 
-sheet1, sheet2, sheet3, sheet5 = connect_to_google_sheet()
+sheet1, sheet2 = connect_to_google_sheet()[0][1]
+sheet5 = connect_to_google_sheet()[3]
+
 
 
 #@st.cache(ttl=60)
 class he_we:
     def __init__(self):
+            sheet3 = connect_to_google_sheet()[2]
             dataframe = pd.DataFrame(sheet3.get_all_records())
             self.dataframe = dataframe.tail(10)
+            self.sheet3 = sheet3
     def show(self):
             dataframe = pd.DataFrame(self.dataframe)
             dataframe = dataframe.set_index('date')
             dataframe.rename(columns={'height':'身高','weight':'体重',},inplace=True)
             return dataframe
+    def append(self, date, height, weight):
+            self.sheet3.append_row([date, height, weight])
+
 
 with st.sidebar:
         st.header('身高体重记录')
         height_value = st.number_input('身高(cm)', value=0.0, step=0.1)
-        height_value= st.number_input('体重(kg)', value=0.0, step=0.1)
+        weight_value= st.number_input('体重(kg)', value=0.0, step=0.1)
         if st.button('提交', key='submit_2'):
-                sheet3.append_row([date, height_value, height_value])
+                he_we().append(date, height_value, weight_value)
                 st.success('提交成功')
         if st.button('显示身高体重记录',key = 'height_weight'):
                 height_weight = he_we()
