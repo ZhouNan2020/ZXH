@@ -31,21 +31,17 @@ def connect_to_google_sheet():
 # 这一段就牛逼了，这一段那串乱码是目标谷歌sheet地址中间那一部分，用.来确定要访问的工作表
         sheet_A = client.open_by_key(
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").sheet1
-        sheet_B = client.open_by_key(
-        "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('工作表2')
-        sheet_C = client.open_by_key(
-        "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('工作表3')
 
-        sheet_D = client.open_by_key(
+        sheet_B = client.open_by_key(
         "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('屎尿吃药表')
 
-        return sheet_A,sheet_B,sheet_C,sheet_D
+        return sheet_A,sheet_B
 
 
 
 #%%
 #下面的就可以动了
-tab1, tab2, tab3,tab4,tab5,tab6 = st.tabs(["喂养状态总览","新增记录", "特殊情况记录", "数据分析","覃薇吸奶记录",'测试页面'])
+tab1, tab2, tab3,tab4 = st.tabs(["喂养状态总览","新增记录", "特殊情况记录", "数据分析"])
 timeticks = time.time()
 global date,time_value,time_auto
 date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
@@ -53,7 +49,7 @@ time_value = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai'))
 time_auto = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
 #st.write(time_value.strftime("%H"))
 
-sheet1,sheet2,sheet3,sheet5 = connect_to_google_sheet()
+sheet1,sheet5 = connect_to_google_sheet()
 
 #@st.cache(ttl=60)
 #class he_we:
@@ -152,8 +148,8 @@ with tab1:
                                                                                           today_eat.todayeverything('BreastBottleFeeding'),
                                                                                           today_eat.todayeverything('FormulaMilkPowder'),
                                                                                           today_eat.todayeverything('Breastfeeding'),
-
                                                                                           today_eat.todayeverything('BreastBottleFeeding')+today_eat.todayeverything('FormulaMilkPowder')))
+
         st.subheader('今日杂项：')
         st.write('上一次大便：{}'.format(today_shit.lastcoltime('Shit')))
         st.write('今日大便次数：{}次'.format(today_shit.todayeverything('Shit')))
@@ -167,7 +163,7 @@ with tab1:
 
 with tab2:
         st.subheader('喂养记录')
-        time_input = st.time_input('手动选择时间（如果不更改则自动记录当前时间）',
+        time_input_1 = st.time_input('手动选择时间（如果不更改则自动记录当前时间）',
                                    value=datetime.time(int(time_value.strftime('%H')),
                                                        int(time_value.strftime('%M')),
                                                        int(time_value.strftime('%S'))),key = 'input2')
@@ -176,13 +172,13 @@ with tab2:
         BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）',value=0,step=1)
         FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）',value=0,step=1)
         if st.button('提交喂养记录',key='feed'):
-                sheet1.append_row([timeticks, date,str(time_input),Breastfeeding,BreastBottleFeeding,FormulaMilkPowder],1)
+                sheet1.append_row([timeticks, date,str(time_input_1),Breastfeeding,BreastBottleFeeding,FormulaMilkPowder],1)
                 st.success('喂养记录已提交')
 
         st.markdown('---')
 
         st.subheader('屎尿吃药记录')
-        time_input = st.time_input('手动选择时间（如果不输入则自动记录当前时间）',
+        time_input_2 = st.time_input('手动选择时间（如果不输入则自动记录当前时间）',
                                    value=datetime.time(int(time_value.strftime('%H')),
                                                        int(time_value.strftime('%M')),
                                                        int(time_value.strftime('%S'))),key = 'input1')
@@ -207,7 +203,7 @@ with tab2:
         if ADconsole:
                 ADconsole_value = 1
         if st.button('提交屎尿吃药记录',key='shit'):
-                record_2 = [timeticks, date, str(time_input), Shit_value,Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value,0]
+                record_2 = [timeticks, date, str(time_input_2), Shit_value,Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value,0]
                 sheet5.append_row(record_2, 1)
                 st.success('屎尿吃药记录已提交')
 
@@ -366,64 +362,64 @@ with tab4:
 
 
 #@st.cache(ttl=600)
-class suctionOfMilk:
-        def __init__(self):
-                self.datafrmae = pd.DataFrame(sheet2.get_all_records())
-
-        def lastSuckingTime(self):
-                data = self.datafrmae
-                data = data['time']
-                data = (data.tail(1)).values[0]
-                return data
-        def lastMilkML(self):
-                data = self.datafrmae
-                data = data['Quantity']
-                data = data.tail(1).values[0]
-                return data
-        def dailyMilkIntake(self):
-                data = self.datafrmae
-                data = data.set_index('date')
-                data = data['count']
-                data = data.groupby('date').sum()
-                data = data.tail(7)
-                return data
-        def dailyMilkMl(self):
-                data = self.datafrmae
-                data = data.set_index('date')
-                data = data['Quantity']
-                data = data.groupby('date').mean()
-                data = data.tail(7)
-                return data
-
-
-with tab5:
-        st.subheader('覃薇吸奶记录')
-        col1, col2= st.columns([1,2])
-        suc = suctionOfMilk()
-
-        with col1:
-                suctionVolume = st.number_input('吸出量（单位:ml）')
-                dailytimes = pd.DataFrame(suc.dailyMilkIntake())
-                dailymilk = pd.DataFrame(suc.dailyMilkMl())
-                if st.button('记录本次吸奶'):
-                        sheet2.append_row([timeticks,date,time,suctionVolume,1], 1)
-                        st.success('记录成功')
-        with col2:
-                st.write('最近一次吸奶时间：', str(suc.lastSuckingTime()))
-                st.write('最近一次吸奶量：', str(suc.lastMilkML()))
-                fig, ax = plt.subplots()
-                ax1 = ax.twinx()
-                ax.plot(dailytimes.index, dailytimes['count'], 'o-')
-                ax1.bar(dailymilk.index, dailymilk['Quantity'], width=0.5, alpha=0.5)
-                ax.set_ylabel('日吸奶次数', fontsize=16, fontproperties=font)
-                ax.set_xlabel('日期', fontsize=16, fontproperties=font)
-                ax1.set_ylabel('日均吸奶量', fontsize=16, fontproperties=font)
-                plt.xticks(rotation=45)
-                #for a, c in zip(list(dailymilk.index), list(dailymilk['Quantity'])):
-                        #plt.text(a, c + 2, c, ha='center', va='center', fontsize=14)
-                ax.legend(['日吸奶次数'], loc='upper left', prop=font)
-                ax1.legend(['日均吸奶量'], loc='upper right', prop=font)
-                st.pyplot(fig)
+#class suctionOfMilk:
+#        def __init__(self):
+#                self.datafrmae = pd.DataFrame(sheet2.get_all_records())
+#
+#        def lastSuckingTime(self):
+#                data = self.datafrmae
+#                data = data['time']
+#                data = (data.tail(1)).values[0]
+#                return data
+#        def lastMilkML(self):
+#                data = self.datafrmae
+#                data = data['Quantity']
+#                data = data.tail(1).values[0]
+#                return data
+#        def dailyMilkIntake(self):
+#                data = self.datafrmae
+#                data = data.set_index('date')
+#                data = data['count']
+#                data = data.groupby('date').sum()
+#                data = data.tail(7)
+#                return data
+#        def dailyMilkMl(self):
+#                data = self.datafrmae
+#                data = data.set_index('date')
+#                data = data['Quantity']
+#                data = data.groupby('date').mean()
+#                data = data.tail(7)
+#                return data
+#
+#
+#with tab5:
+#        st.subheader('覃薇吸奶记录')
+#        col1, col2= st.columns([1,2])
+#        suc = suctionOfMilk()
+#
+#        with col1:
+#                suctionVolume = st.number_input('吸出量（单位:ml）')
+#                dailytimes = pd.DataFrame(suc.dailyMilkIntake())
+#                dailymilk = pd.DataFrame(suc.dailyMilkMl())
+#                if st.button('记录本次吸奶'):
+#                        sheet2.append_row([timeticks,date,time,suctionVolume,1], 1)
+#                        st.success('记录成功')
+#        with col2:
+#                st.write('最近一次吸奶时间：', str(suc.lastSuckingTime()))
+#                st.write('最近一次吸奶量：', str(suc.lastMilkML()))
+#                fig, ax = plt.subplots()
+#                ax1 = ax.twinx()
+#                ax.plot(dailytimes.index, dailytimes['count'], 'o-')
+#                ax1.bar(dailymilk.index, dailymilk['Quantity'], width=0.5, alpha=0.5)
+#                ax.set_ylabel('日吸奶次数', fontsize=16, fontproperties=font)
+#                ax.set_xlabel('日期', fontsize=16, fontproperties=font)
+#                ax1.set_ylabel('日均吸奶量', fontsize=16, fontproperties=font)
+#                plt.xticks(rotation=45)
+#                #for a, c in zip(list(dailymilk.index), list(dailymilk['Quantity'])):
+#                        #plt.text(a, c + 2, c, ha='center', va='center', fontsize=14)
+#                ax.legend(['日吸奶次数'], loc='upper left', prop=font)
+#                ax1.legend(['日均吸奶量'], loc='upper right', prop=font)
+#                st.pyplot(fig)
 
 
 
