@@ -108,7 +108,7 @@ class today_eatable:
         table = pd.DataFrame(self.table)
         table = table.iloc[:,2:6]
         table = table.set_index('time')
-        table.rename(columns={'Breastfeeding':'母乳亲喂','BreastBottleFeeding':'母乳瓶喂','FormulaMilkPowder':'配方奶粉'},inplace=True)
+        table.rename(columns={'Breastfeeding':'母乳亲喂（分钟）','BreastBottleFeeding':'母乳瓶喂（ml）','FormulaMilkPowder':'配方奶粉（ml）'},inplace=True)
         #table.replace(0, '没吃', inplace=True)
         return table.tail(10)
 
@@ -168,14 +168,16 @@ with tab1:
 
 with tab2:
         st.subheader('喂养记录')
-        time_input_1 = st.time_input('手动选择时间（如果不更改则自动记录当前时间）',
-                                   value=datetime.time(int(time_value.strftime('%H')),
-                                                       int(time_value.strftime('%M')),
-                                                       int(time_value.strftime('%S'))),key = 'input2')
+
 
         Breastfeeding = st.number_input('母乳亲喂（单位:分钟）',value=0,step=1)
         BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）',value=0,step=1)
         FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）',value=0,step=1)
+
+        time_input_1 = st.time_input('手动选择时间（如果不更改则自动记录当前时间）',
+                                     value=datetime.time(int(time_value.strftime('%H')),
+                                                         int(time_value.strftime('%M')),
+                                                         int(time_value.strftime('%S'))), key='input2')
         if st.button('提交喂养记录',key='feed'):
                 #sheet1 = connect_to_google_sheet()[0]
                 sheet1.append_row([timeticks, date,str(time_input_1),Breastfeeding,BreastBottleFeeding,FormulaMilkPowder],1)
@@ -184,10 +186,7 @@ with tab2:
         st.markdown('---')
 
         st.subheader('屎尿吃药记录')
-        time_input_2 = st.time_input('手动选择时间（如果不输入则自动记录当前时间）',
-                                   value=datetime.time(int(time_value.strftime('%H')),
-                                                       int(time_value.strftime('%M')),
-                                                       int(time_value.strftime('%S'))),key = 'input1')
+
         Shit = st.checkbox('大便')
         Shit_value = 0
         if Shit:
@@ -208,6 +207,11 @@ with tab2:
         ADconsole_value = 0
         if ADconsole:
                 ADconsole_value = 1
+
+        time_input_2 = st.time_input('手动选择时间（如果不输入则自动记录当前时间）',
+                                     value=datetime.time(int(time_value.strftime('%H')),
+                                                         int(time_value.strftime('%M')),
+                                                         int(time_value.strftime('%S'))), key='input1')
         if st.button('提交屎尿吃药记录',key='shit'):
                 #sheet5 = connect_to_google_sheet()[1]
                 record_2 = [timeticks, date, str(time_input_2), Shit_value,Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value,0]
