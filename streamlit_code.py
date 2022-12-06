@@ -108,8 +108,7 @@ class today_eatable:
         table = table.iloc[:,2:6]
         table = table.set_index('time')
         table.rename(columns={'Breastfeeding':'母乳亲喂','BreastBottleFeeding':'母乳瓶喂','FormulaMilkPowder':'配方奶粉'},inplace=True)
-        table = table.astype(str) + 'ml'
-        table.replace('0ml', '没吃', inplace=True)
+        table.replace(0, '没吃', inplace=True)
         return table.tail(10)
 
 class today_shittable:
