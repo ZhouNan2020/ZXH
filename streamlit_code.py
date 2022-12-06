@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import pytz
 import streamlit as st
@@ -132,7 +133,7 @@ class today_shittable:
         table = table.set_index('time')
         table.rename(columns={'Shit':'屎','Pee':'尿','ChangeDiapers':'换尿布','Mamiai':'妈咪爱','ADconsole':'AD滴丸'},inplace=True)
         table.replace(1,'有',inplace=True)
-        table.replace(0, None, inplace=True)
+        table.replace(0, np.NaN, inplace=True)
         return table.tail(10)
 
 
