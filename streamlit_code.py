@@ -50,7 +50,7 @@ time_value = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai'))
 time_auto = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
 #st.write(time_value.strftime("%H"))
 
-#sheet1,sheet5 = connect_to_google_sheet()
+sheet1,sheet5 = connect_to_google_sheet()
 
 #@st.cache(ttl=60)
 #class he_we:
@@ -88,7 +88,7 @@ time_auto = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%
 #@st.cache(ttl=60)
 class today_eatable:
     def __init__(self):
-        sheet1 = connect_to_google_sheet()[0]
+
         eattabel = pd.DataFrame(sheet1.get_all_records())
         self.table = eattabel
         self.tail = eattabel.iloc[-1:]
@@ -114,7 +114,7 @@ class today_eatable:
 
 class today_shittable:
     def __init__(self):
-        sheet5 = connect_to_google_sheet()[1]
+
         shittable = pd.DataFrame(sheet5.get_all_records())
         self.table = shittable
         self.tail = shittable.iloc[-1:]
@@ -177,7 +177,7 @@ with tab2:
         BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）',value=0,step=1)
         FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）',value=0,step=1)
         if st.button('提交喂养记录',key='feed'):
-                sheet1 = connect_to_google_sheet()[0]
+                #sheet1 = connect_to_google_sheet()[0]
                 sheet1.append_row([timeticks, date,str(time_input_1),Breastfeeding,BreastBottleFeeding,FormulaMilkPowder],1)
                 st.success('喂养记录已提交')
 
@@ -209,7 +209,7 @@ with tab2:
         if ADconsole:
                 ADconsole_value = 1
         if st.button('提交屎尿吃药记录',key='shit'):
-                sheet5 = connect_to_google_sheet()[1]
+                #sheet5 = connect_to_google_sheet()[1]
                 record_2 = [timeticks, date, str(time_input_2), Shit_value,Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value,0]
                 sheet5.append_row(record_2, 1)
                 st.success('屎尿吃药记录已提交')
