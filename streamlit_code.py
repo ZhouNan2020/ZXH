@@ -135,7 +135,7 @@ class today_shittable:
         table = table.iloc[:,2:8]
         table = table.set_index('time')
         table.rename(columns={'Shit':'屎','Pee':'尿','ChangeDiapers':'换尿布','Mamiai':'妈咪爱','ADconsole':'AD滴丸'},inplace=True)
-        #table.replace(1,'有',inplace=True)
+        table.replace(1,'有',inplace=True)
         return table.tail(10)
 
 
@@ -161,9 +161,9 @@ with tab1:
         st.write('今日服用妈咪爱：{}次'.format(today_shit.todayeverything('Mamiai')))
         st.write('今日服用AD滴丸：{}次'.format(today_shit.todayeverything('ADconsole')))
         st.subheader('最近10次喂养记录：')
-        st.write(today_eat.show())
+        st.table(today_eat.show())
         st.subheader('最近10次屎尿吃药记录：')
-        st.write(today_shit.show())
+        st.table(today_shit.show())
 
 
 with tab2:
