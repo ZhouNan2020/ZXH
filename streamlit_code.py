@@ -135,6 +135,7 @@ class today_shittable:
         table = table.iloc[:,2:8]
         table = table.set_index('time')
         table.rename(columns={'Shit':'屎','Pee':'尿','ChangeDiapers':'换尿布','Mamiai':'妈咪爱','ADconsole':'AD滴丸'},inplace=True)
+        table = table.astype('int')
         table.replace(1,'有',inplace=True)
         return table.tail(10)
 
