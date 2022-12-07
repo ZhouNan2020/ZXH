@@ -145,9 +145,9 @@ with tab1:
         today_eat = today_eatable()
         today_shit = today_shittable()
         st.subheader('上一次喂养：{}'.format(today_eat.lasteverything('time')))
-        st.write('母乳亲喂{}分钟\n'
-                 '母乳瓶喂{}ml\n'
-                 '奶粉{}ml'.format(
+        st.write("""母乳亲喂{}分钟
+        母乳瓶喂{}ml
+        奶粉{}ml""".format(
                                    today_eat.lasteverything('Breastfeeding'),
                                    today_eat.lasteverything('BreastBottleFeeding'),
                                    today_eat.lasteverything('FormulaMilkPowder')
@@ -155,10 +155,10 @@ with tab1:
                 )
         
         st.subheader('今日喂养总览：')
-        st.write('母乳亲喂{}分钟\n'
-                 '母乳瓶喂{}ml\n'
-                 '奶粉{}ml\n'
-                 '共{}分钟亲喂+{}ml'.format(today_eat.todayeverything('Breastfeeding'),
+        st.write("""母乳亲喂{}分钟
+                 母乳瓶喂{}ml
+                 奶粉{}ml
+                 共{}分钟亲喂+{}ml""".format(today_eat.todayeverything('Breastfeeding'),
                                           today_eat.todayeverything('BreastBottleFeeding'),
                                           today_eat.todayeverything('FormulaMilkPowder'),
                                           today_eat.todayeverything('Breastfeeding'),
