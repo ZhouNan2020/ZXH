@@ -42,6 +42,7 @@ def connect_to_google_sheet():
 
 #%%
 #下面的就可以动了
+
 tab1, tab2, tab3,tab4 = st.tabs(["喂养状态总览","新增记录", "特殊情况记录", "数据分析"])
 timeticks = time.time()
 global date,time_value,time_auto
@@ -143,17 +144,25 @@ class today_shittable:
 with tab1:
         today_eat = today_eatable()
         today_shit = today_shittable()
-        st.subheader('上一次喂养：')
-        st.write('{}，母乳亲喂{}分钟，母乳瓶喂{}ml，奶粉{}ml'.format(today_eat.lasteverything('time'),
-                                                                             today_eat.lasteverything('Breastfeeding'),
-                                                                             today_eat.lasteverything('BreastBottleFeeding'),
-                                                                             today_eat.lasteverything('FormulaMilkPowder')))
+        st.subheader('上一次喂养：{}'.format(today_eat.lasteverything('time')))
+        st.write('母乳亲喂{}分钟/n'
+                 '母乳瓶喂{}ml/n'
+                 '奶粉{}ml'.format(
+                                   today_eat.lasteverything('Breastfeeding'),
+                                   today_eat.lasteverything('BreastBottleFeeding'),
+                                   today_eat.lasteverything('FormulaMilkPowder')
+                                    )
+                )
+        
         st.subheader('今日喂养总览：')
-        st.write('母乳亲喂{}分钟，母乳瓶喂{}ml，奶粉{}ml，共{}分钟亲喂+{}ml'.format(today_eat.todayeverything('Breastfeeding'),
-                                                                                          today_eat.todayeverything('BreastBottleFeeding'),
-                                                                                          today_eat.todayeverything('FormulaMilkPowder'),
-                                                                                          today_eat.todayeverything('Breastfeeding'),
-                                                                                          today_eat.todayeverything('BreastBottleFeeding')+today_eat.todayeverything('FormulaMilkPowder')))
+        st.write('母乳亲喂{}分钟/n'
+                 '母乳瓶喂{}ml/n'
+                 '奶粉{}ml/n'
+                 '共{}分钟亲喂+{}ml'.format(today_eat.todayeverything('Breastfeeding'),
+                                          today_eat.todayeverything('BreastBottleFeeding'),
+                                          today_eat.todayeverything('FormulaMilkPowder'),
+                                          today_eat.todayeverything('Breastfeeding'),
+                                          today_eat.todayeverything('BreastBottleFeeding')+today_eat.todayeverything('FormulaMilkPowder')))
 
         st.subheader('今日杂项：')
         st.write('上一次大便：{}'.format(today_shit.lastcoltime('Shit')))
