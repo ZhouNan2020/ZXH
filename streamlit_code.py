@@ -112,6 +112,14 @@ class today_eatable:
         table.rename(columns={'Breastfeeding':'母乳亲喂（分钟）','BreastBottleFeeding':'母乳瓶喂（ml）','FormulaMilkPowder':'配方奶粉（ml）'},inplace=True)
         #table.replace(0, '没吃', inplace=True)
         return table.tail(10)
+    def show_last_time(self):
+        lasttime = self.today['time'].value[0]
+        lasttime = str(lasttime)
+        lasttime = datetime.datetime.strptime(lasttime, "%H:%M:%S")
+        nexteatTime = (lasttime+datetime.timedelta(hours=2)).strftime("%H:%M:%S")
+        warmtime1 = (lasttime+datetime.timedelta(minutes=90)).strftime("%H:%M:%S")
+        warmtime2 = (lasttime+datetime.timedelta(minutes=105)).strftime("%H:%M:%S")
+        return nexteatTime,warmtime1,warmtime2
 
 class today_shittable:
     def __init__(self):
@@ -148,6 +156,9 @@ with tab1:
         st.write('母乳亲喂{}分钟'.format(today_eat.lasteverything('Breastfeeding')))
         st.write('母乳瓶喂{}ml'.format(today_eat.lasteverything('BreastBottleFeeding')))
         st.write('奶粉{}ml'.format(today_eat.lasteverything('FormulaMilkPowder')))
+        st.write('如果是白天的话，下一次喂养时间可能在{}左右，需要在{}到{}之间准备温奶'.format(today_eat.show_last_time()[0],
+                                                                                    today_eat.show_last_time()[1],
+                                                                                    today_eat.show_last_time()[2]))
 
         
         st.subheader('今日喂养总览：')
