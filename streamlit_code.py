@@ -115,15 +115,7 @@ class today_eatable:
 
 
 
-def show_last_time(self):
-    #lasttime = str(self.lasttime)
-    today = today_eatable
-    lasttime = today.lasteverything('time')
-    lasttime = datetime.datetime.strptime(lasttime, "%H:%M:%S")
-    nexteatTime = (lasttime+datetime.timedelta(hours=2)).strftime("%H:%M:%S")
-    warmtime1 = (lasttime+datetime.timedelta(minutes=90)).strftime("%H:%M:%S")
-    warmtime2 = (lasttime+datetime.timedelta(minutes=105)).strftime("%H:%M:%S")
-    return nexteatTime,warmtime1,warmtime2
+
 
 class today_shittable:
     def __init__(self):
@@ -162,6 +154,13 @@ with tab1:
         st.write('奶粉{}ml'.format(today_eat.lasteverything('FormulaMilkPowder')))
 
 
+        def show_last_time(self):
+            lasttime = today_eat.lasteverything('time')
+            lasttime = datetime.datetime.strptime(lasttime, "%H:%M:%S")
+            nexteatTime = (lasttime + datetime.timedelta(hours=2)).strftime("%H:%M:%S")
+            warmtime1 = (lasttime + datetime.timedelta(minutes=90)).strftime("%H:%M:%S")
+            warmtime2 = (lasttime + datetime.timedelta(minutes=105)).strftime("%H:%M:%S")
+            return nexteatTime, warmtime1, warmtime2
 
         st.write('如果是白天的话，下一次喂养时间可能在{}左右，需要在{}到{}之间准备温奶'.format(show_last_time()[0],
                                                                                     show_last_time()[1],
