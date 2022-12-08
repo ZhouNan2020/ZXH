@@ -116,10 +116,10 @@ class today_eatable:
 
 class nexttime(today_eatable):
     def __init__(self):
-        self.lasttime = today_eatable.lasteverything('time')
+        self.lasttime = today_eatable.lasteverything(name='time')
     def show_last_time(self):
         #lasttime = str(self.lasttime)
-        lasttime = datetime.datetime.strptime(lasttime, "%H:%M:%S")
+        lasttime = datetime.datetime.strptime(self.lasttime, "%H:%M:%S")
         nexteatTime = (lasttime+datetime.timedelta(hours=2)).strftime("%H:%M:%S")
         warmtime1 = (lasttime+datetime.timedelta(minutes=90)).strftime("%H:%M:%S")
         warmtime2 = (lasttime+datetime.timedelta(minutes=105)).strftime("%H:%M:%S")
