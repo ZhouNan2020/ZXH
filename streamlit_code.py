@@ -154,7 +154,7 @@ with tab1:
         st.write('奶粉{}ml'.format(today_eat.lasteverything('FormulaMilkPowder')))
 
 
-        def show_last_time(self):
+        def show_last_time():
             lasttime = today_eat.lasteverything('time')
             lasttime = datetime.datetime.strptime(lasttime, "%H:%M:%S")
             nexteatTime = (lasttime + datetime.timedelta(hours=2)).strftime("%H:%M:%S")
