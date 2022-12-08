@@ -113,7 +113,7 @@ class today_eatable:
         #table.replace(0, '没吃', inplace=True)
         return table.tail(10)
     def show_last_time(self):
-        lasttime = self.today['time'].value[0]
+        lasttime = self.tail['time'].value[0]
         #lasttime = str(lasttime)
         lasttime = datetime.datetime.strptime(lasttime, "%H:%M:%S")
         nexteatTime = (lasttime+datetime.timedelta(hours=2)).strftime("%H:%M:%S")
