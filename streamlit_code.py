@@ -167,9 +167,9 @@ with tab1:
         nexteatTime = (lasttime + datetime.timedelta(hours=2)).strftime("%H:%M:%S")
         warmtime1 = (lasttime + datetime.timedelta(minutes=90)).strftime("%H:%M:%S")
         warmtime2 = (lasttime + datetime.timedelta(minutes=105)).strftime("%H:%M:%S")
-        st.write('如果是白天的话，下一次喂养时间可能在{}左右，需要在{}到{}之间准备温奶'.format(next.show_last_time()[0],
-                                                                                    next.show_last_time()[1],
-                                                                                    next.show_last_time()[2]))
+        st.write('如果是白天的话，下一次喂养时间可能在{}左右，需要在{}到{}之间准备温奶'.format(show_last_time()[0],
+                                                                                    show_last_time()[1],
+                                                                                    show_last_time()[2]))
 
         
         st.subheader('今日喂养总览：')
