@@ -115,7 +115,7 @@ class today_eatable:
 
 
 class nexttime(today_eatable):
-    def __init__(self):
+    def __init__(self,today_eatable):
         self.lasttime = today_eatable.lasteverything(name='time')
     def show_last_time(self):
         #lasttime = str(self.lasttime)
