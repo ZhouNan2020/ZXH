@@ -143,15 +143,34 @@ class today_shittable:
         #table.replace(1,'有',inplace=True)
         return table.tail(10)
 
+class Analysis:
+    def __init__(self):
+        data_eat = pd.DataFrame(sheet1.get_all_records())
+        data_shit = pd.DataFrame(sheet5.get_all_records())
+        self.datafrmae_eat = data_eat
+        self.datafrmae_shit = data_shit
+
+    def day_mean(self, name,tail_num=7):
+        data_nozero = self.datafrmae_eat.drop(self.datafrmae_eat[self.datafrmae_eat[str(name)] == 0].index)
+        data_nozero.set_index('date', inplace=True)
+        data_nozero = data_nozero[str(name)]
+        median = data_nozero.median()
+        max = data_nozero.max()
+        min = data_nozero.min()
+        mean_all = data_nozero.groupby('date').mean()
+        mean_tail = mean_all.tail(tail_num)
+        mean_tail = mean_tail.astype('int')
+        return mean_tail, median, max, min
+
 
 
 with tab1:
         today_eat = today_eatable()
         today_shit = today_shittable()
         st.subheader('上一次喂养：{}'.format(today_eat.lasteverything('time')))
-        st.write('母乳亲喂{}分钟'.format(today_eat.lasteverything('Breastfeeding')))
-        st.write('母乳瓶喂{}ml'.format(today_eat.lasteverything('BreastBottleFeeding')))
-        st.write('奶粉{}ml'.format(today_eat.lasteverything('FormulaMilkPowder')))
+        st.markdown('母乳亲喂**{}**分钟'.format(today_eat.lasteverything('Breastfeeding')))
+        st.markdown('母乳瓶喂**{}**ml'.format(today_eat.lasteverything('BreastBottleFeeding')))
+        st.markdown('奶粉**{}**ml'.format(today_eat.lasteverything('FormulaMilkPowder')))
 
 
         def show_last_time():
@@ -183,7 +202,8 @@ with tab1:
         st.table(today_eat.show())
         st.subheader('最近10次屎尿吃药记录：')
         st.table(today_shit.show())
-
+        analysis = Analysis()
+        st.write('最近7天日均母乳瓶喂量：',analysis.day_mean('BreastBottleFeeding')[0])
 
 with tab2:
         st.subheader('喂养记录')
@@ -240,13 +260,7 @@ with tab2:
 
 
 
-class Analysis:
-            def __init__(self):
-                    data_eat = pd.DataFrame(sheet1.get_all_records())
-                    data_shit = pd.DataFrame(sheet5.get_all_records())
 
-                    self.datafrmae_1 = data_eat
-                    self.datafrmae_2 = data_shit
             def day_mean(self,tail_num,name):
                     data_nozero = self.datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index)
                     data_nozero.set_index('date', inplace=True)
