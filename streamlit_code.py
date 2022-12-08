@@ -261,38 +261,38 @@ with tab2:
 
 
 
-            def day_mean(self,tail_num,name):
-                    data_nozero = self.datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index)
-                    data_nozero.set_index('date', inplace=True)
-                    data_nozero = data_nozero[str(name)]
-                    median = data_nozero.median()
-                    max = data_nozero.max()
-                    min = data_nozero.min()
-                    mean_all = data_nozero.groupby('date').mean()
-                    mean_tail = mean_all.tail(tail_num)
-                    mean_tail = mean_tail.astype('int')
-                    return mean_tail,median,max,min
-            def day_sum(self,tail_num,name):
-                    sum_all = self.datafrmae.groupby('date').sum()
-                    sum_all = sum_all[str(name)]
-                    median = sum_all.median()
-                    max = sum_all.max()
-                    min = sum_all.min()
-                    sum_tail = sum_all.tail(tail_num)
-                    sum_tail = sum_tail.astype('int')
-                    return sum_tail,median,max,min
-            def shit_ticks(self,tail_num,name):
-                    datafrmae = self.datafrmae
-                    dataframe = pd.DataFrame(datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index))
-                    dataframe = pd.concat([dataframe['date'], dataframe['ticks']], axis=1)
-                    dataframe.set_index('date', inplace=True)
-                    dataframe = dataframe.diff(axis=0, periods=1)
-                    dataframe = dataframe.groupby('date').mean()
-                    dataframe = dataframe.astype('int')
-                    dataframe = dataframe / 60
-                    dataframe = round(dataframe, 2)
-                    return dataframe
-
+            #def day_mean(self,tail_num,name):
+            #        data_nozero = self.datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index)
+            #        data_nozero.set_index('date', inplace=True)
+            #        data_nozero = data_nozero[str(name)]
+            #        median = data_nozero.median()
+            #        max = data_nozero.max()
+            #        min = data_nozero.min()
+            #        mean_all = data_nozero.groupby('date').mean()
+            #        mean_tail = mean_all.tail(tail_num)
+            #        mean_tail = mean_tail.astype('int')
+            #        return mean_tail,median,max,min
+            #def day_sum(self,tail_num,name):
+            #        sum_all = self.datafrmae.groupby('date').sum()
+            #        sum_all = sum_all[str(name)]
+            #        median = sum_all.median()
+            #        max = sum_all.max()
+            #        min = sum_all.min()
+            #        sum_tail = sum_all.tail(tail_num)
+            #        sum_tail = sum_tail.astype('int')
+            #        return sum_tail,median,max,min
+            #def shit_ticks(self,tail_num,name):
+            #        datafrmae = self.datafrmae
+            #        dataframe = pd.DataFrame(datafrmae.drop(self.datafrmae[self.datafrmae[str(name)] == 0].index))
+            #        dataframe = pd.concat([dataframe['date'], dataframe['ticks']], axis=1)
+            #        dataframe.set_index('date', inplace=True)
+            #        dataframe = dataframe.diff(axis=0, periods=1)
+            #        dataframe = dataframe.groupby('date').mean()
+            #        dataframe = dataframe.astype('int')
+            #        dataframe = dataframe / 60
+            #        dataframe = round(dataframe, 2)
+            #        return dataframe
+            #
 
 class temper_metric:
         def __init__(self):
