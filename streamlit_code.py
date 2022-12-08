@@ -114,7 +114,7 @@ class today_eatable:
         return table.tail(10)
     def show_last_time(self):
         lasttime = self.today['time'].value[0]
-        lasttime = str(lasttime)
+        #lasttime = str(lasttime)
         lasttime = datetime.datetime.strptime(lasttime, "%H:%M:%S")
         nexteatTime = (lasttime+datetime.timedelta(hours=2)).strftime("%H:%M:%S")
         warmtime1 = (lasttime+datetime.timedelta(minutes=90)).strftime("%H:%M:%S")
