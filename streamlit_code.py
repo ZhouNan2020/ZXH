@@ -118,23 +118,9 @@ class today_eatable:
         table_sum = table.iloc[:,0:2].sum(axis=1)
         table_sum = table_sum.to_frame()
         table_sum_nozero = table_sum.drop(table_sum[table_sum[0] == 0].index)
-        table_sum_tail = table_sum_nozero.tail(20)
+        table_sum_tail = table_sum_nozero.tail(30)
         table_sum_tail_mean = table_sum_tail.mean()
         return table_sum_tail_mean
-
-
-
-    def meanTimeInterval(self):
-        table = pd.DataFrame(self.table)
-        table = table.iloc[:, 2]
-        table = table.tail(20)
-        table_time = pd.to_datetime(table)
-        time_diff = table_time.diff(periods=1)
-        mean_time_diff = time_diff.mean()
-        #mean_time_diff = mean_time_diff.total_seconds()
-        #mean_time_diff = mean_time_diff
-        return mean_time_diff
-
 
 
 
@@ -204,8 +190,8 @@ with tab1:
             return nexteatTime, warmtime1, warmtime2
         st.markdown('下一次喂养时间可能在：**{}**左右'.format(show_last_time()[0]))
         st.markdown('温奶时间可以在：**{}**到**{}**之间'.format(show_last_time()[1],show_last_time()[2]))
-        st.markdown('下一次瓶喂量可能在**{}**ml上下'.format((today_eat.averageFeedingAmount().values[0])+30))
-        st.markdown('下一次瓶喂时间间隔可能在**{}**分钟之后'.format((today_eat.meanTimeInterval())))
+        st.markdown('根据最近30次瓶喂的均值，预估下一次瓶喂量可能在**{}**ml上下'.format((today_eat.averageFeedingAmount().values[0])))
+
         st.subheader('今日喂养总览：')
         st.write('母乳亲喂{}分钟'.format(today_eat.todayeverything('Breastfeeding')))
         st.write('母乳瓶喂{}ml'.format(today_eat.todayeverything('BreastBottleFeeding')))
