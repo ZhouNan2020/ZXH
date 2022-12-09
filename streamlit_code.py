@@ -131,7 +131,7 @@ class today_eatable:
         table_time = table_time.to_frame()
         time_diff = table_time.diff(axis=0, periods=1)
         mean_time_diff = time_diff.mean()
-
+        mean_time_diff = mean_time_diff.astype('datetime64[m]')
         return mean_time_diff
 
 
