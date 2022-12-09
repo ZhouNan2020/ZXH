@@ -130,7 +130,7 @@ class today_eatable:
         table_time = pd.to_datetime(table)
         time_diff = table_time.diff(periods=1)
         mean_time_diff = time_diff.mean()
-        mean_time_diff = mean_time_diff//3600
+        mean_time_diff = (mean_time_diff % 3600)//60
         return mean_time_diff
 
 
