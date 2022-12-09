@@ -118,8 +118,10 @@ class today_eatable:
         table_sum = table.iloc[:,0:2].sum(axis=1)
         table_sum = table_sum.to_frame()
         table_sum_nozero = table_sum.drop(table_sum[table_sum[0] == 0].index)
-        table_sum_tail = table_sum_nozero.tail(56)
+        table_sum_tail = table_sum_nozero.tail(50)
         table_sum_tail_mean = table_sum_tail.mean()
+        table_sum_tail_mean = table_sum_tail_mean.values[0]
+        table_sum_tail_mean = round(table_sum_tail_mean,2)
         return table_sum_tail_mean
 
 
@@ -190,7 +192,7 @@ with tab1:
             return nexteatTime, warmtime1, warmtime2
         st.markdown('下一次喂养时间可能在：**{}**左右'.format(show_last_time()[0]))
         st.markdown('温奶时间可以在：**{}**到**{}**之间'.format(show_last_time()[1],show_last_time()[2]))
-        st.markdown('根据最近30次瓶喂的均值，预估下一次瓶喂量可能在**{}**ml上下'.format((today_eat.averageFeedingAmount().values[0])))
+        st.markdown('根据最近30次瓶喂的均值，预估下一次瓶喂量可能在**{}**ml上下'.format((today_eat.averageFeedingAmount())))
 
         st.subheader('今日喂养总览：')
         st.write('母乳亲喂{}分钟'.format(today_eat.todayeverything('Breastfeeding')))
