@@ -188,14 +188,14 @@ with tab1:
             lasttime = today_eat.lasteverything('time')
             lasttime = datetime.datetime.strptime(lasttime, "%H:%M:%S")
             nexteatTime = (lasttime + datetime.timedelta(minutes=150)).strftime("%H:%M:%S")
-            warmtime1 = (lasttime + datetime.timedelta(minutes=90)).strftime("%H:%M:%S")
-            warmtime2 = (lasttime + datetime.timedelta(minutes=120)).strftime("%H:%M:%S")
+            warmtime1 = (lasttime + datetime.timedelta(minutes=110)).strftime("%H:%M:%S")
+            warmtime2 = (lasttime + datetime.timedelta(minutes=130)).strftime("%H:%M:%S")
             return nexteatTime, warmtime1, warmtime2
         st.markdown('下一次喂养时间可能在**{}**左右'.format(show_last_time()[0]))
         st.markdown('可以在**{}**到**{}**温奶'.format(show_last_time()[1],show_last_time()[2]))
         st.markdown('根据最近50次瓶喂（母乳+奶粉）的均值，下一次热奶的量在**{}**ml上下'.format((today_eat.averageFeedingAmount())))
 
-
+        st.markdown('-------')
         st.subheader('今日喂养总览：')
         st.write('母乳亲喂{}分钟'.format(today_eat.todayeverything('Breastfeeding')))
         st.write('母乳瓶喂{}ml'.format(today_eat.todayeverything('BreastBottleFeeding')))
@@ -203,18 +203,23 @@ with tab1:
         st.write('今日总计：共{}分钟亲喂+{}ml母乳瓶喂或奶粉'.format(today_eat.todayeverything('Breastfeeding'),
                                           today_eat.todayeverything('BreastBottleFeeding')+today_eat.todayeverything('FormulaMilkPowder')))
 
-
+        st.markdown('-------')
         st.subheader('今日杂项：')
         st.write('上一次大便：{}'.format(today_shit.lastcoltime('Shit')))
         st.write('今日大便次数：{}次'.format(today_shit.todayeverything('Shit')))
         st.write('今日服用妈咪爱：{}次'.format(today_shit.todayeverything('Mamiai')))
         st.write('今日服用AD滴丸：{}次'.format(today_shit.todayeverything('ADconsole')))
+        st.markdown('-------')
+        st.subheader('近期喂养总览')
         st.subheader('最近10次喂养记录：')
         st.table(today_eat.show())
         st.subheader('最近10次屎尿吃药记录：')
         st.table(today_shit.show())
         analysis = Analysis()
-        st.write('最近7天日均母乳瓶喂量：',analysis.day_mean('BreastBottleFeeding')[0])
+        st.write('最近7天日均母乳瓶喂量：')
+        fig,ax = plt.subplots()
+        ax.plot(analysis.day_mean('BreastBottleFeeding')[0])
+        st.pyplot(fig)
 
 with tab2:
         st.subheader('喂养记录')
