@@ -110,6 +110,7 @@ class today_eatable:
         table = table.iloc[:,2:6]
         table = table.set_index('time')
         table.rename(columns={'Breastfeeding':'母乳亲喂（分钟）','BreastBottleFeeding':'母乳瓶喂（ml）','FormulaMilkPowder':'配方奶粉（ml）'},inplace=True)
+        #table.style.highlight_min()
         #table.replace(0, '没吃', inplace=True)
         return table.tail(10)
     def averageFeedingAmount(self):
