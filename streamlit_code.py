@@ -127,6 +127,7 @@ class today_eatable:
     def meanTimeInterval(self):
         table = pd.DataFrame(self.table)
         table = table.iloc[:, 2]
+        table = table.tail(20)
         table_time = pd.to_datetime(table)
         time_diff = table_time.diff(periods=1)
         mean_time_diff = time_diff.sum()
