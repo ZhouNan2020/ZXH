@@ -131,7 +131,7 @@ class today_eatable:
         table_sum_nozero = table_sum.drop(table_sum[table_sum[0] == 0].index)
         table_sum_nozero.reset_index(inplace=True)
         day7_mean = table_sum_nozero.groupby('date').mean()
-        day7_mean = int(day7_mean.sum(axis=0))
+        #day7_mean = int(day7_mean.sum(axis=0))
         return day7_mean
 
     def meanTimeInterval(self):
