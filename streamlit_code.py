@@ -186,13 +186,14 @@ with tab1:
         def show_last_time():
             lasttime = today_eat.lasteverything('time')
             lasttime = datetime.datetime.strptime(lasttime, "%H:%M:%S")
-            nexteatTime = (lasttime + datetime.timedelta(hours=2)).strftime("%H:%M:%S")
+            nexteatTime = (lasttime + datetime.timedelta(minutes=150)).strftime("%H:%M:%S")
             warmtime1 = (lasttime + datetime.timedelta(minutes=90)).strftime("%H:%M:%S")
-            warmtime2 = (lasttime + datetime.timedelta(minutes=105)).strftime("%H:%M:%S")
+            warmtime2 = (lasttime + datetime.timedelta(minutes=120)).strftime("%H:%M:%S")
             return nexteatTime, warmtime1, warmtime2
-        st.markdown('下一次喂养时间可能在：**{}**左右'.format(show_last_time()[0]))
-        st.markdown('温奶时间可以在：**{}**到**{}**之间'.format(show_last_time()[1],show_last_time()[2]))
-        st.markdown('根据最近30次瓶喂的均值，预估下一次瓶喂量可能在**{}**ml上下'.format((today_eat.averageFeedingAmount())))
+        st.markdown('下一次喂养时间可能在**{}**左右'.format(show_last_time()[0]))
+        st.markdown('可以在**{}**到**{}**温奶'.format(show_last_time()[1],show_last_time()[2]))
+        st.markdown('根据最近50次瓶喂（母乳+奶粉）的均值，下一次热奶的量在**{}**ml上下'.format((today_eat.averageFeedingAmount())))
+        st.metric(today_eat.averageFeedingAmount())
 
         st.subheader('今日喂养总览：')
         st.write('母乳亲喂{}分钟'.format(today_eat.todayeverything('Breastfeeding')))
