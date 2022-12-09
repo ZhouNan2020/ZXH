@@ -129,9 +129,9 @@ class today_eatable:
         table = table.iloc[:, 2]
         table_time = pd.to_datetime(table)
         time_diff = table_time.diff(periods=1)
-        mean_time_diff = time_diff.mean()
-        mean_time_diff = mean_time_diff.total_seconds()
-        mean_time_diff = mean_time_diff
+        mean_time_diff = time_diff.sum()
+        #mean_time_diff = mean_time_diff.total_seconds()
+        #mean_time_diff = mean_time_diff
         return mean_time_diff
 
 
