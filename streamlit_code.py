@@ -219,6 +219,7 @@ with tab1:
         st.write('最近7天日均母乳瓶喂量：')
         fig,ax = plt.subplots()
         ax.plot(analysis.day_mean('BreastBottleFeeding')[0])
+        plt.xticks(rotation=45)
         st.pyplot(fig)
 
 with tab2:
