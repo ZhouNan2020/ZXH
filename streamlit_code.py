@@ -203,7 +203,7 @@ with tab1:
         st.markdown('下一次喂养时间可能在：**{}**左右'.format(show_last_time()[0]))
         st.markdown('温奶时间可以在：**{}**到**{}**之间'.format(show_last_time()[1],show_last_time()[2]))
         st.markdown('下一次瓶喂量可能在**{}**ml上下'.format((today_eat.averageFeedingAmount().values[0])+30))
-        st.markdown('下一次瓶喂时间间隔可能在**{}**分钟之后'.format((today_eat.meanTimeInterval().values[0]).seconds/60))
+        st.markdown('下一次瓶喂时间间隔可能在**{}**分钟之后'.format((today_eat.meanTimeInterval().values[0])))
         st.subheader('今日喂养总览：')
         st.write('母乳亲喂{}分钟'.format(today_eat.todayeverything('Breastfeeding')))
         st.write('母乳瓶喂{}ml'.format(today_eat.todayeverything('BreastBottleFeeding')))
