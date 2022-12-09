@@ -118,7 +118,7 @@ class today_eatable:
         table_sum = table.iloc[:,0:2].sum(axis=1)
         table_sum = table_sum.to_frame()
         table_sum_nozero = table_sum.drop(table_sum[table_sum[0] == 0].index)
-        table_sum_tail = table_sum_nozero.tail(15)
+        table_sum_tail = table_sum_nozero.tail(56)
         table_sum_tail_mean = table_sum_tail.mean()
         return table_sum_tail_mean
 
