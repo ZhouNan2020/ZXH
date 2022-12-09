@@ -179,7 +179,7 @@ with tab1:
         today_eat = today_eatable()
         today_shit = today_shittable()
         st.subheader('上一次喂养：{}'.format(today_eat.lasteverything('time')))
-        st.write('喂养内容：')
+        st.markdown('**喂养内容：**')
         st.markdown('1.母乳亲喂**{}**分钟'.format(today_eat.lasteverything('Breastfeeding')))
         st.markdown('2.母乳瓶喂**{}**ml'.format(today_eat.lasteverything('BreastBottleFeeding')))
         st.markdown('3.奶粉**{}**ml'.format(today_eat.lasteverything('FormulaMilkPowder')))
