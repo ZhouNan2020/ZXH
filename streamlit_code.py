@@ -193,7 +193,7 @@ with tab1:
         st.markdown('下一次喂养时间可能在**{}**左右'.format(show_last_time()[0]))
         st.markdown('可以在**{}**到**{}**温奶'.format(show_last_time()[1],show_last_time()[2]))
         st.markdown('根据最近50次瓶喂（母乳+奶粉）的均值，下一次热奶的量在**{}**ml上下'.format((today_eat.averageFeedingAmount())))
-        st.metric(today_eat.averageFeedingAmount())
+        st.metric(value=today_eat.averageFeedingAmount(),delta='ml',label='下一次热奶的量')
 
         st.subheader('今日喂养总览：')
         st.write('母乳亲喂{}分钟'.format(today_eat.todayeverything('Breastfeeding')))
