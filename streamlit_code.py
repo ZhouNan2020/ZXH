@@ -112,6 +112,19 @@ class today_eatable:
         table.rename(columns={'Breastfeeding':'母乳亲喂（分钟）','BreastBottleFeeding':'母乳瓶喂（ml）','FormulaMilkPowder':'配方奶粉（ml）'},inplace=True)
         #table.replace(0, '没吃', inplace=True)
         return table.tail(10)
+    def averageFeedingAmount(self):
+        table = pd.DataFrame(self.table)
+        table = table.iloc[:,4:6]
+        table_sum = table.iloc[:,0:2].sum(axis=1)
+        table_sum = table_sum.to_frame()
+        table_sum_nozero = table_sum.drop(table_sum[table_sum[0] == 0].index)
+        table_sum_tail = table_sum_nozero.tail(50)
+        table_sum_tail_mean = table_sum_tail.mean()
+        return table_sum_tail_mean
+    def meanTimeInterval(self):
+        table = pd.DataFrame(self.table)
+        table = table.iloc[:, 2]
+        table.iloc[:,2] = table[:,2].astype('datetime64[ns]')
 
 
 
@@ -182,7 +195,7 @@ with tab1:
             return nexteatTime, warmtime1, warmtime2
         st.markdown('下一次喂养时间可能在：**{}**左右'.format(show_last_time()[0]))
         st.markdown('温奶时间可以在：**{}**到**{}**之间'.format(show_last_time()[1],show_last_time()[2]))
-
+        st.markdown('下一次喂养量可能在：**{}**ml左右'.format(today_eat.averageFeedingAmount().values[0]))
 
         
         st.subheader('今日喂养总览：')
