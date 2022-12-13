@@ -134,6 +134,7 @@ class today_eatable:
 
 
 
+
 class today_shittable:
     def __init__(self):
 
@@ -165,6 +166,14 @@ class today_shittable:
             st.warning('今天还没有吃AD滴丸')
         else:
             st.success('好了今天的AD滴丸吃过了')
+
+    def judg_shit(self):
+        value = self.today['Shit'].value[0]
+        if value == 1:
+            st.warning('今天只拉了一次大便噢')
+        else:
+            st.success('好了今天拉了不止一次大便')
+
 
 
 class Analysis:
