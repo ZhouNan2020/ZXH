@@ -204,6 +204,7 @@ with tab1:
         today_shit = today_shittable()
         today_shit.judg_AD()
         today_eat.judg_formula()
+        today_shit.judg_shit()
         st.markdown('---------')
         st.subheader('上一次喂养：{}'.format(today_eat.lasteverything('time')))
         st.markdown('**喂养内容：**')
