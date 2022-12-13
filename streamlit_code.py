@@ -193,6 +193,9 @@ class Analysis:
 with tab1:
         today_eat = today_eatable()
         today_shit = today_shittable()
+        today_shit.judg_AD()
+        today_eat.judg_formula()
+        st.markdown('---------')
         st.subheader('上一次喂养：{}'.format(today_eat.lasteverything('time')))
         st.markdown('**喂养内容：**')
         st.markdown('1.母乳亲喂**{}**分钟'.format(today_eat.lasteverything('Breastfeeding')))
