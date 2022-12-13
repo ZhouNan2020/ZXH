@@ -370,76 +370,76 @@ with tab3:
         st.pyplot(fig)
         st.subheader('2.大便颜色')
 
-with tab4:
-        st.subheader('数据分析')
-        daynum = st.slider('想分析周栩珩最近多少天的状态？', 1, 15, 3)
-
-        if st.button('开始分析'):
-                ana = Analysis()
-                name1 = '近{}日每日平均母乳亲喂时间'.format(daynum)
-                mean_breastfeeding=pd.DataFrame(ana.day_mean(daynum,'Breastfeeding')[0])
-                fig, ax = plt.subplots()
-                ax.plot(mean_breastfeeding.index, mean_breastfeeding['Breastfeeding'], 'o-')
-                ax.set_xlabel('日期', fontsize=16, fontproperties=font)
-                plt.xticks(rotation=45)
-                ax.set_ylabel('日均亲喂时间', fontsize=16, fontproperties=font)
-                ax.set_title(str(name1), fontsize=16, fontproperties=font)
-                #for a, b in zip(list(mean_breastfeeding.index), list(mean_breastfeeding['Breastfeeding'])):
-                        #plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
-                st.pyplot(fig)
-
-                name2 = '近{}日每日平均喂养量'.format(daynum)
-                mean_bottle=pd.DataFrame(ana.day_mean(daynum,'BreastBottleFeeding')[0])
-                mean_formulamilkpowder = pd.DataFrame(ana.day_mean(daynum, 'FormulaMilkPowder')[0])
-                fig, ax = plt.subplots()
-                ax.plot(mean_bottle.index, mean_bottle['BreastBottleFeeding'], 'o-')
-                ax.plot(mean_formulamilkpowder.index, mean_formulamilkpowder['FormulaMilkPowder'], 's-')
-                ax.set_xlabel('日期', fontsize=16, fontproperties=font)
-                plt.xticks(rotation=45)
-                plt.legend(['母乳瓶喂', '配方奶粉'], loc='upper left', prop=font)
-                ax.set_ylabel('喂养量', fontsize=16, fontproperties=font)
-                ax.set_title(str(name2), fontsize=16, fontproperties=font)
-                #for a, b in zip(list(mean_bottle.index), list(mean_bottle['BreastBottleFeeding'])):
-                        #plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
-                #for a, b in zip(list(mean_formulamilkpowder.index), list(mean_formulamilkpowder['FormulaMilkPowder'])):
-                        #plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
-                st.pyplot(fig)
-                median = ana.day_mean(daynum,'BreastBottleFeeding')[1]
-                max = ana.day_mean(daynum,'BreastBottleFeeding')[2]
-                min = ana.day_mean(daynum,'BreastBottleFeeding')[3]
-                st.write('近{}日母乳瓶喂量中位数为{}毫升，最大值为{}毫升，最小值为{}毫升'.format(daynum,median,max,min))
-                median = ana.day_mean(daynum,'FormulaMilkPowder')[1]
-                max = ana.day_mean(daynum,'FormulaMilkPowder')[2]
-                min = ana.day_mean(daynum,'FormulaMilkPowder')[3]
-                st.write('近{}日配方奶粉喂量中位数为{}毫升，最大值为{}毫升，最小值为{}毫升'.format(daynum,median,max,min))
-
-                name3 = '近{}日每日拉屎次数'.format(daynum)
-                shit_sum = pd.DataFrame(ana.day_sum(daynum,'Shit')[0])
-                fig, ax = plt.subplots()
-                ax.bar(x=shit_sum.index,height=shit_sum['Shit'],width=0.5,align='center',color='steelblue',alpha=0.8,edgecolor='black')
-                ax.set_xlabel('日期', fontsize=16, fontproperties=font)
-                plt.xticks(rotation=45)
-                ax.set_ylabel('拉屎次数', fontsize=16, fontproperties=font)
-                ax.set_title(str(name3), fontsize=16, fontproperties=font)
-                #for a, b in zip(list(shit_sum.index),list(shit_sum['Shit'])):
-                        #plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
-                st.pyplot(fig)
-                median = ana.day_sum(daynum,'Shit')[1]
-                max = ana.day_sum(daynum,'Shit')[2]
-                min = ana.day_sum(daynum,'Shit')[3]
-                st.write('近{}日拉屎次数中位数为{}次，最大值为{}次，最小值为{}次'.format(daynum,median,max,min))
-
-                name4 = '近{}日每日平均拉屎间隔时间'.format(daynum)
-                shit_day = pd.DataFrame(ana.shit_ticks(daynum,'Shit'))
-                fig, ax = plt.subplots()
-                ax.bar(shit_day.index, shit_day['ticks'], width=0.5, align='center', color='steelblue', alpha=0.8)
-                ax.set_xlabel('日期', fontsize=16, fontproperties=font)
-                plt.xticks(rotation=45)
-                ax.set_ylabel('平均拉屎间隔时间（分钟）', fontsize=16, fontproperties=font)
-                ax.set_title(str(name4), fontsize=16, fontproperties=font)
-                #for a, b in zip(list(shit_day.index),list(shit_day['ticks'])):
-                        #plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
-                st.pyplot(fig)
+#with tab4:
+#        st.subheader('数据分析')
+#        daynum = st.slider('想分析周栩珩最近多少天的状态？', 1, 15, 3)
+#
+#        if st.button('开始分析'):
+#                ana = Analysis()
+#                name1 = '近{}日每日平均母乳亲喂时间'.format(daynum)
+#                mean_breastfeeding=pd.DataFrame(ana.day_mean(daynum,'Breastfeeding')[0])
+#                fig, ax = plt.subplots()
+#                ax.plot(mean_breastfeeding.index, mean_breastfeeding['Breastfeeding'], 'o-')
+#                ax.set_xlabel('日期', fontsize=16, fontproperties=font)
+#                plt.xticks(rotation=45)
+#                ax.set_ylabel('日均亲喂时间', fontsize=16, fontproperties=font)
+#                ax.set_title(str(name1), fontsize=16, fontproperties=font)
+#                #for a, b in zip(list(mean_breastfeeding.index), list(mean_breastfeeding['Breastfeeding'])):
+#                        #plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
+#                st.pyplot(fig)
+#
+#                name2 = '近{}日每日平均喂养量'.format(daynum)
+#                mean_bottle=pd.DataFrame(ana.day_mean(daynum,'BreastBottleFeeding')[0])
+#                mean_formulamilkpowder = pd.DataFrame(ana.day_mean(daynum, 'FormulaMilkPowder')[0])
+#                fig, ax = plt.subplots()
+#                ax.plot(mean_bottle.index, mean_bottle['BreastBottleFeeding'], 'o-')
+#                ax.plot(mean_formulamilkpowder.index, mean_formulamilkpowder['FormulaMilkPowder'], 's-')
+#                ax.set_xlabel('日期', fontsize=16, fontproperties=font)
+#                plt.xticks(rotation=45)
+#                plt.legend(['母乳瓶喂', '配方奶粉'], loc='upper left', prop=font)
+#                ax.set_ylabel('喂养量', fontsize=16, fontproperties=font)
+#                ax.set_title(str(name2), fontsize=16, fontproperties=font)
+#                #for a, b in zip(list(mean_bottle.index), list(mean_bottle['BreastBottleFeeding'])):
+#                        #plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
+#                #for a, b in zip(list(mean_formulamilkpowder.index), list(mean_formulamilkpowder['FormulaMilkPowder'])):
+#                        #plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
+#                st.pyplot(fig)
+#                median = ana.day_mean(daynum,'BreastBottleFeeding')[1]
+#                max = ana.day_mean(daynum,'BreastBottleFeeding')[2]
+#                min = ana.day_mean(daynum,'BreastBottleFeeding')[3]
+#                st.write('近{}日母乳瓶喂量中位数为{}毫升，最大值为{}毫升，最小值为{}毫升'.format(daynum,median,max,min))
+#                median = ana.day_mean(daynum,'FormulaMilkPowder')[1]
+#                max = ana.day_mean(daynum,'FormulaMilkPowder')[2]
+#                min = ana.day_mean(daynum,'FormulaMilkPowder')[3]
+#                st.write('近{}日配方奶粉喂量中位数为{}毫升，最大值为{}毫升，最小值为{}毫升'.format(daynum,median,max,min))
+#
+#                name3 = '近{}日每日拉屎次数'.format(daynum)
+#                shit_sum = pd.DataFrame(ana.day_sum(daynum,'Shit')[0])
+#                fig, ax = plt.subplots()
+#                ax.bar(x=shit_sum.index,height=shit_sum['Shit'],width=0.5,align='center',color='steelblue',alpha=0.8,edgecolor='black')
+#                ax.set_xlabel('日期', fontsize=16, fontproperties=font)
+#                plt.xticks(rotation=45)
+#                ax.set_ylabel('拉屎次数', fontsize=16, fontproperties=font)
+#                ax.set_title(str(name3), fontsize=16, fontproperties=font)
+#                #for a, b in zip(list(shit_sum.index),list(shit_sum['Shit'])):
+#                        #plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
+#                st.pyplot(fig)
+#                median = ana.day_sum(daynum,'Shit')[1]
+#                max = ana.day_sum(daynum,'Shit')[2]
+#                min = ana.day_sum(daynum,'Shit')[3]
+#                st.write('近{}日拉屎次数中位数为{}次，最大值为{}次，最小值为{}次'.format(daynum,median,max,min))
+#
+#                name4 = '近{}日每日平均拉屎间隔时间'.format(daynum)
+#                shit_day = pd.DataFrame(ana.shit_ticks(daynum,'Shit'))
+#                fig, ax = plt.subplots()
+#                ax.bar(shit_day.index, shit_day['ticks'], width=0.5, align='center', color='steelblue', alpha=0.8)
+#                ax.set_xlabel('日期', fontsize=16, fontproperties=font)
+#                plt.xticks(rotation=45)
+#                ax.set_ylabel('平均拉屎间隔时间（分钟）', fontsize=16, fontproperties=font)
+#                ax.set_title(str(name4), fontsize=16, fontproperties=font)
+#                #for a, b in zip(list(shit_day.index),list(shit_day['ticks'])):
+#                        #plt.text(a, b + 2, b, ha='center', va='center', fontsize=14)
+#                st.pyplot(fig)
 
 
 #@st.cache(ttl=600)
