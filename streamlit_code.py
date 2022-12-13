@@ -127,7 +127,7 @@ class today_eatable:
     def judg_formula(self):
         value = self.today['FormulaMilkPowder'].values[0]
         if value == 0:
-            st.warning('今天还没有吃配方奶粉')
+            st.error('今天还没有吃配方奶粉')
         else:
             pass
 
@@ -163,21 +163,21 @@ class today_shittable:
     def judg_AD(self):
         value = self.today['ADconsole'].values[0]
         if value == 0:
-            st.warning('今天还没有吃AD滴丸')
+            st.error('今天还没有吃AD滴丸')
         else:
             pass
 
     def judg_shit(self):
         value = self.today['Shit'].values[0]
         if value == 1:
-            st.warning('今天只拉了一次大便噢')
+            st.error('今天只拉了一次大便噢')
         else:
             pass
 
     def judg_mamiai(self):
         value = self.today['Mamiai'].values[0]
         if value == 0:
-            st.warning('今天还没有吃妈咪爱')
+            st.error('今天还没有吃妈咪爱')
         else:
             pass
 
