@@ -168,7 +168,7 @@ class today_shittable:
             st.success('好了今天的AD滴丸吃过了')
 
     def judg_shit(self):
-        value = self.today['Shit'].value[0]
+        value = self.today['Shit'].values[0]
         if value == 1:
             st.warning('今天只拉了一次大便噢')
         else:
