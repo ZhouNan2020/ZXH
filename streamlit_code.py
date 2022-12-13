@@ -127,7 +127,7 @@ class today_eatable:
     def judg_formula(self):
         value = self.today['FormulaMilkPowder'].values[0]
         if value == 0:
-            st.warning('今天还没有吃过配方奶粉')
+            st.warning('今天还没有吃配方奶粉')
         else:
             pass
 
