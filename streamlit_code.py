@@ -124,6 +124,12 @@ class today_eatable:
         table_sum_tail_mean = table_sum_tail_mean.values[0]
         table_sum_tail_mean = round(table_sum_tail_mean,2)
         return table_sum_tail_mean
+    def judg_formula(self):
+        value = self.today['FormulaMilkPowder'].values[0]
+        if value == 0:
+            st.warning('今天还没有吃过配方奶粉')
+        else:
+            st.success('好了今天吃过配方奶粉了')
 
 
 
@@ -153,6 +159,13 @@ class today_shittable:
         table.rename(columns={'Shit':'屎','Pee':'尿','ChangeDiapers':'换尿布','Mamiai':'妈咪爱','ADconsole':'AD滴丸'},inplace=True)
         #table.replace(1,'有',inplace=True)
         return table.tail(10)
+    def judg_AD(self):
+        value = self.today['ADconsole'].values[0]
+        if value == 0:
+            st.warning('今天还没有吃AD滴丸')
+        else:
+            st.success('好了今天的AD滴丸吃过了')
+
 
 class Analysis:
     def __init__(self):
@@ -172,6 +185,8 @@ class Analysis:
         mean_tail = mean_all.tail(tail_num)
         mean_tail = mean_tail.astype('int')
         return mean_tail, median, max, min
+
+
 
 
 
