@@ -170,7 +170,7 @@ class today_shittable:
     def judg_shit(self):
         value = self.today['Shit'].values[0]
         if value == 1:
-            st.error('今天只拉了一次大便噢')
+            st.warning('今天只拉了一次大便噢')
         else:
             pass
 
