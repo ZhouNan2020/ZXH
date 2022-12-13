@@ -129,7 +129,7 @@ class today_eatable:
         if value == 0:
             st.warning('今天还没有吃过配方奶粉')
         else:
-            st.success('好了今天吃过配方奶粉了')
+            pass
 
 
 
@@ -165,14 +165,21 @@ class today_shittable:
         if value == 0:
             st.warning('今天还没有吃AD滴丸')
         else:
-            st.success('好了今天的AD滴丸吃过了')
+            pass
 
     def judg_shit(self):
         value = self.today['Shit'].values[0]
         if value == 1:
             st.warning('今天只拉了一次大便噢')
         else:
-            st.success('好了今天拉了不止一次大便')
+            pass
+
+    def judg_mamiai(self):
+        value = self.today['Mamiai'].values[0]
+        if value == 0:
+            st.warning('今天还没有吃妈咪爱')
+        else:
+            pass
 
 
 
@@ -203,6 +210,7 @@ with tab1:
         today_eat = today_eatable()
         today_shit = today_shittable()
         today_shit.judg_AD()
+        today_shit.judg_mamiai()
         today_eat.judg_formula()
         today_shit.judg_shit()
         st.markdown('---------')
