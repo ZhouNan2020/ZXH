@@ -369,7 +369,7 @@ class temper_metric:
 
 with tab3:
         st.write('该版面会依据周栩珩当前需要记录的特殊情况调整')
-        st.subheader('目前仅开放记录体温和大便颜色')
+        st.subheader('目前仅开放记录体温')
         st.subheader('1.体温')
         temper=st.number_input('本次体温',step=0.1,min_value=35.0,max_value=42.0)
         if st.button('提交本次体温记录',key='temper'):
@@ -386,7 +386,7 @@ with tab3:
         ax.set_title('最近10次体温测量结果', fontproperties=font, fontsize=12)
         plt.xticks(rotation=45)
         st.pyplot(fig)
-        st.subheader('2.大便颜色')
+
 
 #with tab4:
 #        st.subheader('数据分析')
