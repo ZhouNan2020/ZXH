@@ -371,7 +371,7 @@ with tab3:
         st.write('该版面会依据周栩珩当前需要记录的特殊情况调整')
         st.subheader('目前仅开放记录体温')
         st.subheader('1.体温')
-        temper=st.number_input('本次体温',step=0.1,min_value=35.0,max_value=42.0)
+        temper=st.number_input('本次体温',step=0.1,min_value=0.0)
         if st.button('提交本次体温记录',key='temper'):
                 sheet5.append_row([timeticks,date,time_auto,0,0,0,0,0,temper],1)
                 st.success('体温记录已提交')
