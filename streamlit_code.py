@@ -385,7 +385,7 @@ with tab3:
         ax.set_ylabel('体温', fontproperties=font, fontsize=12)
         ax.set_title('最近10次体温测量结果', fontproperties=font, fontsize=12)
         plt.axhline(y=37.2, color='r', linestyle='--')
-        plt.text(1,37.4,'37.2℃',fontproperties=font,fontsize=12)
+        plt.text(0.3,37.2,'37.2℃',fontproperties=font,fontsize=12)
         plt.xticks(rotation=45)
         st.pyplot(fig)
 
