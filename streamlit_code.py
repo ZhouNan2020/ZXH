@@ -364,7 +364,7 @@ class temper_metric:
                 last = last10.values[-2]
                 delta = current-last
                 delta = round(delta,2)
-                return delta,last10
+                return delta,last10,current
 
 
 with tab3:
@@ -377,7 +377,7 @@ with tab3:
                 st.success('体温记录已提交')
         temp = temper_metric()
         delta = temp.temper()[0]
-        st.metric(label="目前体温", value=temper, delta=delta, delta_color="inverse")
+        st.metric(label="目前体温", value=temp.temper()[2], delta=delta, delta_color="inverse")
         temp_plot = pd.DataFrame(temp.temper()[1])
         fig, ax = plt.subplots()
         ax.plot(temp_plot.index, temp_plot['temper'])
