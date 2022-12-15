@@ -9,84 +9,6 @@ import matplotlib.pyplot as plt
 from matplotlib import font_manager
 import datetime
 #%%
-st.title('周栩珩成长日记')
-font = font_manager.FontProperties(fname='simhei.ttf')
-plt.rcParams['font.family']=['SimHei']
-parameters = {'xtick.labelsize': 16,
-              'ytick.labelsize': 16,
-              'axes.unicode_minus':False}
-plt.rcParams.update(parameters)
-plt.style.use('ggplot')
-
-#%%
-# 这一段不要动，我特么目前还没有搞太明白谷歌的API怎么工作的
-# 目前可以知道的是：scopes是范围，但是地址就是这个而不是sheet的链接
-#@st.cache(ttl=300)
-def connect_to_google_sheet():
-        scopes = ["https://spreadsheets.google.com/feeds"]
-# 为特定的账户开设key，然后然后把账户给到谷歌sheet的访问权限中，通过key访问这个账户关联的sheet
-        credentials = ServiceAccountCredentials.from_json_keyfile_name(
-        "credentials.json", scopes)
-#这个json就是key，授权给谷歌的表格
-        client = gspread.authorize(credentials)
-# 这一段就牛逼了，这一段那串乱码是目标谷歌sheet地址中间那一部分，用.来确定要访问的工作表
-        sheet_A = client.open_by_key(
-        "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").sheet1
-
-        sheet_B = client.open_by_key(
-        "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('屎尿吃药表')
-
-        return sheet_A,sheet_B
-
-
-
-#%%
-#下面的就可以动了
-
-tab1, tab2, tab3 = st.tabs(["喂养状态总览","新增记录", "特殊情况记录"])
-timeticks = time.time()
-global date,time_value,time_auto
-date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
-time_value = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai'))
-time_auto = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
-#st.write(time_value.strftime("%H"))
-
-sheet1,sheet5 = connect_to_google_sheet()
-
-#@st.cache(ttl=60)
-#class he_we:
-#    def __init__(self):
-#            sheet5 = connect_to_google_sheet()[2]
-#            dataframe = pd.DataFrame(sheet3.get_all_records())
-#            self.dataframe = dataframe.tail(10)
-#            self.sheet3 = sheet3
-#    def show(self):
-#            dataframe = pd.DataFrame(self.dataframe)
-#            dataframe = dataframe.set_index('date')
-#            dataframe.rename(columns={'height':'身高','weight':'体重',},inplace=True)
-#            return dataframe
-#    def append(self, date, height, weight):
-#            self.sheet3.append_row([date, height, weight])
-#
-#
-#with st.sidebar:
-#
-#        st.header('身高体重记录')
-#        height_value = st.number_input('身高(cm)', value=0.0, step=0.1)
-#        weight_value= st.number_input('体重(kg)', value=0.0, step=0.1)
-#        if st.button('提交', key='submit_2'):
-#                sheet3 = connect_to_google_sheet()[2]
-#                sheet3.append(date, height_value, weight_value)
-#                st.success('提交成功')
-#        if st.button('显示身高体重记录',key = 'height_weight'):
-#                hw = he_we()
-#                hewe = hw.show()
-#                st.write(hewe)
-
-
-
-
-#@st.cache(ttl=60)
 class today_eatable:
     def __init__(self):
 
@@ -201,6 +123,89 @@ class Analysis:
         mean_tail = mean_all.tail(tail_num)
         mean_tail = mean_tail.astype('int')
         return mean_tail, median, max, min
+
+
+
+#%%
+st.title('周栩珩成长日记')
+font = font_manager.FontProperties(fname='simhei.ttf')
+plt.rcParams['font.family']=['SimHei']
+parameters = {'xtick.labelsize': 16,
+              'ytick.labelsize': 16,
+              'axes.unicode_minus':False}
+plt.rcParams.update(parameters)
+plt.style.use('ggplot')
+
+#%%
+# 这一段不要动，我特么目前还没有搞太明白谷歌的API怎么工作的
+# 目前可以知道的是：scopes是范围，但是地址就是这个而不是sheet的链接
+#@st.cache(ttl=300)
+def connect_to_google_sheet():
+        scopes = ["https://spreadsheets.google.com/feeds"]
+# 为特定的账户开设key，然后然后把账户给到谷歌sheet的访问权限中，通过key访问这个账户关联的sheet
+        credentials = ServiceAccountCredentials.from_json_keyfile_name(
+        "credentials.json", scopes)
+#这个json就是key，授权给谷歌的表格
+        client = gspread.authorize(credentials)
+# 这一段就牛逼了，这一段那串乱码是目标谷歌sheet地址中间那一部分，用.来确定要访问的工作表
+        sheet_A = client.open_by_key(
+        "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").sheet1
+
+        sheet_B = client.open_by_key(
+        "16cvjJKBqGoFjOxrDgdLGYzZgkffnFFOkBfhW7ra1DsM").worksheet('屎尿吃药表')
+
+        return sheet_A,sheet_B
+
+
+
+#%%
+#下面的就可以动了
+
+tab1, tab2, tab3 = st.tabs(["喂养状态总览","新增记录", "体温记录"])
+timeticks = time.time()
+global date,time_value,time_auto
+date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
+time_value = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai'))
+time_auto = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%H:%M:%S")
+#st.write(time_value.strftime("%H"))
+
+sheet1,sheet5 = connect_to_google_sheet()
+
+#@st.cache(ttl=60)
+#class he_we:
+#    def __init__(self):
+#            sheet5 = connect_to_google_sheet()[2]
+#            dataframe = pd.DataFrame(sheet3.get_all_records())
+#            self.dataframe = dataframe.tail(10)
+#            self.sheet3 = sheet3
+#    def show(self):
+#            dataframe = pd.DataFrame(self.dataframe)
+#            dataframe = dataframe.set_index('date')
+#            dataframe.rename(columns={'height':'身高','weight':'体重',},inplace=True)
+#            return dataframe
+#    def append(self, date, height, weight):
+#            self.sheet3.append_row([date, height, weight])
+#
+#
+#with st.sidebar:
+#
+#        st.header('身高体重记录')
+#        height_value = st.number_input('身高(cm)', value=0.0, step=0.1)
+#        weight_value= st.number_input('体重(kg)', value=0.0, step=0.1)
+#        if st.button('提交', key='submit_2'):
+#                sheet3 = connect_to_google_sheet()[2]
+#                sheet3.append(date, height_value, weight_value)
+#                st.success('提交成功')
+#        if st.button('显示身高体重记录',key = 'height_weight'):
+#                hw = he_we()
+#                hewe = hw.show()
+#                st.write(hewe)
+
+
+
+
+#@st.cache(ttl=60)
+
 
 
 
