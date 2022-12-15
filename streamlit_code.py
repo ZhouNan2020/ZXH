@@ -165,7 +165,7 @@ class today_shittable:
         if value == 0:
             st.error('今天还没有吃AD滴丸')
         else:
-            pass
+            st.write('AD滴丸✔')
 
     def judg_shit(self):
         value = self.today['Shit'].values[0]
@@ -179,7 +179,7 @@ class today_shittable:
         if value == 0:
             st.error('今天还没有吃妈咪爱')
         else:
-            pass
+            st.write('妈咪爱✔')
 
 
 
