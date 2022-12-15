@@ -128,6 +128,7 @@ class Analysis:
 
 #%%
 st.title('周栩珩成长日记')
+st.info('周栩珩每天需要频繁的测体温', icon="ℹ️")
 font = font_manager.FontProperties(fname='simhei.ttf')
 plt.rcParams['font.family']=['SimHei']
 parameters = {'xtick.labelsize': 16,
