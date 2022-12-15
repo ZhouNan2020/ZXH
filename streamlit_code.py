@@ -129,7 +129,7 @@ class today_eatable:
         if value == 0:
             st.error('今天还没有吃配方奶粉')
         else:
-            pass
+            st.write('配方奶粉✔')
 
 
 
