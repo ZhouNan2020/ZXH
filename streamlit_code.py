@@ -377,7 +377,7 @@ with tab3:
                 st.success('体温记录已提交')
         temp = temper_metric()
         delta = temp.temper()[0]
-        st.metric(label="末次体温及变化幅度", value=temp.temper()[2], delta=delta, delta_color="inverse")
+        st.metric(label="末次体温及变化幅度：", value=temp.temper()[2], delta=delta, delta_color="inverse")
         temp_plot = pd.DataFrame(temp.temper()[1])
         fig, ax = plt.subplots()
         ax.plot(temp_plot.index, temp_plot['temper'])
