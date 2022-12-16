@@ -287,6 +287,7 @@ with tab2:
         BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）',value=0,step=1)
         FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）',value=0,step=1)
         time = time_input()
+        st.caption('输入示例：八点四十五输入为8.45’')
         #time_input_1 = st.time_input('手动选择时间（如果不更改则自动记录当前时间）',
         #                             value=datetime.time(int(time_value.strftime('%H')),
         #                                                 int(time_value.strftime('%M')),
