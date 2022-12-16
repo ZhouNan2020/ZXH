@@ -266,6 +266,19 @@ with tab1:
         plt.xticks(rotation=45)
         st.pyplot(fig)
 
+
+
+def time_input():
+    time_number = st.number_input('手动选择时间（如果不更改则自动记录当前时间）',value=0.00,step=0.01)
+    if time_number != 0.00:
+        time_format = datetime.datetime.strptime(str(time_number), '%H.%M')
+        time = time_format.strftime('%H:%M:%S')
+    else:
+        time = time_auto
+    return time
+
+
+
 with tab2:
         st.subheader('喂养记录')
 
@@ -273,11 +286,11 @@ with tab2:
         Breastfeeding = st.number_input('母乳亲喂（单位:分钟）',value=0,step=1)
         BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）',value=0,step=1)
         FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）',value=0,step=1)
-
-        time_input_1 = st.time_input('手动选择时间（如果不更改则自动记录当前时间）',
-                                     value=datetime.time(int(time_value.strftime('%H')),
-                                                         int(time_value.strftime('%M')),
-                                                         int(time_value.strftime('%S'))), key='input2')
+        time = time_input()
+        #time_input_1 = st.time_input('手动选择时间（如果不更改则自动记录当前时间）',
+        #                             value=datetime.time(int(time_value.strftime('%H')),
+        #                                                 int(time_value.strftime('%M')),
+        #                                                 int(time_value.strftime('%S'))), key='input2')
         if st.button('提交喂养记录',key='feed'):
                 #sheet1 = connect_to_google_sheet()[0]
                 sheet1.append_row([timeticks, date,str(time_input_1),Breastfeeding,BreastBottleFeeding,FormulaMilkPowder],1)
