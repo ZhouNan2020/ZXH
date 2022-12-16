@@ -127,7 +127,7 @@ class Analysis:
 
 
 #%%
-st.info('↖点击左上箭头，查看今日待办事项')
+st.info('点击左上方右拉→箭头，查看今日待办事项')
 st.markdown('---')
 st.title('周栩珩成长日记')
 
@@ -226,7 +226,6 @@ with tab1:
         today_eat = today_eatable()
         today_shit = today_shittable()
 
-        st.markdown('---------')
         st.subheader('上一次喂养：{}'.format(today_eat.lasteverything('time')))
         st.markdown('**喂养内容：**')
         st.markdown('1.母乳亲喂**{}**分钟'.format(today_eat.lasteverything('Breastfeeding')))
