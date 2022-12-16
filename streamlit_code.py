@@ -127,6 +127,7 @@ class Analysis:
 
 
 #%%
+st.info('↖点击左上箭头，查看今日待办事项')
 st.title('周栩珩成长日记')
 st.info('周栩珩每天需要频繁的测体温', icon="ℹ️")
 font = font_manager.FontProperties(fname='simhei.ttf')
@@ -206,6 +207,13 @@ sheet1,sheet5 = connect_to_google_sheet()
 
 
 #@st.cache(ttl=60)
+with st.sidebar:
+    today_eat = today_eatable()
+    today_shit = today_shittable()
+    today_shit.judg_AD()
+    today_shit.judg_mamiai()
+    today_eat.judg_formula()
+    today_shit.judg_shit()
 
 
 
@@ -215,10 +223,7 @@ sheet1,sheet5 = connect_to_google_sheet()
 with tab1:
         today_eat = today_eatable()
         today_shit = today_shittable()
-        today_shit.judg_AD()
-        today_shit.judg_mamiai()
-        today_eat.judg_formula()
-        today_shit.judg_shit()
+
         st.markdown('---------')
         st.subheader('上一次喂养：{}'.format(today_eat.lasteverything('time')))
         st.markdown('**喂养内容：**')
