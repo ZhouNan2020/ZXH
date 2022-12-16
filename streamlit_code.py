@@ -269,8 +269,8 @@ with tab1:
 
 
 def time_input():
-    time_number = st.number_input('手动选择时间（如果不更改则自动记录当前时间）',value=0.0,step=0.1)
-    if time_number != 0.0:
+    time_number = st.text_input('手动选择时间（如果不更改则自动记录当前时间）',value='',help='输入示例：八点四十五输入为8.45’')
+    if time_number != '':
         time_format = datetime.datetime.strptime(str(time_number), '%H.%M')
         time = time_format.strftime('%H:%M:%S')
     else:
