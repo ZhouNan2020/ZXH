@@ -110,13 +110,13 @@ class today_shittable:
         if temper_count ==0:
             st.info('今天还没有给周栩珩测体温噢')
         elif temper_count ==1:
-            st.warning('今天只给周栩珩测了一次体温噢')
+            st.info('今天只给周栩珩测了一次体温噢')
         elif temper_count ==5:
-            st.success('今天已经给周栩珩测了五次体温')
+            st.info('今天已经给周栩珩测了五次体温')
         elif temper_count >5:
-            st.success('今天的体温监测超过5次，争取做够10次')
+            st.info('今天的体温监测超过5次，争取做够10次')
         elif temper_count ==10 or temper_count >10:
-            st.warning('今天的体温监测很密集')
+            st.info('今天的体温监测很密集')
 
 
 
@@ -224,7 +224,7 @@ sheet1,sheet5 = connect_to_google_sheet()
 
 #@st.cache(ttl=60)
 with st.sidebar:
-    
+
     today_eat = today_eatable()
     today_shit = today_shittable()
     today_shit.judg_AD()
