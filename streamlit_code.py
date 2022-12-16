@@ -108,13 +108,13 @@ class today_shittable:
         today_temper = pd.DataFrame(today.drop(today[today['temper']==0].index))
         temper_count = len(today_temper)
         if temper_count ==0:
-            st.info('今天还没有给周栩珩测体温噢')
+            st.error('今天还没有测体温')
         elif temper_count <5:
-            st.info('今天给周栩珩测体温不足5次')
+            st.warning('今天测体温不足5次')
         elif temper_count >=5 and temper_count <10:
-            st.info('今天给周栩珩测体温已经达到5次')
+            st.info('今天测体温已经达到5次')
         elif temper_count >=10:
-            st.info('今天的体温监测很密集')
+            st.success('今天的体温监测很密集')
 
 
 
