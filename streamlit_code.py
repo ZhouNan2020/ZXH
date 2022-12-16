@@ -102,6 +102,21 @@ class today_shittable:
             st.error('今天还没有吃妈咪爱')
         else:
             st.success('今天已经吃了妈咪爱')
+    def judg_temper(self):
+        table = self.table
+        today = pd.DataFrame(self.table.drop(self.table[self.table['date'] !=date].index))
+        today_temper = pd.DataFrame(today.drop(today[today['temper']==0].index))
+        temper_count = len(today_temper)
+        if temper_count ==0:
+            st.info('今天还没有给周栩珩测体温噢')
+        elif temper_count ==1:
+            st.warning('今天只给周栩珩测了一次体温噢')
+        elif temper_count ==5:
+            st.success('今天已经给周栩珩测了五次体温')
+        elif temper_count >5:
+            st.success('今天的体温监测超过5次，争取做够10次')
+        elif temper_count ==10 or temper_count >10:
+            st.warning('今天的体温监测很密集')
 
 
 
@@ -216,6 +231,7 @@ with st.sidebar:
     today_shit.judg_mamiai()
     today_eat.judg_formula()
     today_shit.judg_shit()
+    today_shit.judg_temper()
 
 
 
