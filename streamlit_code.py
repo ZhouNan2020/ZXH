@@ -128,8 +128,9 @@ class Analysis:
 
 #%%
 st.info('↖点击左上箭头，查看今日待办事项')
+st.markdown('---')
 st.title('周栩珩成长日记')
-st.info('周栩珩每天需要频繁的测体温', icon="ℹ️")
+
 font = font_manager.FontProperties(fname='simhei.ttf')
 plt.rcParams['font.family']=['SimHei']
 parameters = {'xtick.labelsize': 16,
@@ -208,6 +209,7 @@ sheet1,sheet5 = connect_to_google_sheet()
 
 #@st.cache(ttl=60)
 with st.sidebar:
+    st.info('周栩珩每天需要频繁的测体温', icon="ℹ️")
     today_eat = today_eatable()
     today_shit = today_shittable()
     today_shit.judg_AD()
@@ -274,7 +276,7 @@ with tab1:
 
 
 def time_input(key_number):
-    time_number = st.text_input('手动选择时间（如果不更改则自动记录当前时间）',value='',key=key_number)
+    time_number = st.text_input('手动输入时间（如果不输入则自动记录当前时间）',value='',key=key_number)
     if time_number != '':
         time_format = datetime.datetime.strptime(str(time_number), '%H.%M')
         time = time_format.strftime('%H:%M:%S')
