@@ -51,7 +51,7 @@ class today_eatable:
         if value == 0:
             st.error('今天还没有吃配方奶粉')
         else:
-            st.write('配方奶粉✔')
+            st.success('今天已经吃了配方奶粉')
 
 
 
@@ -87,7 +87,7 @@ class today_shittable:
         if value == 0:
             st.error('今天还没有吃AD滴丸')
         else:
-            st.write('AD滴丸✔')
+            st.success('今天已经吃了AD滴丸')
 
     def judg_shit(self):
         value = self.today['Shit'].values[0]
@@ -101,7 +101,7 @@ class today_shittable:
         if value == 0:
             st.error('今天还没有吃妈咪爱')
         else:
-            st.write('妈咪爱✔')
+            st.success('今天已经吃了妈咪爱')
 
 
 
