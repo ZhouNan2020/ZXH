@@ -109,13 +109,11 @@ class today_shittable:
         temper_count = len(today_temper)
         if temper_count ==0:
             st.info('今天还没有给周栩珩测体温噢')
-        elif temper_count ==1:
-            st.info('今天只给周栩珩测了一次体温噢')
-        elif temper_count ==5:
-            st.info('今天已经给周栩珩测了五次体温')
-        elif temper_count >5:
-            st.info('今天的体温监测超过5次，争取做够10次')
-        elif temper_count ==10 or temper_count >10:
+        elif temper_count <5:
+            st.info('今天给周栩珩测体温不足5次')
+        elif temper_count >=5 :
+            st.info('今天给周栩珩测体温已经达到5次')
+        elif temper_count >=10 :
             st.info('今天的体温监测很密集')
 
 
