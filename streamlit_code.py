@@ -293,7 +293,7 @@ with tab2:
         #                                                 int(time_value.strftime('%S'))), key='input2')
         if st.button('提交喂养记录',key='feed'):
                 #sheet1 = connect_to_google_sheet()[0]
-                sheet1.append_row([timeticks, date,str(time_input_1),Breastfeeding,BreastBottleFeeding,FormulaMilkPowder],1)
+                sheet1.append_row([timeticks, date,time,Breastfeeding,BreastBottleFeeding,FormulaMilkPowder],1)
                 st.success('喂养记录已提交')
 
         st.markdown('---')
