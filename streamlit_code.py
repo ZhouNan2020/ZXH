@@ -140,7 +140,7 @@ class Analysis:
 
 
 #%%
-st.info('点击左上方右拉→箭头，查看今日待办事项')
+st.info('点击屏幕左上角右拉→箭头，查看今日待办事项')
 st.markdown('---')
 st.title('周栩珩成长日记')
 
