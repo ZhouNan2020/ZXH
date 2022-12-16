@@ -224,7 +224,7 @@ sheet1,sheet5 = connect_to_google_sheet()
 
 #@st.cache(ttl=60)
 with st.sidebar:
-    st.info('周栩珩每天需要频繁的测体温', icon="ℹ️")
+    
     today_eat = today_eatable()
     today_shit = today_shittable()
     today_shit.judg_AD()
