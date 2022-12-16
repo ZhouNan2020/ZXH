@@ -273,8 +273,8 @@ with tab1:
 
 
 
-def time_input():
-    time_number = st.text_input('手动选择时间（如果不更改则自动记录当前时间）',value='')
+def time_input(key_number):
+    time_number = st.text_input('手动选择时间（如果不更改则自动记录当前时间）',value='',key=key_number)
     if time_number != '':
         time_format = datetime.datetime.strptime(str(time_number), '%H.%M')
         time = time_format.strftime('%H:%M:%S')
@@ -291,7 +291,7 @@ with tab2:
         Breastfeeding = st.number_input('母乳亲喂（单位:分钟）',value=0,step=1)
         BreastBottleFeeding = st.number_input('母乳瓶喂（单位:ml）',value=0,step=1)
         FormulaMilkPowder = st.number_input('配方奶粉（单位:ml）',value=0,step=1)
-        time_1 = time_input()
+        time_1 = time_input(key_number=1)
         st.caption('格式示例：八点四十五，输入的格式为：8.45，使用小数点代替时间中间的冒号')
 
         if st.button('提交喂养记录',key='feed'):
@@ -323,7 +323,7 @@ with tab2:
         ADconsole_value = 0
         if ADconsole:
                 ADconsole_value = 1
-        time_2 = time_input()
+        time_2 = time_input(key_number=2)
         st.caption('格式示例：八点四十五，输入的格式为：8.45，使用小数点代替时间中间的冒号')
 
         if st.button('提交屎尿吃药记录',key='shit'):
