@@ -16,12 +16,17 @@ class today_eatable:
         self.table = eattabel
         self.tail = eattabel.iloc[-1:]
         all_sum = eattabel.groupby('date').sum()
+        self.all_sum = all_sum
         today = all_sum.iloc[-1:]
         self.today = today
     def lasteverything(self, name):
         return self.tail[name].values[0]
     def todayeverything(self, name):
         return self.today[name].values[0]
+    def select_day_everything(self, name, day):
+        day = self.all_sum.iloc[day:day+1]
+        day = day[name].values[0]
+        return day
     def lastcoltime(self, name):
         coltable = pd.DataFrame(self.table.drop(self.table[self.table[name] == 0].index))
         coltable = coltable.iloc[-1:]
@@ -266,7 +271,14 @@ with tab1:
         st.write('奶粉{}ml'.format(today_eat.todayeverything('FormulaMilkPowder')))
         st.write('今日总计：共{}分钟亲喂+{}ml瓶喂（母乳或奶粉）'.format(today_eat.todayeverything('Breastfeeding'),
                                           today_eat.todayeverything('BreastBottleFeeding')+today_eat.todayeverything('FormulaMilkPowder')))
-
+        st.markdown('--------')
+        day=st.slider('可以关注过去几天的喂养情况，请选择', min_value=0, max_value=-10, step=1)
+        st.caption('注意：如果选择0，那么就是今天的喂养情况,如果选择-1，那么就是昨天的喂养情况，如果选择-2，那么就是前天的喂养情况，以此类推')
+        st.write('母乳亲喂{}分钟'.format(today_eat.select_day_everything('Breastfeeding',day=day)))
+        st.write('母乳瓶喂{}ml'.format(today_eat.select_day_everything('BreastBottleFeeding',day=day)))
+        st.write('奶粉{}ml'.format(today_eat.select_day_everything('FormulaMilkPowder',day=day)))
+        st.write('总计：共{}分钟亲喂+{}ml瓶喂（母乳或奶粉）'.format(abs(day),today_eat.select_day_everything('Breastfeeding',day=day),
+                                          today_eat.select_day_everything('BreastBottleFeeding',day=day)+today_eat.select_day_everything('FormulaMilkPowder',day=day)))
         st.markdown('-------')
         st.markdown('**今日杂项：**')
         st.write('上一次大便：{}'.format(today_shit.lastcoltime('Shit')))
