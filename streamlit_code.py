@@ -277,7 +277,7 @@ with tab1:
         st.write('母乳亲喂{}分钟'.format(today_eat.select_day_everything('Breastfeeding',day=day)))
         st.write('母乳瓶喂{}ml'.format(today_eat.select_day_everything('BreastBottleFeeding',day=day)))
         st.write('奶粉{}ml'.format(today_eat.select_day_everything('FormulaMilkPowder',day=day)))
-        st.write('总计：共{}分钟亲喂+{}ml瓶喂（母乳或奶粉）'.format(abs(day),today_eat.select_day_everything('Breastfeeding',day=day),
+        st.write('总计：共{}分钟亲喂+{}ml瓶喂（母乳或奶粉）'.format(today_eat.select_day_everything('Breastfeeding',day=day),
                                           today_eat.select_day_everything('BreastBottleFeeding',day=day)+today_eat.select_day_everything('FormulaMilkPowder',day=day)))
         st.markdown('-------')
         st.markdown('**今日杂项：**')
