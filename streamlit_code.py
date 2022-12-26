@@ -24,7 +24,7 @@ class today_eatable:
     def todayeverything(self, name):
         return self.today[name].values[0]
     def select_day_everything(self, name, day):
-        day = self.all_sum.iloc[day:day+1]
+        day = self.all_sum.iloc[-day:-day+1]
         day = day[name].values[0]
         return day
     def lastcoltime(self, name):
@@ -276,11 +276,11 @@ with tab1:
         st.caption('注意：如果选择0，那么就是今天的喂养情况,如果选择1，那么就是1天前（昨天）的喂养情况，如果选择2，那么就是2天前（前天）的喂养情况，以此类推')
         if st.button('显示过去喂养情况',key='show_eat'):
                 st.write('{}天前的喂养情况'.format(abs(day)))
-                st.write('母乳亲喂{}分钟'.format(today_eat.select_day_everything('Breastfeeding',day=-day)))
-                st.write('母乳瓶喂{}ml'.format(today_eat.select_day_everything('BreastBottleFeeding',day=-day)))
-                st.write('奶粉{}ml'.format(today_eat.select_day_everything('FormulaMilkPowder',day=-day)))
-                st.write('总计：共{}分钟亲喂+{}ml瓶喂（母乳或奶粉）'.format(today_eat.select_day_everything('Breastfeeding',day=-day),
-                                                  today_eat.select_day_everything('BreastBottleFeeding',day=-day)+today_eat.select_day_everything('FormulaMilkPowder',day=-day)))
+                st.write('母乳亲喂{}分钟'.format(today_eat.select_day_everything('Breastfeeding',day=day)))
+                st.write('母乳瓶喂{}ml'.format(today_eat.select_day_everything('BreastBottleFeeding',day=day)))
+                st.write('奶粉{}ml'.format(today_eat.select_day_everything('FormulaMilkPowder',day=day)))
+                st.write('总计：共{}分钟亲喂+{}ml瓶喂（母乳或奶粉）'.format(today_eat.select_day_everything('Breastfeeding',day=day),
+                                                  today_eat.select_day_everything('BreastBottleFeeding',day=day)+today_eat.select_day_everything('FormulaMilkPowder',day=day)))
         st.markdown('-------')
         st.markdown('**今日杂项：**')
         st.write('上一次大便：{}'.format(today_shit.lastcoltime('Shit')))
