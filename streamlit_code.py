@@ -272,8 +272,8 @@ with tab1:
         st.write('今日总计：共{}分钟亲喂+{}ml瓶喂（母乳或奶粉）'.format(today_eat.todayeverything('Breastfeeding'),
                                           today_eat.todayeverything('BreastBottleFeeding')+today_eat.todayeverything('FormulaMilkPowder')))
         st.markdown('--------')
-        day=st.slider('滑动圆点选择关注过去几天的喂养情况', min_value=0, max_value=-10, value=-5,step=1)
-        st.caption('注意：如果选择0，那么就是今天的喂养情况,如果选择-1，那么就是昨天的喂养情况，如果选择-2，那么就是前天的喂养情况，以此类推')
+        day=st.slider('滑动圆点选择关注过去几天的喂养情况', min_value=0, max_value=10,step=1)
+        st.caption('注意：如果选择0，那么就是今天的喂养情况,如果选择1，那么就是1天前（昨天）的喂养情况，如果选择2，那么就是2天前（前天）的喂养情况，以此类推')
         if st.button('显示过去喂养情况',key='show_eat'):
                 st.write('{}天前的喂养情况'.format(abs(day)))
                 st.write('母乳亲喂{}分钟'.format(today_eat.select_day_everything('Breastfeeding',day=day)))
