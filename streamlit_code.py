@@ -290,7 +290,7 @@ with tab1:
         st.markdown('**今日杂项：**')
         st.write('上一次大便：{}'.format(today_shit.lastcoltime('Shit')))
         st.write('今日大便次数：{}次'.format(today_shit.todayeverything('Shit')))
-        st.write('今日服用妈咪爱：{}次'.format(today_shit.todayeverything('Mamiai')))
+        st.write('今日服用益生菌：{}次'.format(today_shit.todayeverything('Mamiai')))
         st.write('今日服用AD滴丸：{}次'.format(today_shit.todayeverything('ADconsole')))
         st.markdown('-------')
         st.subheader('近期喂养总览')
