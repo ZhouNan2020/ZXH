@@ -88,7 +88,7 @@ class today_shittable:
         table = pd.DataFrame(self.table)
         table = table.iloc[:,2:8]
         table = table.set_index('time')
-        table.rename(columns={'Shit':'屎','Pee':'尿','ChangeDiapers':'换尿布','Mamiai':'妈咪爱','ADconsole':'AD滴丸'},inplace=True)
+        table.rename(columns={'Shit':'屎','Pee':'尿','ChangeDiapers':'换尿布','Mamiai':'益生菌','ADconsole':'AD滴丸'},inplace=True)
         #table.replace(1,'有',inplace=True)
         return table.tail(10)
     def judg_AD(self):
@@ -108,9 +108,9 @@ class today_shittable:
     def judg_mamiai(self):
         value = self.today['Mamiai'].values[0]
         if value == 0:
-            st.error('今天还没有吃妈咪爱')
+            st.error('今天还没有吃益生菌')
         else:
-            st.success('今天已经吃了妈咪爱')
+            st.success('今天已经吃了益生菌')
     def judg_temper(self):
         table = self.table
         today = pd.DataFrame(self.table.drop(self.table[self.table['date'] !=date].index))
@@ -349,7 +349,7 @@ with tab2:
         ChangeDiapers_value = 0
         if ChangeDiapers:
                 ChangeDiapers_value = 1
-        Mamiai = st.checkbox('妈咪爱')
+        Mamiai = st.checkbox('益生菌')
         Mamiai_value = 0
         if Mamiai:
                 Mamiai_value = 1
