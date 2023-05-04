@@ -186,7 +186,7 @@ def connect_to_google_sheet():
 #%%
 #下面的就可以动了
 
-tab1, tab2, tab3 = st.tabs(["喂养状态总览","新增记录", "体温记录"])
+tab1, tab2 = st.tabs(["喂养状态总览","新增记录",])
 timeticks = time.time()
 global date,time_value,time_auto
 date = datetime.datetime.now(tz=pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d")
