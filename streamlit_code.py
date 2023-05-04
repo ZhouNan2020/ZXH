@@ -255,6 +255,7 @@ with tab1:
         st.markdown('2.母乳瓶喂**{}**ml'.format(today_eat.lasteverything('BreastBottleFeeding')))
         st.markdown('3.奶粉**{}**ml'.format(today_eat.lasteverything('FormulaMilkPowder')))
 
+
         st.markdown('-------')
         def show_last_time():
             lasttime = today_eat.lasteverything('time')
@@ -307,6 +308,7 @@ with tab1:
 
 
 
+
 def time_input(key_number):
     time_number = st.text_input('手动输入时间（如果不输入则自动记录当前时间）',value='',key=key_number)
     if time_number != '':
@@ -328,12 +330,16 @@ with tab2:
         time_1 = time_input(key_number=1)
         st.caption('格式示例：八点四十五，输入的格式为：8.45，使用小数点代替时间中间的冒号')
 
+
         if st.button('提交喂养记录',key='feed'):
                 #sheet1 = connect_to_google_sheet()[0]
                 sheet1.append_row([timeticks, date,time_1,Breastfeeding,BreastBottleFeeding,FormulaMilkPowder],1)
                 st.success('喂养记录已提交')
 
+
+
         st.markdown('---')
+
 
         st.subheader('屎尿吃药记录')
 
@@ -360,11 +366,13 @@ with tab2:
         time_2 = time_input(key_number=2)
         st.caption('格式示例：八点四十五，输入的格式为：8.45，使用小数点代替时间中间的冒号')
 
+
         if st.button('提交屎尿吃药记录',key='shit'):
                 #sheet5 = connect_to_google_sheet()[1]
                 record_2 = [timeticks, date, time_2, Shit_value,Pee_value, ChangeDiapers_value, Mamiai_value, ADconsole_value,0]
                 sheet5.append_row(record_2, 1)
                 st.success('屎尿吃药记录已提交')
+
 
 
 
@@ -421,27 +429,7 @@ class temper_metric:
                 return delta,last10,current
 
 
-with tab3:
-        st.write('该版面会依据周栩珩当前需要记录的特殊情况调整')
-        st.subheader('目前仅开放记录体温')
-        st.subheader('1.体温')
-        temper=st.number_input('本次体温',step=0.1,min_value=0.0)
-        if st.button('提交本次体温记录',key='temper'):
-                sheet5.append_row([timeticks,date,time_auto,0,0,0,0,0,temper],1)
-                st.success('体温记录已提交')
-        temp = temper_metric()
-        delta = temp.temper()[0]
-        st.metric(label="末次体温及变化幅度：", value=temp.temper()[2], delta=delta, delta_color="inverse")
-        temp_plot = pd.DataFrame(temp.temper()[1])
-        fig, ax = plt.subplots()
-        ax.plot(temp_plot.index, temp_plot['temper'])
-        ax.set_xlabel('时间', fontproperties=font, fontsize=12)
-        ax.set_ylabel('体温', fontproperties=font, fontsize=12)
-        ax.set_title('最近10次体温测量结果', fontproperties=font, fontsize=12)
-        plt.axhline(y=37.2, color='r', linestyle='--')
-        plt.text(0.02,37.24,'37.2℃',fontproperties=font,fontsize=12)
-        plt.xticks(rotation=45)
-        st.pyplot(fig)
+
 
 
 #with tab4:
